@@ -27,12 +27,11 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     {
         d = sdCircle(m, 0.5);
         col = mix(col, vec3(1.0, 1.0, 0.0), 1.0 - smoothstep(0.0, 0.005, abs(length(p - m) - abs(d)) - 0.0025));
-        col = mix(col, vec3(1.0, 0.0, 0.0), 1.0 - smoothstep(0.0, 0.005, length(p - m) - 0.015));
+        col = mix(col, vec3(1.0, 1.0, 0.0), 1.0 - smoothstep(0.0, 0.005, length(p - m) - 0.015));
     }
 
     fragColor = vec4(col, 1.0);
 }
-
 void main()
 {
     mainImage(gl_FragColor, gl_FragCoord.xy);

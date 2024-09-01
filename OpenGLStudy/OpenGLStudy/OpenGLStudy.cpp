@@ -1,6 +1,4 @@
 #include "OpenGLStudy.h"
-#include "DemoVexture.h"
-#include "Common.h"
 
 OpenGLStudy::OpenGLStudy(QWidget *parent)
     : QMainWindow(parent)
@@ -8,7 +6,7 @@ OpenGLStudy::OpenGLStudy(QWidget *parent)
     ui.setupUi(this);
     
     connect(ui.BtnCreateGL, SIGNAL(clicked()), this, SLOT(TestOpenGL()));
-
+    
 }
 
 OpenGLStudy::~OpenGLStudy()
@@ -19,8 +17,13 @@ OpenGLStudy::~OpenGLStudy()
 
 void OpenGLStudy::TestOpenGL()
 {
-    //testmain();
-    //testCircle();
-    //testCircleBorder();
-    testCircleGLSL();
+    if (m_DrawCircle == nullptr)
+    {
+        m_DrawCircle = new C_DrawCircle();
+    }
+    //m_DrawCircle->DrawCircle_Vertices();
+
+    //m_DrawCircle->DrawCircleSingle_GLSL();   //使用glsl进行绘图
+    //m_DrawCircle->DrawCircleGrid_GLSL();
+    m_DrawCircle->DrawCircleGridPixel_GLSL();
 }

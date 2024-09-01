@@ -78,6 +78,9 @@
     <ClInclude Include="src\DemoVexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\DemoCircle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\Vexture\shader_f.glsl">
@@ -99,6 +102,12 @@
       <Filter>Shaders\Circle</Filter>
     </None>
     <None Include="shaders\Circle\CircleDemo1_f.glsl">
+      <Filter>Shaders\Circle</Filter>
+    </None>
+    <None Include="shaders\Circle\CircleGrid_f.glsl">
+      <Filter>Shaders\Circle</Filter>
+    </None>
+    <None Include="shaders\Circle\CircleGridPixel_f.glsl">
       <Filter>Shaders\Circle</Filter>
     </None>
   </ItemGroup>

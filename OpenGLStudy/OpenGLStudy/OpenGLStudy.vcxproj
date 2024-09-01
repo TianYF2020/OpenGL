@@ -130,10 +130,13 @@
   <ItemGroup>
     <ClInclude Include="Shader.h" />
     <ClInclude Include="src\Common.h" />
+    <ClInclude Include="src\DemoCircle.h" />
     <ClInclude Include="src\DemoVexture.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\Circle\CircleDemo1_f.glsl" />
+    <None Include="shaders\Circle\CircleGridPixel_f.glsl" />
+    <None Include="shaders\Circle\CircleGrid_f.glsl" />
     <None Include="shaders\Circle\Circle_f.glsl" />
     <None Include="shaders\Circle\Circle_v.glsl" />
     <None Include="shaders\Circle\shader_f.glsl" />
