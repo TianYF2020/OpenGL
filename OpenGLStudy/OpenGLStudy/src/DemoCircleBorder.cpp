@@ -13,15 +13,15 @@ using namespace std;
 const int numSegments = 100; // 圆的细分程度
 
 // 生成圆形的顶点数据
-std::vector<float> generateCircleBorderVertices(int numSegments)
+std::vector<GLfloat> generateCircleBorderVertices(int numSegments)
 {
-	std::vector<float> vertices;
+	std::vector<GLfloat> vertices;
 	// 添加圆周上的顶点
 	for (int i = 0; i <= numSegments; ++i)
 	{
-		float theta = 2.0f * 3.1415926f * float(i) / float(numSegments);
-		float x = cosf(theta);
-		float y = sinf(theta);
+		GLfloat theta = 2.0f * 3.1415926f * GLfloat(i) / GLfloat(numSegments);
+		GLfloat x = cosf(theta);
+		GLfloat y = sinf(theta);
 		vertices.push_back(x);
 		vertices.push_back(y);
 	}
@@ -45,7 +45,7 @@ int testCircleBorder()
 	glfwMakeContextCurrent(window);
 	glewInit();
 
-	std::vector<float> instanceData =
+	std::vector<GLfloat> instanceData =
 	{
 	-0.0f, -0.0f, 0.5f,  // 第一个圆的x, y位置和半径
 	 0.5f, -0.5f, 0.4f,  // 第二个圆
@@ -73,12 +73,12 @@ int testCircleBorder()
 	glBufferData(GL_ARRAY_BUFFER, instanceData.size() * sizeof(GLfloat), &instanceData[0], GL_STATIC_DRAW);
 
 	// 设置位置的实例化属性（位置在偏移为0的地方）
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
 	glEnableVertexAttribArray(1);
 	glVertexAttribDivisor(1, 1); // 每个实例使用一个位置
 
 	// 设置半径的实例化属性（半径在偏移为2*sizeof(float)的地方）
-	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(2 * sizeof(float)));
+	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)(2 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(2);
 	glVertexAttribDivisor(2, 1); // 每个实例使用一个半径
 

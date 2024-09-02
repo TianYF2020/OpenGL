@@ -20,7 +20,7 @@ public:
 	~C_DrawCircle();
 	void CreatGLWindow(int width, int height);
 	void DestroyGLWindow();
-	vector<float> generateCircleVertices(int numSegments);
+	vector<GLfloat> generateCircleVertices(int numSegments);
 	//这里区分使用顶点绘制和使用GLSL绘制，一旦切换，需要释放GPU重新分配
 	int DrawCircle_Vertices();	//使用描点的方案来进行绘图
 	int DrawCircle_GLSL();		//使用glsl进行绘图

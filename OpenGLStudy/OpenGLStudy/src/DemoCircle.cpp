@@ -54,7 +54,7 @@ void C_DrawCircle::DestroyGLWindow()
 
 int C_DrawCircle::DrawCircle_Vertices()   //使用描点的方案来进行绘图
 {
-	std::vector<float> instanceData = 
+	std::vector<GLfloat> instanceData =
 	{
 	-0.0f, -0.f, 0.1f,  // 第一个圆的x, y位置和半径
 	 0.5f, -0.5f, 0.2f,  // 第二个圆
@@ -76,12 +76,12 @@ int C_DrawCircle::DrawCircle_Vertices()   //使用描点的方案来进行绘图
 	glBufferData(GL_ARRAY_BUFFER, instanceData.size() * sizeof(GLfloat), &instanceData[0], GL_STATIC_DRAW);
 
 	// 设置位置的实例化属性（位置在偏移为0的地方）
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
 	glEnableVertexAttribArray(1);
 	glVertexAttribDivisor(1, 1); // 每个实例使用一个位置
 
 	// 设置半径的实例化属性（半径在偏移为2*sizeof(float)的地方）
-	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(2 * sizeof(float)));
+	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)(2 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(2);
 	glVertexAttribDivisor(2, 1); // 每个实例使用一个半径
 
@@ -106,7 +106,6 @@ int C_DrawCircle::DrawCircle_Vertices()   //使用描点的方案来进行绘图
 		glBindVertexArray(VAO);										// 解绑定 VAO
 		glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, numSegments + 2, instanceData.size() / 3);
 		glBindVertexArray(0);									// 解绑定 VAO
-		glBindTexture(GL_TEXTURE_2D, 0);						// 解绑定 纹理
 
 		/* 交换缓冲 */
 		glfwSwapBuffers(window);
@@ -352,9 +351,9 @@ int C_DrawCircle::DrawCircleGridPixel_GLSL()   //使用glsl进行绘图
 
 
 // 生成圆形的顶点数据
-vector<float> C_DrawCircle::generateCircleVertices(int numSegments)
+vector<GLfloat> C_DrawCircle::generateCircleVertices(int numSegments)
 {
-	std::vector<float> vertices;
+	std::vector<GLfloat> vertices;
 	// 添加圆心的顶点
 	vertices.push_back(0.0f);
 	vertices.push_back(0.0f);
@@ -362,9 +361,9 @@ vector<float> C_DrawCircle::generateCircleVertices(int numSegments)
 	// 添加圆周上的顶点
 	for (int i = 0; i <= numSegments; ++i)
 	{
-		float theta = 2.0f * 3.1415926f * float(i) / float(numSegments);
-		float x = cosf(theta);
-		float y = sinf(theta);
+		GLfloat theta = 2.0f * 3.1415926f * GLfloat(i) / float(numSegments);
+		GLfloat x = cosf(theta);
+		GLfloat y = sinf(theta);
 		vertices.push_back(x);
 		vertices.push_back(y);
 	}

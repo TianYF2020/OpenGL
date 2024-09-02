@@ -117,8 +117,8 @@
   <ItemGroup>
     <ClCompile Include="src\DemoCircle.cpp" />
     <ClCompile Include="src\DemoCircleBorder.cpp" />
-    <ClCompile Include="src\DemoCircleRectangle.cpp" />
     <ClCompile Include="src\DemoLine.cpp" />
+    <ClCompile Include="src\DemoRectangle.cpp" />
     <ClCompile Include="src\DemoVexture.cpp" />
     <QtRcc Include="OpenGLStudy.qrc" />
     <QtUic Include="OpenGLStudy.ui" />
@@ -131,6 +131,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="src\Common.h" />
     <ClInclude Include="src\DemoCircle.h" />
+    <ClInclude Include="src\DemoRectangle.h" />
     <ClInclude Include="src\DemoVexture.h" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +142,8 @@
     <None Include="shaders\Circle\Circle_v.glsl" />
     <None Include="shaders\Circle\shader_f.glsl" />
     <None Include="shaders\Circle\shader_v.glsl" />
+    <None Include="shaders\Rectangle\shader_f.glsl" />
+    <None Include="shaders\Rectangle\shader_v.glsl" />
     <None Include="shaders\Vexture\shader_f.glsl" />
     <None Include="shaders\Vexture\shader_v.glsl" />
   </ItemGroup>

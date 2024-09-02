@@ -30,6 +30,9 @@
     <Filter Include="Shaders\Circle">
       <UniqueIdentifier>{002e1c05-c285-4f94-81f0-f38ccec41951}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders\Rectangle">
+      <UniqueIdentifier>{0d9b2200-1504-4fd5-8bad-c054fb44002d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="OpenGLStudy.qrc">
@@ -58,13 +61,13 @@
     <ClCompile Include="src\DemoCircleBorder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\DemoCircleRectangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\DemoLine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\DemoCircle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DemoRectangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -79,6 +82,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\DemoCircle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DemoRectangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -109,6 +115,12 @@
     </None>
     <None Include="shaders\Circle\CircleGridPixel_f.glsl">
       <Filter>Shaders\Circle</Filter>
+    </None>
+    <None Include="shaders\Rectangle\shader_f.glsl">
+      <Filter>Shaders\Rectangle</Filter>
+    </None>
+    <None Include="shaders\Rectangle\shader_v.glsl">
+      <Filter>Shaders\Rectangle</Filter>
     </None>
   </ItemGroup>
 </Project>
