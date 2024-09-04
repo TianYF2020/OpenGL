@@ -22,7 +22,7 @@ set(CMAKE_AUTOMOC ON) # Meta-Object Compiler
 set(CMAKE_AUTORCC ON) # Resource Compiler
 set(CMAKE_AUTOUIC ON) # User Interface Compiler
 
-find_package(Qt6 REQUIRED COMPONENTS Quick Core Qml)
+find_package(Qt6 REQUIRED COMPONENTS Quick Core Qml OpenGl)
 
 aux_source_directory(src SRC_LIST)
 
@@ -49,6 +49,8 @@ target_link_libraries(${PROJECT_NAME}
     PRIVATE Qt6::Quick
     PRIVATE Qt6::Qml
     PRIVATE Qt6::Core
+    PRIVATE Qt6::OpenGL
+
 )
 
 
