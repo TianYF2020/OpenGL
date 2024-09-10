@@ -1,5 +1,10 @@
-/OpenGLStudy/.vs
-/OpenGLStudy/.vscode
-/OpenGLStudy/x64
-/OpenGLStudy/OpenGLStudy
-/OpenGLStudy/OpenGLStudy/64
+/OpenGLStudy/.vs/
+/OpenGLStudy/.vscode/
+/OpenGLStudy/x64/
+/OpenGLStudy/OpenGLStudy/
+/OpenGLStudy/OpenGLStudy/64/
+/CMakeQml/build/
+/CMakeQml/*.json
+/CMakeQml/*.user
+/CMakeQml/.vs/
+/CMakeQml/out/

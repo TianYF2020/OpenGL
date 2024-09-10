@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/Main.qml</file>
+        <file>qml/MyTableView.qml</file>
+        <file>qml/MainControl.qml</file>
+        <file>qml/EasyTableWidget.qml</file>
     </qresource>
 </RCC>

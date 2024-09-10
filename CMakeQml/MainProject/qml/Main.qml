@@ -11,12 +11,38 @@ Window {
     title: qsTr("Hello World")
 
 
-        FBOItem
-        {
-            id:myView
-            width: parent.width*0.5
-            height: parent.height*0.5
+        // FBOItem
+        // {
+        //     id:myView
+        //     width: parent.width*0.5
+        //     height: parent.height*0.5
+        // }
+
+
+
+
+
+
+        Column {
+            id: column
+            width: parent.width
+            height: parent.height
+            MyTableView
+            {
+                id: testTableView
+                width: parent.width
+                height: parent.height/2
+            }
+            EasyTableWidget
+            {
+                id: testTableView1
+                // anchors.top: testTableView.Bottom
+                width: parent.width
+                height: parent.height/2
+            }
         }
+
+    
 //    Rectangle
 //    {
 //        width: parent.width

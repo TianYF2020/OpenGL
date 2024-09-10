@@ -30,7 +30,7 @@ aux_source_directory(src SRC_LIST)
 qt6_add_resources(QML_QRC qml.qrc)
 file(GLOB INC inc/*.h)
 set(PROJECT_SOURCES  ${SRC_LIST} ${QML_QRC} ${INC} )
-add_executable(${PROJECT_NAME}  ${PROJECT_SOURCES})
+add_executable(${PROJECT_NAME}  ${PROJECT_SOURCES} )
 
 target_include_directories(${PROJECT_NAME}
     PRIVATE ./inc
@@ -50,7 +50,6 @@ target_link_libraries(${PROJECT_NAME}
     PRIVATE Qt6::Qml
     PRIVATE Qt6::Core
     PRIVATE Qt6::OpenGL
-
 )
 
 

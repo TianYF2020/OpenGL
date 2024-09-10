@@ -1,10 +1,10 @@
-#include "DrawTestGL.h"
+ï»¿#include "DrawTestGL.h"
 #include <QDebug>
 
 FBOItem::FBOItem(QQuickItem* parent)
     : QQuickFramebufferObject(parent)
 {
-    //ÉÏÏÂ·­×ª£¬ÕâÑù¾ÍºÍOpenGLµÄ×ø±êÏµÒ»ÖÂÁË
+    //ä¸Šä¸‹ç¿»è½¬ï¼Œè¿™æ ·å°±å’ŒOpenGLçš„åæ ‡ç³»ä¸€è‡´äº†
     qDebug() << "init ";
     setMirrorVertically(true);
 }
@@ -12,7 +12,7 @@ FBOItem::FBOItem(QQuickItem* parent)
 QQuickFramebufferObject::Renderer* FBOItem::createRenderer() const
 {
     qDebug() << "init ";
-    //Renderer ºÍ FBO ¶¼ÊÇÄÚ²¿¹ÜÀíµÄÄÚ´æ
+    //Renderer å’Œ FBO éƒ½æ˜¯å†…éƒ¨ç®¡ç†çš„å†…å­˜
     return new FBORenderer();
 }
 
@@ -20,11 +20,11 @@ QQuickFramebufferObject::Renderer* FBOItem::createRenderer() const
 FBORenderer::FBORenderer()
 {
     qDebug() << "FBO Render";
-    //Îªµ±Ç°ÉÏÏÂÎÄ³õÊ¼»¯OpenGLº¯Êı½âÎö
+    //ä¸ºå½“å‰ä¸Šä¸‹æ–‡åˆå§‹åŒ–OpenGLå‡½æ•°è§£æ
     initializeOpenGLFunctions();
 
-    //×ÅÉ«Æ÷´úÂë
-    //inÊäÈë£¬outÊä³ö,uniform´ÓcpuÏògpu·¢ËÍ
+    //ç€è‰²å™¨ä»£ç 
+    //inè¾“å…¥ï¼Œoutè¾“å‡º,uniformä»cpuå‘gpuå‘é€
     const char* vertex_str = R"(#version 330 core
                            layout (location = 0) in vec3 vertices;
                            void main() {
@@ -36,7 +36,7 @@ FBORenderer::FBORenderer()
                              gl_FragColor = vec4(myColor,1.0);
                              })";
 
-    //½«source±àÒëÎªÖ¸¶¨ÀàĞÍµÄ×ÅÉ«Æ÷£¬²¢Ìí¼Óµ½´Ë×ÅÉ«Æ÷³ÌĞò
+    //å°†sourceç¼–è¯‘ä¸ºæŒ‡å®šç±»å‹çš„ç€è‰²å™¨ï¼Œå¹¶æ·»åŠ åˆ°æ­¤ç€è‰²å™¨ç¨‹åº
     if (!program.addCacheableShaderFromSourceCode(
         QOpenGLShader::Vertex, vertex_str)) {
         qDebug() << "compiler vertex error";
@@ -47,10 +47,10 @@ FBORenderer::FBORenderer()
         qDebug() << "compiler fragment error";
         exit(0);
     }
-    //Ê¹ÓÃaddShader()½«Ìí¼Óµ½¸Ã³ÌĞòµÄ×ÅÉ«Æ÷Á´½ÓÔÚÒ»Æğ¡£
+    //ä½¿ç”¨addShader()å°†æ·»åŠ åˆ°è¯¥ç¨‹åºçš„ç€è‰²å™¨é“¾æ¥åœ¨ä¸€èµ·ã€‚
     program.link();
 
-    //½«ÊôĞÔÃû³Æ°ó¶¨µ½Ö¸¶¨Î»ÖÃ(ÕâÀïlocation=0)
+    //å°†å±æ€§åç§°ç»‘å®šåˆ°æŒ‡å®šä½ç½®(è¿™é‡Œlocation=0)
     program.bindAttributeLocation("vertices", 0);
 
     qDebug() << "init ";
@@ -59,41 +59,41 @@ FBORenderer::FBORenderer()
 void FBORenderer::render()
 {
     glClearColor(1.0f, 1.0f, 0.3f, 1.0f);
-    //create FBO Ê±¸½¼ÓÁËÉî¶È»º³å
+    //create FBO æ—¶é™„åŠ äº†æ·±åº¦ç¼“å†²
     glEnable(GL_DEPTH_TEST);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    //½«´Ë×ÅÉ«Æ÷³ÌĞò°ó¶¨µ½»î¶¯µÄQOpenGLContext£¬²¢Ê¹Æä³ÉÎªµ±Ç°µÄ×ÅÉ«Æ÷³ÌĞò
-    //Í¬ÓÚµ÷ÓÃglUseProgram(programid)
+    //å°†æ­¤ç€è‰²å™¨ç¨‹åºç»‘å®šåˆ°æ´»åŠ¨çš„QOpenGLContextï¼Œå¹¶ä½¿å…¶æˆä¸ºå½“å‰çš„ç€è‰²å™¨ç¨‹åº
+    //åŒäºè°ƒç”¨glUseProgram(programid)
     program.bind();
-    //´«µİÖµ
+    //ä¼ é€’å€¼
     program.setUniformValue("myColor", QVector3D(0, 1, 0));
 
-    //QtÄ¬ÈÏÊÇºÍOpenGLÀïµßµ¹¹ıÀ´µÄ£¬ÉÏ¸ºÏÂÕı£¬
-    //µ«ÊÇ¿ÉÒÔÔÚQQuickFramebufferObjectÉèÖÃsetMirrorVertically(true);
+    //Qté»˜è®¤æ˜¯å’ŒOpenGLé‡Œé¢ å€’è¿‡æ¥çš„ï¼Œä¸Šè´Ÿä¸‹æ­£ï¼Œ
+    //ä½†æ˜¯å¯ä»¥åœ¨QQuickFramebufferObjectè®¾ç½®setMirrorVertically(true);
     float vertices[] = {
         0.5f, -0.5f, 0.0f,  // bottom right
         -0.5f,-0.5f, 0.0f,  // bottom left
         0.0f,  0.5f, 0.0f   // top
     };
-    //ÔÚ´Ë×ÅÉ«Æ÷³ÌĞòÖĞµÄÎ»ÖÃ´¦ÆôÓÃ¶¥µãÊı×é£¬
-    //ÒÔ±ã×ÅÉ«Æ÷³ÌĞò½«Ê¹ÓÃÔÚÎ»ÖÃÉÏÓÉsetAttributeArray()ÉèÖÃµÄÖµ¡£
+    //åœ¨æ­¤ç€è‰²å™¨ç¨‹åºä¸­çš„ä½ç½®å¤„å¯ç”¨é¡¶ç‚¹æ•°ç»„ï¼Œ
+    //ä»¥ä¾¿ç€è‰²å™¨ç¨‹åºå°†ä½¿ç”¨åœ¨ä½ç½®ä¸Šç”±setAttributeArray()è®¾ç½®çš„å€¼ã€‚
     program.enableAttributeArray(0);
-    //¸ø¶ÔÓ¦Î»ÖÃÉèÖÃ¶¥µãÊı×é
+    //ç»™å¯¹åº”ä½ç½®è®¾ç½®é¡¶ç‚¹æ•°ç»„
     program.setAttributeArray(0, GL_FLOAT, vertices, 3);
-    //´ÓÊı×éÊı¾İäÖÈ¾Í¼Ôª(render primitives from array data)
+    //ä»æ•°ç»„æ•°æ®æ¸²æŸ“å›¾å…ƒ(render primitives from array data)
     glDrawArrays(GL_TRIANGLES, 0, 3);
     program.disableAttributeArray(0);
 
-    //´Óµ±Ç°QOpenGLContextÊÍ·Å»î¶¯µÄ×ÅÉ«Æ÷³ÌĞò
-    //Ïàµ±ÓÚµ÷ÓÃglUseProgram(0)
+    //ä»å½“å‰QOpenGLContexté‡Šæ”¾æ´»åŠ¨çš„ç€è‰²å™¨ç¨‹åº
+    //ç›¸å½“äºè°ƒç”¨glUseProgram(0)
     program.release();
 }
 
 QOpenGLFramebufferObject* FBORenderer::createFramebufferObject(const QSize& size)
 {
     QOpenGLFramebufferObjectFormat format;
-    //attachºóĞèÒª¿ªÆôGL_DEPTH_TEST
+    //attachåéœ€è¦å¼€å¯GL_DEPTH_TEST
     format.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
     format.setSamples(4);
     return new QOpenGLFramebufferObject(size, format);

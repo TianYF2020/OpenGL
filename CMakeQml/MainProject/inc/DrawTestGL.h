@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <QQuickFramebufferObject>
 #include <QOpenGLFramebufferObject>
 #include <QOpenGLContext>
@@ -7,31 +7,31 @@
 
 
 class FBORenderer;
-//QML UI Ïà¹ØÂß¼­·Åµ½ QQuickFramebufferObject ×ÓÀà
-//äÖÈ¾Ïà¹Ø·Åµ½ QQuickFramebufferObject::Renderer ×ÓÀà
-//¸ÃÀà½öÔÚ Qt Quick Í¨¹ı OpenGL äÖÈ¾Ê±²ÅÆğ×÷ÓÃ
+//QML UI ç›¸å…³é€»è¾‘æ”¾åˆ° QQuickFramebufferObject å­ç±»
+//æ¸²æŸ“ç›¸å…³æ”¾åˆ° QQuickFramebufferObject::Renderer å­ç±»
+//è¯¥ç±»ä»…åœ¨ Qt Quick é€šè¿‡ OpenGL æ¸²æŸ“æ—¶æ‰èµ·ä½œç”¨
 class FBOItem : public QQuickFramebufferObject
 {
     Q_OBJECT
     //QML_NAMED_ELEMENT(Renderer)
 public:
     FBOItem(QQuickItem* parent = nullptr);
-    //Renderer ÊµÀıÊÇ´Ó createRenderer() ·µ»ØµÄ
+    //Renderer å®ä¾‹æ˜¯ä» createRenderer() è¿”å›çš„
     QQuickFramebufferObject::Renderer* createRenderer() const override;
 };
 
-//äÖÈ¾Ïà¹Ø·Åµ½ QQuickFramebufferObject::Renderer ×ÓÀà
+//æ¸²æŸ“ç›¸å…³æ”¾åˆ° QQuickFramebufferObject::Renderer å­ç±»
 class FBORenderer : public QQuickFramebufferObject::Renderer,
     protected QOpenGLFunctions_3_3_Core
 {
 public:
     FBORenderer();
-    //ÒªäÖÈ¾µ½ FBO£¬ĞèÒª¼Ì³Ğ Renderer Àà²¢ÖØĞÂÊµÏÖÆä render() º¯Êı
+    //è¦æ¸²æŸ“åˆ° FBOï¼Œéœ€è¦ç»§æ‰¿ Renderer ç±»å¹¶é‡æ–°å®ç°å…¶ render() å‡½æ•°
     void render() override;
-    //´´½¨ĞÂµÄ FBO Ê±µ÷ÓÃ£¬Èç resize Ê±
+    //åˆ›å»ºæ–°çš„ FBO æ—¶è°ƒç”¨ï¼Œå¦‚ resize æ—¶
     QOpenGLFramebufferObject* createFramebufferObject(const QSize& size) override;
 
 private:
-    //×ÅÉ«Æ÷³ÌĞò
+    //ç€è‰²å™¨ç¨‹åº
     QOpenGLShaderProgram program;
 };
