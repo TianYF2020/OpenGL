@@ -54,7 +54,9 @@ public:
     // Remove data:
     //bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
     //bool removeColumns(int column, int count, const QModelIndex &parent = QModelIndex()) override;
-
+    Q_INVOKABLE void addRow(const QJsonObject& rowData);
+    Q_INVOKABLE void removeLastRow();
+    Q_INVOKABLE void removeAllRows();
 private:
     void loadData(const QJsonArray &data);
 

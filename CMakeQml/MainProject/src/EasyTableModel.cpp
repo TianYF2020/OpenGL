@@ -149,6 +149,40 @@ void EasyTableModel::loadData(const QJsonArray &data)
     emit endResetModel();
 }
 
+void EasyTableModel::addRow(const QJsonObject& rowData)
+{
+    int newRow = _modelData.size();
+    beginInsertRows(QModelIndex(), newRow, newRow);
+
+    QVector<QVariant> newRowData;
+    newRowData.append(rowData.value("id"));
+    newRowData.append(rowData.value("name"));
+    newRowData.append(rowData.value("age"));
+    newRowData.append(rowData.value("note"));
+
+    _modelData.append(newRowData);
+    endInsertRows();
+}
+
+void EasyTableModel::removeLastRow()
+{
+    if (!_modelData.isEmpty()) {
+        int lastRow = _modelData.size() - 1;
+        beginRemoveRows(QModelIndex(), lastRow, lastRow);
+        _modelData.removeLast();
+        endRemoveRows();
+    }
+}
+
+void EasyTableModel::removeAllRows()
+{
+    if (!_modelData.isEmpty()) {
+        beginResetModel();
+        _modelData.clear();
+        endResetModel();
+    }
+}
+
 /*
 bool EasyTableModel::insertRows(int row, int count, const QModelIndex &parent)
 {

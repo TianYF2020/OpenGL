@@ -3,7 +3,8 @@ import QtQuick.Controls 2.15
 import EasyModel 1.0
 
 //自定义QtQuick 2中的TableView
-Item {
+Item 
+{
     id: control
     implicitHeight: 300
     implicitWidth: 500
@@ -19,21 +20,8 @@ Item {
     property int scrollBarWidth: 3
     //列宽
     property variant columnWidthArr: [100,100,100,200]
-
-    EasyTableModel{
-        id: table_model
-        horHeader: ["Id","Name","Age","Note"]
-        initData: [
-            {"id":1,"name":"gonge","age":20,"note":"test model view"},
-            {"id":2,"name":"gonge","age":21,"note":"test model view"},
-            {"id":3,"name":"gonge","age":22,"note":"test model view"},
-            {"id":4,"name":"gonge","age":23,"note":"test model view"},
-            {"id":5,"name":"gonge","age":24,"note":"test model view"},
-            {"id":6,"name":"gonge","age":25,"note":"test model view"},
-            {"id":7,"name":"gonge","age":26,"note":"test model view"},
-            {"id":8,"name":"gonge","age":27,"note":"test model view"}
-        ]
-    }
+    property var myModel: null;
+  
 
     //表格内容（不包含表头）
     TableView{
@@ -90,7 +78,7 @@ Item {
             }
         }
         //model是在C++中定义的，和QtC++是类似的
-        model: table_model
+        model: myModel
         delegate: Rectangle{
             color: (model.row%2)?"orange":Qt.darker("orange")
             TextInput{
@@ -154,7 +142,7 @@ Item {
 
                     Text {
                         anchors.centerIn: parent
-                        text: table_model.headerData(index, Qt.Horizontal)
+                        text: myModel.headerData(index, Qt.Horizontal)
                     }
                     Rectangle{
                         width: 1
@@ -206,10 +194,26 @@ Item {
                 color: "green"
                 Text {
                     anchors.centerIn: parent
-                    text: table_model.headerData(index, Qt.Vertical)
+                    text: myModel.headerData(index, Qt.Vertical)
                 }
             }
         }
     }
+    // 增加一行数据的函数
+    function addRow(data) {
+        myModel.addRow(data);
+    }
+
+    // 删除最后一行的函数
+    function removeLastRow() {
+        myModel.removeLastRow();
+    }
+
+    // 删除所有行的函数
+    function removeAllRows() {
+        myModel.removeAllRows();
+    }
+
+
 
 }

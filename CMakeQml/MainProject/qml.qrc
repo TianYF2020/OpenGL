@@ -4,5 +4,6 @@
         <file>qml/MyTableView.qml</file>
         <file>qml/MainControl.qml</file>
         <file>qml/EasyTableWidget.qml</file>
+        <file>qml/MesDataModel.qml</file>
     </qresource>
 </RCC>
