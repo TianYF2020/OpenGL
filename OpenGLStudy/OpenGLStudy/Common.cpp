@@ -1,35 +1,35 @@
-#include "Common.h"
+ï»¿#include "Common.h"
 using namespace std;
 bool isDragging = false;
 GLint WIDTH = 600, HEIGHT = 600;
-// ÉùÃ÷Ò»¸ö¼ÇÂ¼Êó±êÎ»ÖÃµÄ½á¹¹Ìå
+// å£°æ˜ä¸€ä¸ªè®°å½•é¼ æ ‡ä½ç½®çš„ç»“æ„ä½“
 
 
-/* ±àĞ´¸÷¶¥µãĞÅÏ¢ */
+/* ç¼–å†™å„é¡¶ç‚¹ä¿¡æ¯ */
 vector<GLfloat> vertices_Screen =
 {
-    //position				// color				// texture coords(ÎÆÀí×ø±ê)
-    1.0f, 1.0f, 0.0f,		// ÓÒÉÏ¶¥µã		±àºÅ0
-    1.0f, -1.0f, 0.0f,		// ÓÒÏÂ¶¥µã		±àºÅ1
-    -1.0f, -1.0f, 0.0f,		// ×óÏÂ¶¥µã		±àºÅ2
-    -1.0f, 1.0f, 0.0f,		// ×óÉÏ¶¥µã		±àºÅ3
+    //position				// color				// texture coords(çº¹ç†åæ ‡)
+    1.0f, 1.0f, 0.0f,		// å³ä¸Šé¡¶ç‚¹		ç¼–å·0
+    1.0f, -1.0f, 0.0f,		// å³ä¸‹é¡¶ç‚¹		ç¼–å·1
+    -1.0f, -1.0f, 0.0f,		// å·¦ä¸‹é¡¶ç‚¹		ç¼–å·2
+    -1.0f, 1.0f, 0.0f,		// å·¦ä¸Šé¡¶ç‚¹		ç¼–å·3
 };
 
-/* ËÄ¸ö¶¥µãµÄÁ¬½ÓĞÅÏ¢¸ø³öÀ´ */
+/* å››ä¸ªé¡¶ç‚¹çš„è¿æ¥ä¿¡æ¯ç»™å‡ºæ¥ */
 vector<GLuint> indices_Screen =
 {
-    0, 1, 3,		// ĞòºÅÎª 0¡¢1¡¢3 µÄ¶¥µã×éºÏ³ÉÒ»¸öÈı½ÇĞÎ
-    1, 2, 3			// ĞòºÅÎª 1¡¢2¡¢3 µÄ¶¥µã×éºÏ³ÉÒ»¸öÈı½ÇĞÎ
+    0, 1, 3,		// åºå·ä¸º 0ã€1ã€3 çš„é¡¶ç‚¹ç»„åˆæˆä¸€ä¸ªä¸‰è§’å½¢
+    1, 2, 3			// åºå·ä¸º 1ã€2ã€3 çš„é¡¶ç‚¹ç»„åˆæˆä¸€ä¸ªä¸‰è§’å½¢
 };
 
 MousePosition mousePos;
-// ´°¿Ú´óĞ¡ºÍÎ»ÖÃ¸Ä±äµÄ»Øµ÷º¯Êı
+// çª—å£å¤§å°å’Œä½ç½®æ”¹å˜çš„å›è°ƒå‡½æ•°
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) 
 {
     glViewport(0, 0, width, height);
 }
 
-// Êó±ê°´¼üÊÂ¼şµÄ»Øµ÷º¯Êı
+// é¼ æ ‡æŒ‰é”®äº‹ä»¶çš„å›è°ƒå‡½æ•°
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) 
 {
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
@@ -44,11 +44,11 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
     {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
-        glfwTerminate();	// ½áÊø
+        glfwTerminate();	// ç»“æŸ
     }
 }
 
-// Êó±êÒÆ¶¯ÊÂ¼şµÄ»Øµ÷º¯Êı
+// é¼ æ ‡ç§»åŠ¨äº‹ä»¶çš„å›è°ƒå‡½æ•°
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos) 
 {
     if (isDragging) 

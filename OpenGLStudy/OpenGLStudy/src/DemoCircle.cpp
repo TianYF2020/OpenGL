@@ -1,4 +1,4 @@
-/* ÒıÈëÏàÓ¦µÄ¿â */
+ï»¿/* å¼•å…¥ç›¸åº”çš„åº“ */
 #include "DemoCircle.h"
 
 C_DrawCircle::C_DrawCircle()
@@ -19,7 +19,7 @@ void C_DrawCircle::CreatGLWindow(int width,int height)
 		screenWidth = width;
 		screenHeight = height;
 		window = glfwCreateWindow(screenWidth, screenHeight, "Learn OpenGL Texture test", nullptr, nullptr);
-		glfwWindowHint(GLFW_DECORATED, GL_FALSE);   //Ã»ÓĞ±ß¿òºÍ±êÌâÀ¸
+		glfwWindowHint(GLFW_DECORATED, GL_FALSE);   //æ²¡æœ‰è¾¹æ¡†å’Œæ ‡é¢˜æ 
 		glfwGetFramebufferSize(window, &screenWidth, &screenHeight);
 		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 		glfwSetMouseButtonCallback(window, mouse_button_callback);
@@ -28,7 +28,7 @@ void C_DrawCircle::CreatGLWindow(int width,int height)
 		cout << "screenWidth = " << screenWidth << ", screenHeight = " << screenHeight << endl;
 		glfwMakeContextCurrent(window);
 		glewInit();
-		//¿ª±ÙGPUÄÚ´æ
+		//å¼€è¾ŸGPUå†…å­˜
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
 		glGenBuffers(1, &instanceVBO);
@@ -40,8 +40,8 @@ void C_DrawCircle::DestroyGLWindow()
 {
 	if (window != nullptr)
 	{
-		/* ÊÍ·Å×ÊÔ´ */
-		glfwTerminate();	// ½áÊø
+		/* é‡Šæ”¾èµ„æº */
+		glfwTerminate();	// ç»“æŸ
 		glDeleteVertexArrays(1, &VAO);
 		glDeleteBuffers(1, &VBO);
 		glDeleteBuffers(1, &EBO);
@@ -52,18 +52,18 @@ void C_DrawCircle::DestroyGLWindow()
 
 
 
-int C_DrawCircle::DrawCircle_Vertices()   //Ê¹ÓÃÃèµãµÄ·½°¸À´½øĞĞ»æÍ¼
+int C_DrawCircle::DrawCircle_Vertices()   //ä½¿ç”¨æç‚¹çš„æ–¹æ¡ˆæ¥è¿›è¡Œç»˜å›¾
 {
 	std::vector<GLfloat> instanceData =
 	{
-	-0.0f, -0.f, 0.1f,  // µÚÒ»¸öÔ²µÄx, yÎ»ÖÃºÍ°ë¾¶
-	 0.5f, -0.5f, 0.2f,  // µÚ¶ş¸öÔ²
-	-0.5f,  0.5f, 0.2f,  // µÚÈı¸öÔ²
-	 0.5f,  0.5f, 0.1f,  // µÚËÄ¸öÔ²
-	 0.0f,  0.0f, 0.3f   // µÚÎå¸öÔ²
+	-0.0f, -0.f, 0.1f,  // ç¬¬ä¸€ä¸ªåœ†çš„x, yä½ç½®å’ŒåŠå¾„
+	 0.5f, -0.5f, 0.2f,  // ç¬¬äºŒä¸ªåœ†
+	-0.5f,  0.5f, 0.2f,  // ç¬¬ä¸‰ä¸ªåœ†
+	 0.5f,  0.5f, 0.1f,  // ç¬¬å››ä¸ªåœ†
+	 0.0f,  0.0f, 0.3f   // ç¬¬äº”ä¸ªåœ†
 	};
 	vector<GLfloat> circleVertices = generateCircleVertices(numSegments);
-	ourShader = new Shader("./shaders/Circle/shader_v.glsl", "./shaders/Circle/shader_f.glsl");		// Ïà¶ÔÂ·¾¶
+	ourShader = new Shader("./shaders/Circle/shader_v.glsl", "./shaders/Circle/shader_f.glsl");		// ç›¸å¯¹è·¯å¾„
 
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -71,43 +71,43 @@ int C_DrawCircle::DrawCircle_Vertices()   //Ê¹ÓÃÃèµãµÄ·½°¸À´½øĞĞ»æÍ¼
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (void*)(sizeof(GLfloat) * 0));
 	glEnableVertexAttribArray(0);
 
-	// °ó¶¨VBO²¢´«µİÊı¾İ
+	// ç»‘å®šVBOå¹¶ä¼ é€’æ•°æ®
 	glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
 	glBufferData(GL_ARRAY_BUFFER, instanceData.size() * sizeof(GLfloat), &instanceData[0], GL_STATIC_DRAW);
 
-	// ÉèÖÃÎ»ÖÃµÄÊµÀı»¯ÊôĞÔ£¨Î»ÖÃÔÚÆ«ÒÆÎª0µÄµØ·½£©
+	// è®¾ç½®ä½ç½®çš„å®ä¾‹åŒ–å±æ€§ï¼ˆä½ç½®åœ¨åç§»ä¸º0çš„åœ°æ–¹ï¼‰
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
 	glEnableVertexAttribArray(1);
-	glVertexAttribDivisor(1, 1); // Ã¿¸öÊµÀıÊ¹ÓÃÒ»¸öÎ»ÖÃ
+	glVertexAttribDivisor(1, 1); // æ¯ä¸ªå®ä¾‹ä½¿ç”¨ä¸€ä¸ªä½ç½®
 
-	// ÉèÖÃ°ë¾¶µÄÊµÀı»¯ÊôĞÔ£¨°ë¾¶ÔÚÆ«ÒÆÎª2*sizeof(float)µÄµØ·½£©
+	// è®¾ç½®åŠå¾„çš„å®ä¾‹åŒ–å±æ€§ï¼ˆåŠå¾„åœ¨åç§»ä¸º2*sizeof(float)çš„åœ°æ–¹ï¼‰
 	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)(2 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(2);
-	glVertexAttribDivisor(2, 1); // Ã¿¸öÊµÀıÊ¹ÓÃÒ»¸ö°ë¾¶
+	glVertexAttribDivisor(2, 1); // æ¯ä¸ªå®ä¾‹ä½¿ç”¨ä¸€ä¸ªåŠå¾„
 
 	glm::vec3 circleColor(1.0f, 0.0f, 0.0f);
-	/* ÎÆÀíµ¥Ôª£ºÏÂÒ»½ÚÖØµãÊ¹ÓÃ */
+	/* çº¹ç†å•å…ƒï¼šä¸‹ä¸€èŠ‚é‡ç‚¹ä½¿ç”¨ */
 	ourShader->Use();	// don't forget to activate/use the shader before setting uniforms!
-	int fillColor = glGetUniformLocation(ourShader->Program, "fillColor");	// ÕÒµ½×ÅÉ«Æ÷ÖĞ uniform ÊôĞÔµÄÃûÎª"ourTexture"µÄÎÆÀíµÄË÷Òı
-	glUniformMatrix3fv(fillColor,1,GL_FALSE, glm::value_ptr(circleColor));		// ¸æËß OpenGL µÄ×ÅÉ«Æ÷²ÉÑùÆ÷ÊôÓÚÄÄ¸öÎÆÀíµ¥Ôª	
+	int fillColor = glGetUniformLocation(ourShader->Program, "fillColor");	// æ‰¾åˆ°ç€è‰²å™¨ä¸­ uniform å±æ€§çš„åä¸º"ourTexture"çš„çº¹ç†çš„ç´¢å¼•
+	glUniformMatrix3fv(fillColor,1,GL_FALSE, glm::value_ptr(circleColor));		// å‘Šè¯‰ OpenGL çš„ç€è‰²å™¨é‡‡æ ·å™¨å±äºå“ªä¸ªçº¹ç†å•å…ƒ	
 
-	/* ÊÓ¿Ú + Ê±¼ä */
+	/* è§†å£ + æ—¶é—´ */
 	glViewport(0, 0, screenWidth, screenHeight);
 
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
-		/* äÖÈ¾ + Çå³ıÑÕÉ«»º³å */
+		/* æ¸²æŸ“ + æ¸…é™¤é¢œè‰²ç¼“å†² */
 		glClearColor(1.0f, 0.8f, 0.5f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		/* »æÖÆÍ¼ĞÎ */
+		/* ç»˜åˆ¶å›¾å½¢ */
 		ourShader->Use();
-		glBindVertexArray(VAO);										// ½â°ó¶¨ VAO
+		glBindVertexArray(VAO);										// è§£ç»‘å®š VAO
 		glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, numSegments + 2, instanceData.size() / 3);
-		glBindVertexArray(0);									// ½â°ó¶¨ VAO
+		glBindVertexArray(0);									// è§£ç»‘å®š VAO
 
-		/* ½»»»»º³å */
+		/* äº¤æ¢ç¼“å†² */
 		glfwSwapBuffers(window);
 	}
 	DestroyGLWindow();
@@ -117,17 +117,17 @@ int C_DrawCircle::DrawCircle_Vertices()   //Ê¹ÓÃÃèµãµÄ·½°¸À´½øĞĞ»æÍ¼
 
 
 
-int C_DrawCircle::DrawCircle_GLSL()   //Ê¹ÓÃglsl½øĞĞ»æÍ¼
+int C_DrawCircle::DrawCircle_GLSL()   //ä½¿ç”¨glslè¿›è¡Œç»˜å›¾
 {
-	/* ½«ÎÒÃÇ×Ô¼ºÉèÖÃµÄ×ÅÉ«Æ÷ÎÄ±¾´«½øÀ´ */
+	/* å°†æˆ‘ä»¬è‡ªå·±è®¾ç½®çš„ç€è‰²å™¨æ–‡æœ¬ä¼ è¿›æ¥ */
 	if (ourShader != nullptr)
 	{
 		delete ourShader;
 	}
-	ourShader = new  Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/Circle_f.glsl");		// Ïà¶ÔÂ·¾¶  »æÖÆÆÕÍ¨µÄÔ²
-	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGrid_f.glsl");		// Ïà¶ÔÂ·¾¶  ¶àÇøÓò»æÍ¼
-	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleDemo1_f.glsl");		// Ïà¶ÔÂ·¾¶ »æÖÆÔ²+Êó±ê»­Ô²
-	/* ÉèÖÃ¶¥µã»º³å¶ÔÏó(VBO) + ÉèÖÃ¶¥µãÊı×é¶ÔÏó(VAO) + Ë÷Òı»º³å¶ÔÏó(EBO)  */
+	ourShader = new  Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/Circle_f.glsl");		// ç›¸å¯¹è·¯å¾„  ç»˜åˆ¶æ™®é€šçš„åœ†
+	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGrid_f.glsl");		// ç›¸å¯¹è·¯å¾„  å¤šåŒºåŸŸç»˜å›¾
+	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleDemo1_f.glsl");		// ç›¸å¯¹è·¯å¾„ ç»˜åˆ¶åœ†+é¼ æ ‡ç”»åœ†
+	/* è®¾ç½®é¡¶ç‚¹ç¼“å†²å¯¹è±¡(VBO) + è®¾ç½®é¡¶ç‚¹æ•°ç»„å¯¹è±¡(VAO) + ç´¢å¼•ç¼“å†²å¯¹è±¡(EBO)  */
 
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -135,32 +135,32 @@ int C_DrawCircle::DrawCircle_GLSL()   //Ê¹ÓÃglsl½øĞĞ»æÍ¼
 	glBufferData(GL_ARRAY_BUFFER, vertices_Screen.size() * sizeof(GLfloat), &vertices_Screen[0], GL_STATIC_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices_Screen.size() * sizeof(GLuint), &indices_Screen[0], GL_STATIC_DRAW);
 
-	/* ÉèÖÃÁ´½Ó¶¥µãÊôĞÔ */
+	/* è®¾ç½®é“¾æ¥é¡¶ç‚¹å±æ€§ */
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(0);	// Í¨µÀ 0 ´ò¿ª
+	glEnableVertexAttribArray(0);	// é€šé“ 0 æ‰“å¼€
 
 	glm::vec3 screenSize(screenWidth, screenHeight, 1.0f);
-	/* ÎÆÀíµ¥Ôª£ºÏÂÒ»½ÚÖØµãÊ¹ÓÃ */
+	/* çº¹ç†å•å…ƒï¼šä¸‹ä¸€èŠ‚é‡ç‚¹ä½¿ç”¨ */
 	ourShader->Use();	
 	int screenInfor = glGetUniformLocation(ourShader->Program, "iScreenInfor");	
 	glUniform3fv(screenInfor, 1, glm::value_ptr(screenSize)); 
 
 	glm::vec4  mousePosition;
 	int mouse = glGetUniformLocation(ourShader->Program, "iMouse");
-	/* draw loop »­Í¼Ñ­»· */
+	/* draw loop ç”»å›¾å¾ªç¯ */
 	
-		/* ÊÓ¿Ú + Ê±¼ä */
+		/* è§†å£ + æ—¶é—´ */
 	glViewport(0, 0, screenWidth, screenHeight);
 	glfwPollEvents();
 
-	/* äÖÈ¾ + Çå³ıÑÕÉ«»º³å */
+	/* æ¸²æŸ“ + æ¸…é™¤é¢œè‰²ç¼“å†² */
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
 	if (state == GLFW_PRESS) {
 
-		// Êó±ê×ó¼ü±»°´ÏÂ
+		// é¼ æ ‡å·¦é”®è¢«æŒ‰ä¸‹
 		glfwGetCursorPos(window, &xpos, &ypos);
 		mousePosition = glm::vec4(xpos, screenHeight - ypos, 1.0f, 0.0f);
 		glUniform4fv(mouse, 1, glm::value_ptr(mousePosition));
@@ -169,15 +169,15 @@ int C_DrawCircle::DrawCircle_GLSL()   //Ê¹ÓÃglsl½øĞĞ»æÍ¼
 	while (!glfwWindowShouldClose(window))
 	{
 		glUniform4fv(mouse, 1, glm::value_ptr(mousePosition));
-		/* »æÖÆÍ¼ĞÎ */
+		/* ç»˜åˆ¶å›¾å½¢ */
 		ourShader->Use();
-		glBindVertexArray(VAO);									// °ó¶¨ VAO
-		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);				// °ó¶¨ EBO
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);	// »­Á½¸öÈı½ÇĞÎ ´ÓµÚ0¸ö¶¥µã¿ªÊ¼ Ò»¹²»­6´Î
-		glBindVertexArray(0);									// ½â°ó¶¨ VAO
-		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);				// ½â°ó¶¨ EBO
+		glBindVertexArray(VAO);									// ç»‘å®š VAO
+		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);				// ç»‘å®š EBO
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);	// ç”»ä¸¤ä¸ªä¸‰è§’å½¢ ä»ç¬¬0ä¸ªé¡¶ç‚¹å¼€å§‹ ä¸€å…±ç”»6æ¬¡
+		glBindVertexArray(0);									// è§£ç»‘å®š VAO
+		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);				// è§£ç»‘å®š EBO
 
-		/* ½»»»»º³å */
+		/* äº¤æ¢ç¼“å†² */
 		glfwSwapBuffers(window);
 	}
 	DestroyGLWindow();
@@ -186,13 +186,13 @@ int C_DrawCircle::DrawCircle_GLSL()   //Ê¹ÓÃglsl½øĞĞ»æÍ¼
 }
 
 
-int C_DrawCircle::DrawCircleSingle_GLSL()   //Ê¹ÓÃglsl½øĞĞ»æÍ¼
+int C_DrawCircle::DrawCircleSingle_GLSL()   //ä½¿ç”¨glslè¿›è¡Œç»˜å›¾
 {
 
-	ourShader = new Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/Circle_f.glsl");		// Ïà¶ÔÂ·¾¶  »æÖÆÆÕÍ¨µÄÔ²
-	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGrid_f.glsl");		// Ïà¶ÔÂ·¾¶  ¶àÇøÓò»æÍ¼
-	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleDemo1_f.glsl");		// Ïà¶ÔÂ·¾¶ »æÖÆÔ²+Êó±ê»­Ô²
-	/* ÉèÖÃ¶¥µã»º³å¶ÔÏó(VBO) + ÉèÖÃ¶¥µãÊı×é¶ÔÏó(VAO) + Ë÷Òı»º³å¶ÔÏó(EBO)  */
+	ourShader = new Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/Circle_f.glsl");		// ç›¸å¯¹è·¯å¾„  ç»˜åˆ¶æ™®é€šçš„åœ†
+	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGrid_f.glsl");		// ç›¸å¯¹è·¯å¾„  å¤šåŒºåŸŸç»˜å›¾
+	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleDemo1_f.glsl");		// ç›¸å¯¹è·¯å¾„ ç»˜åˆ¶åœ†+é¼ æ ‡ç”»åœ†
+	/* è®¾ç½®é¡¶ç‚¹ç¼“å†²å¯¹è±¡(VBO) + è®¾ç½®é¡¶ç‚¹æ•°ç»„å¯¹è±¡(VAO) + ç´¢å¼•ç¼“å†²å¯¹è±¡(EBO)  */
 
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -200,12 +200,12 @@ int C_DrawCircle::DrawCircleSingle_GLSL()   //Ê¹ÓÃglsl½øĞĞ»æÍ¼
 	glBufferData(GL_ARRAY_BUFFER, vertices_Screen.size() * sizeof(GLfloat), &vertices_Screen[0], GL_STATIC_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices_Screen.size() * sizeof(GLuint), &indices_Screen[0], GL_STATIC_DRAW);
 
-	/* ÉèÖÃÁ´½Ó¶¥µãÊôĞÔ */
+	/* è®¾ç½®é“¾æ¥é¡¶ç‚¹å±æ€§ */
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(0);	// Í¨µÀ 0 ´ò¿ª
+	glEnableVertexAttribArray(0);	// é€šé“ 0 æ‰“å¼€
 
 	glm::vec3 screenSize(screenWidth, screenHeight, 1.0f);
-	/* ÎÆÀíµ¥Ôª£ºÏÂÒ»½ÚÖØµãÊ¹ÓÃ */
+	/* çº¹ç†å•å…ƒï¼šä¸‹ä¸€èŠ‚é‡ç‚¹ä½¿ç”¨ */
 	ourShader->Use();
 	int screenInfor = glGetUniformLocation(ourShader->Program, "iScreenInfor");
 	glUniform3fv(screenInfor, 1, glm::value_ptr(screenSize));
@@ -215,23 +215,23 @@ int C_DrawCircle::DrawCircleSingle_GLSL()   //Ê¹ÓÃglsl½øĞĞ»æÍ¼
 
 	while (!glfwWindowShouldClose(window))
 	{ 
-		/* ÊÓ¿Ú + Ê±¼ä */
+		/* è§†å£ + æ—¶é—´ */
 		glViewport(0, 0, screenWidth, screenHeight);
 		glfwPollEvents();
 
-		/* äÖÈ¾ + Çå³ıÑÕÉ«»º³å */
+		/* æ¸²æŸ“ + æ¸…é™¤é¢œè‰²ç¼“å†² */
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		/* »æÖÆÍ¼ĞÎ */
+		/* ç»˜åˆ¶å›¾å½¢ */
 		ourShader->Use();
-		glBindVertexArray(VAO);									// °ó¶¨ VAO
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);				// °ó¶¨ EBO
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);	// »­Á½¸öÈı½ÇĞÎ ´ÓµÚ0¸ö¶¥µã¿ªÊ¼ Ò»¹²»­6´Î
-		glBindVertexArray(0);									// ½â°ó¶¨ VAO
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);				// ½â°ó¶¨ EBO
+		glBindVertexArray(VAO);									// ç»‘å®š VAO
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);				// ç»‘å®š EBO
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);	// ç”»ä¸¤ä¸ªä¸‰è§’å½¢ ä»ç¬¬0ä¸ªé¡¶ç‚¹å¼€å§‹ ä¸€å…±ç”»6æ¬¡
+		glBindVertexArray(0);									// è§£ç»‘å®š VAO
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);				// è§£ç»‘å®š EBO
 
-		/* ½»»»»º³å */
+		/* äº¤æ¢ç¼“å†² */
 		glfwSwapBuffers(window);
 	}
 	DestroyGLWindow();
@@ -240,13 +240,13 @@ int C_DrawCircle::DrawCircleSingle_GLSL()   //Ê¹ÓÃglsl½øĞĞ»æÍ¼
 }
 
 
-int C_DrawCircle::DrawCircleGrid_GLSL()   //Ê¹ÓÃglsl½øĞĞ»æÍ¼
+int C_DrawCircle::DrawCircleGrid_GLSL()   //ä½¿ç”¨glslè¿›è¡Œç»˜å›¾
 {
 
-	ourShader = new Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGrid_f.glsl");		// Ïà¶ÔÂ·¾¶  »æÖÆÆÕÍ¨µÄÔ²
-	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGrid_f.glsl");		// Ïà¶ÔÂ·¾¶  ¶àÇøÓò»æÍ¼
-	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleDemo1_f.glsl");		// Ïà¶ÔÂ·¾¶ »æÖÆÔ²+Êó±ê»­Ô²
-	/* ÉèÖÃ¶¥µã»º³å¶ÔÏó(VBO) + ÉèÖÃ¶¥µãÊı×é¶ÔÏó(VAO) + Ë÷Òı»º³å¶ÔÏó(EBO)  */
+	ourShader = new Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGrid_f.glsl");		// ç›¸å¯¹è·¯å¾„  ç»˜åˆ¶æ™®é€šçš„åœ†
+	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGrid_f.glsl");		// ç›¸å¯¹è·¯å¾„  å¤šåŒºåŸŸç»˜å›¾
+	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleDemo1_f.glsl");		// ç›¸å¯¹è·¯å¾„ ç»˜åˆ¶åœ†+é¼ æ ‡ç”»åœ†
+	/* è®¾ç½®é¡¶ç‚¹ç¼“å†²å¯¹è±¡(VBO) + è®¾ç½®é¡¶ç‚¹æ•°ç»„å¯¹è±¡(VAO) + ç´¢å¼•ç¼“å†²å¯¹è±¡(EBO)  */
 
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -254,12 +254,12 @@ int C_DrawCircle::DrawCircleGrid_GLSL()   //Ê¹ÓÃglsl½øĞĞ»æÍ¼
 	glBufferData(GL_ARRAY_BUFFER, vertices_Screen.size() * sizeof(GLfloat), &vertices_Screen[0], GL_STATIC_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices_Screen.size() * sizeof(GLuint), &indices_Screen[0], GL_STATIC_DRAW);
 
-	/* ÉèÖÃÁ´½Ó¶¥µãÊôĞÔ */
+	/* è®¾ç½®é“¾æ¥é¡¶ç‚¹å±æ€§ */
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(0);	// Í¨µÀ 0 ´ò¿ª
+	glEnableVertexAttribArray(0);	// é€šé“ 0 æ‰“å¼€
 
 	glm::vec3 screenSize(screenWidth, screenHeight, 1.0f);
-	/* ÎÆÀíµ¥Ôª£ºÏÂÒ»½ÚÖØµãÊ¹ÓÃ */
+	/* çº¹ç†å•å…ƒï¼šä¸‹ä¸€èŠ‚é‡ç‚¹ä½¿ç”¨ */
 	ourShader->Use();
 	int screenInfor = glGetUniformLocation(ourShader->Program, "iScreenInfor");
 	glUniform3fv(screenInfor, 1, glm::value_ptr(screenSize));
@@ -269,23 +269,23 @@ int C_DrawCircle::DrawCircleGrid_GLSL()   //Ê¹ÓÃglsl½øĞĞ»æÍ¼
 
 	while (!glfwWindowShouldClose(window))
 	{
-		/* ÊÓ¿Ú + Ê±¼ä */
+		/* è§†å£ + æ—¶é—´ */
 		glViewport(0, 0, screenWidth, screenHeight);
 		glfwPollEvents();
 
-		/* äÖÈ¾ + Çå³ıÑÕÉ«»º³å */
+		/* æ¸²æŸ“ + æ¸…é™¤é¢œè‰²ç¼“å†² */
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		/* »æÖÆÍ¼ĞÎ */
+		/* ç»˜åˆ¶å›¾å½¢ */
 		ourShader->Use();
-		glBindVertexArray(VAO);									// °ó¶¨ VAO
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);				// °ó¶¨ EBO
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);	// »­Á½¸öÈı½ÇĞÎ ´ÓµÚ0¸ö¶¥µã¿ªÊ¼ Ò»¹²»­6´Î
-		glBindVertexArray(0);									// ½â°ó¶¨ VAO
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);				// ½â°ó¶¨ EBO
+		glBindVertexArray(VAO);									// ç»‘å®š VAO
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);				// ç»‘å®š EBO
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);	// ç”»ä¸¤ä¸ªä¸‰è§’å½¢ ä»ç¬¬0ä¸ªé¡¶ç‚¹å¼€å§‹ ä¸€å…±ç”»6æ¬¡
+		glBindVertexArray(0);									// è§£ç»‘å®š VAO
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);				// è§£ç»‘å®š EBO
 
-		/* ½»»»»º³å */
+		/* äº¤æ¢ç¼“å†² */
 		glfwSwapBuffers(window);
 	}
 	DestroyGLWindow();
@@ -295,13 +295,13 @@ int C_DrawCircle::DrawCircleGrid_GLSL()   //Ê¹ÓÃglsl½øĞĞ»æÍ¼
 
 
 
-int C_DrawCircle::DrawCircleGridPixel_GLSL()   //Ê¹ÓÃglsl½øĞĞ»æÍ¼
+int C_DrawCircle::DrawCircleGridPixel_GLSL()   //ä½¿ç”¨glslè¿›è¡Œç»˜å›¾
 {
 
-	ourShader = new Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGridPixel_f.glsl");		// Ïà¶ÔÂ·¾¶  »æÖÆÆÕÍ¨µÄÔ²
-	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGrid_f.glsl");		// Ïà¶ÔÂ·¾¶  ¶àÇøÓò»æÍ¼
-	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleDemo1_f.glsl");		// Ïà¶ÔÂ·¾¶ »æÖÆÔ²+Êó±ê»­Ô²
-	/* ÉèÖÃ¶¥µã»º³å¶ÔÏó(VBO) + ÉèÖÃ¶¥µãÊı×é¶ÔÏó(VAO) + Ë÷Òı»º³å¶ÔÏó(EBO)  */
+	ourShader = new Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGridPixel_f.glsl");		// ç›¸å¯¹è·¯å¾„  ç»˜åˆ¶æ™®é€šçš„åœ†
+	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGrid_f.glsl");		// ç›¸å¯¹è·¯å¾„  å¤šåŒºåŸŸç»˜å›¾
+	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleDemo1_f.glsl");		// ç›¸å¯¹è·¯å¾„ ç»˜åˆ¶åœ†+é¼ æ ‡ç”»åœ†
+	/* è®¾ç½®é¡¶ç‚¹ç¼“å†²å¯¹è±¡(VBO) + è®¾ç½®é¡¶ç‚¹æ•°ç»„å¯¹è±¡(VAO) + ç´¢å¼•ç¼“å†²å¯¹è±¡(EBO)  */
 
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -309,12 +309,12 @@ int C_DrawCircle::DrawCircleGridPixel_GLSL()   //Ê¹ÓÃglsl½øĞĞ»æÍ¼
 	glBufferData(GL_ARRAY_BUFFER, vertices_Screen.size() * sizeof(GLfloat), &vertices_Screen[0], GL_STATIC_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices_Screen.size() * sizeof(GLuint), &indices_Screen[0], GL_STATIC_DRAW);
 
-	/* ÉèÖÃÁ´½Ó¶¥µãÊôĞÔ */
+	/* è®¾ç½®é“¾æ¥é¡¶ç‚¹å±æ€§ */
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(0);	// Í¨µÀ 0 ´ò¿ª
+	glEnableVertexAttribArray(0);	// é€šé“ 0 æ‰“å¼€
 
 	glm::vec3 screenSize(screenWidth, screenHeight, 1.0f);
-	/* ÎÆÀíµ¥Ôª£ºÏÂÒ»½ÚÖØµãÊ¹ÓÃ */
+	/* çº¹ç†å•å…ƒï¼šä¸‹ä¸€èŠ‚é‡ç‚¹ä½¿ç”¨ */
 	ourShader->Use();
 	int screenInfor = glGetUniformLocation(ourShader->Program, "iScreenInfor");
 	glUniform3fv(screenInfor, 1, glm::value_ptr(screenSize));
@@ -324,23 +324,23 @@ int C_DrawCircle::DrawCircleGridPixel_GLSL()   //Ê¹ÓÃglsl½øĞĞ»æÍ¼
 
 	while (!glfwWindowShouldClose(window))
 	{
-		/* ÊÓ¿Ú + Ê±¼ä */
+		/* è§†å£ + æ—¶é—´ */
 		glViewport(0, 0, screenWidth, screenHeight);
 		glfwPollEvents();
 
-		/* äÖÈ¾ + Çå³ıÑÕÉ«»º³å */
+		/* æ¸²æŸ“ + æ¸…é™¤é¢œè‰²ç¼“å†² */
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		/* »æÖÆÍ¼ĞÎ */
+		/* ç»˜åˆ¶å›¾å½¢ */
 		ourShader->Use();
-		glBindVertexArray(VAO);									// °ó¶¨ VAO
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);				// °ó¶¨ EBO
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);	// »­Á½¸öÈı½ÇĞÎ ´ÓµÚ0¸ö¶¥µã¿ªÊ¼ Ò»¹²»­6´Î
-		glBindVertexArray(0);									// ½â°ó¶¨ VAO
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);				// ½â°ó¶¨ EBO
+		glBindVertexArray(VAO);									// ç»‘å®š VAO
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);				// ç»‘å®š EBO
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);	// ç”»ä¸¤ä¸ªä¸‰è§’å½¢ ä»ç¬¬0ä¸ªé¡¶ç‚¹å¼€å§‹ ä¸€å…±ç”»6æ¬¡
+		glBindVertexArray(0);									// è§£ç»‘å®š VAO
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);				// è§£ç»‘å®š EBO
 
-		/* ½»»»»º³å */
+		/* äº¤æ¢ç¼“å†² */
 		glfwSwapBuffers(window);
 	}
 	DestroyGLWindow();
@@ -350,15 +350,15 @@ int C_DrawCircle::DrawCircleGridPixel_GLSL()   //Ê¹ÓÃglsl½øĞĞ»æÍ¼
 
 
 
-// Éú³ÉÔ²ĞÎµÄ¶¥µãÊı¾İ
+// ç”Ÿæˆåœ†å½¢çš„é¡¶ç‚¹æ•°æ®
 vector<GLfloat> C_DrawCircle::generateCircleVertices(int numSegments)
 {
 	std::vector<GLfloat> vertices;
-	// Ìí¼ÓÔ²ĞÄµÄ¶¥µã
+	// æ·»åŠ åœ†å¿ƒçš„é¡¶ç‚¹
 	vertices.push_back(0.0f);
 	vertices.push_back(0.0f);
 
-	// Ìí¼ÓÔ²ÖÜÉÏµÄ¶¥µã
+	// æ·»åŠ åœ†å‘¨ä¸Šçš„é¡¶ç‚¹
 	for (int i = 0; i <= numSegments; ++i)
 	{
 		GLfloat theta = 2.0f * 3.1415926f * GLfloat(i) / float(numSegments);

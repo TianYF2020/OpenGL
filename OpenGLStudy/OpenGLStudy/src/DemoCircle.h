@@ -1,17 +1,17 @@
-/* ÒıÈëÏàÓ¦µÄ¿â */
+ï»¿/* å¼•å…¥ç›¸åº”çš„åº“ */
 #pragma once
 #define GLEW_STATIC	
 
 #include <iostream>
 #include "Shader.h"
-#include "GL\glew.h"					// ×¢£ºÕâÒ»²¿·ÖÒª¸ù¾İ¸öÈËÇé¿ö½øĞĞÉè¶¨
+#include "GL\glew.h"					// æ³¨ï¼šè¿™ä¸€éƒ¨åˆ†è¦æ ¹æ®ä¸ªäººæƒ…å†µè¿›è¡Œè®¾å®š
 #include "GLFW\glfw3.h"
 #include "SOIL2\stb_image.h"
 #include "SOIL2\SOIL2.h"
 #include "Common.h"
 using namespace std;
 
-const int numSegments = 100; // Ô²µÄÏ¸·Ö³Ì¶È
+const int numSegments = 100; // åœ†çš„ç»†åˆ†ç¨‹åº¦
 
 class C_DrawCircle
 {
@@ -21,16 +21,16 @@ public:
 	void CreatGLWindow(int width, int height);
 	void DestroyGLWindow();
 	vector<GLfloat> generateCircleVertices(int numSegments);
-	//ÕâÀïÇø·ÖÊ¹ÓÃ¶¥µã»æÖÆºÍÊ¹ÓÃGLSL»æÖÆ£¬Ò»µ©ÇĞ»»£¬ĞèÒªÊÍ·ÅGPUÖØĞÂ·ÖÅä
-	int DrawCircle_Vertices();	//Ê¹ÓÃÃèµãµÄ·½°¸À´½øĞĞ»æÍ¼
-	int DrawCircle_GLSL();		//Ê¹ÓÃglsl½øĞĞ»æÍ¼
-	int DrawCircleSingle_GLSL(); //Ê¹ÓÃglsl»æÖÆµ¥¸öÔ²
-	int DrawCircleGrid_GLSL();   //Ê¹ÓÃ°´ÕÕglsl½øĞĞ»æÖÆÍø¸ñÔ²
-	int DrawCircleGridPixel_GLSL();   //Ê¹ÓÃglsl°´ÕÕÏñËØ»æÍ¼
+	//è¿™é‡ŒåŒºåˆ†ä½¿ç”¨é¡¶ç‚¹ç»˜åˆ¶å’Œä½¿ç”¨GLSLç»˜åˆ¶ï¼Œä¸€æ—¦åˆ‡æ¢ï¼Œéœ€è¦é‡Šæ”¾GPUé‡æ–°åˆ†é…
+	int DrawCircle_Vertices();	//ä½¿ç”¨æç‚¹çš„æ–¹æ¡ˆæ¥è¿›è¡Œç»˜å›¾
+	int DrawCircle_GLSL();		//ä½¿ç”¨glslè¿›è¡Œç»˜å›¾
+	int DrawCircleSingle_GLSL(); //ä½¿ç”¨glslç»˜åˆ¶å•ä¸ªåœ†
+	int DrawCircleGrid_GLSL();   //ä½¿ç”¨æŒ‰ç…§glslè¿›è¡Œç»˜åˆ¶ç½‘æ ¼åœ†
+	int DrawCircleGridPixel_GLSL();   //ä½¿ç”¨glslæŒ‰ç…§åƒç´ ç»˜å›¾
 	Shader *ourShader = nullptr;
 private:
 	GLuint VAO, VBO,EBO, instanceVBO;
 	int screenWidth, screenHeight;
 	GLFWwindow* window = nullptr;
-	double xpos, ypos;   //Êó±êÎ»ÖÃ
+	double xpos, ypos;   //é¼ æ ‡ä½ç½®
 };

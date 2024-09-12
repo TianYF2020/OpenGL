@@ -17,14 +17,37 @@
    <widget class="QPushButton" name="BtnCreateGL">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>120</y>
+      <x>180</x>
+      <y>80</y>
       <width>121</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
      <string>创建Opengl</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="BtnCreateThread">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>220</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>创建线程</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>220</y>
+      <width>321</width>
+      <height>131</height>
+     </rect>
     </property>
    </widget>
   </widget>

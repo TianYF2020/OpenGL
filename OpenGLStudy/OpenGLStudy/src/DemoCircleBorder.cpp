@@ -1,22 +1,22 @@
-/* ÒıÈëÏàÓ¦µÄ¿â */
+ï»¿/* å¼•å…¥ç›¸åº”çš„åº“ */
 #define GLEW_STATIC	
 
 #include <iostream>
 #include "Shader.h"
-#include "GL\glew.h"					// ×¢£ºÕâÒ»²¿·ÖÒª¸ù¾İ¸öÈËÇé¿ö½øĞĞÉè¶¨
+#include "GL\glew.h"					// æ³¨ï¼šè¿™ä¸€éƒ¨åˆ†è¦æ ¹æ®ä¸ªäººæƒ…å†µè¿›è¡Œè®¾å®š
 #include "GLFW\glfw3.h"
 #include "SOIL2\stb_image.h"
 #include "SOIL2\SOIL2.h"
 #include "Common.h"
 using namespace std;
 
-const int numSegments = 100; // Ô²µÄÏ¸·Ö³Ì¶È
+const int numSegments = 100; // åœ†çš„ç»†åˆ†ç¨‹åº¦
 
-// Éú³ÉÔ²ĞÎµÄ¶¥µãÊı¾İ
+// ç”Ÿæˆåœ†å½¢çš„é¡¶ç‚¹æ•°æ®
 std::vector<GLfloat> generateCircleBorderVertices(int numSegments)
 {
 	std::vector<GLfloat> vertices;
-	// Ìí¼ÓÔ²ÖÜÉÏµÄ¶¥µã
+	// æ·»åŠ åœ†å‘¨ä¸Šçš„é¡¶ç‚¹
 	for (int i = 0; i <= numSegments; ++i)
 	{
 		GLfloat theta = 2.0f * 3.1415926f * GLfloat(i) / GLfloat(numSegments);
@@ -35,7 +35,7 @@ int testCircleBorder()
 	glfwInit();
 	int screenWidth, screenHeight;
 	GLFWwindow* window = glfwCreateWindow(2560, 1440, "Learn OpenGL Texture test", nullptr, nullptr);
-	glfwWindowHint(GLFW_DECORATED, GL_FALSE);   //Ã»ÓĞ±ß¿òºÍ±êÌâÀ¸
+	glfwWindowHint(GLFW_DECORATED, GL_FALSE);   //æ²¡æœ‰è¾¹æ¡†å’Œæ ‡é¢˜æ 
 	glfwGetFramebufferSize(window, &screenWidth, &screenHeight);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glfwSetMouseButtonCallback(window, mouse_button_callback);
@@ -47,16 +47,16 @@ int testCircleBorder()
 
 	std::vector<GLfloat> instanceData =
 	{
-	-0.0f, -0.0f, 0.5f,  // µÚÒ»¸öÔ²µÄx, yÎ»ÖÃºÍ°ë¾¶
-	 0.5f, -0.5f, 0.4f,  // µÚ¶ş¸öÔ²
-	-0.5f,  0.5f, 0.2f,  // µÚÈı¸öÔ²
-	 0.5f,  0.5f, 0.3f,  // µÚËÄ¸öÔ²
-	 0.0f,  0.0f, 0.5f   // µÚÎå¸öÔ²
+	-0.0f, -0.0f, 0.5f,  // ç¬¬ä¸€ä¸ªåœ†çš„x, yä½ç½®å’ŒåŠå¾„
+	 0.5f, -0.5f, 0.4f,  // ç¬¬äºŒä¸ªåœ†
+	-0.5f,  0.5f, 0.2f,  // ç¬¬ä¸‰ä¸ªåœ†
+	 0.5f,  0.5f, 0.3f,  // ç¬¬å››ä¸ªåœ†
+	 0.0f,  0.0f, 0.5f   // ç¬¬äº”ä¸ªåœ†
 	};
 
 	vector<GLfloat> circleVertices = generateCircleBorderVertices(numSegments);
 
-	Shader ourShader = Shader("./shaders/Circle/shader_v.glsl", "./shaders/Circle/shader_f.glsl");		// Ïà¶ÔÂ·¾¶
+	Shader ourShader = Shader("./shaders/Circle/shader_v.glsl", "./shaders/Circle/shader_f.glsl");		// ç›¸å¯¹è·¯å¾„
 
 	GLuint VAO, VBO;
 	glGenBuffers(1, &VBO);
@@ -68,53 +68,54 @@ int testCircleBorder()
 	glEnableVertexAttribArray(0);
 	GLuint instanceVBO;
 	glGenBuffers(1, &instanceVBO);
-	// °ó¶¨VBO²¢´«µİÊı¾İ
+	// ç»‘å®šVBOå¹¶ä¼ é€’æ•°æ®
 	glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
 	glBufferData(GL_ARRAY_BUFFER, instanceData.size() * sizeof(GLfloat), &instanceData[0], GL_STATIC_DRAW);
 
-	// ÉèÖÃÎ»ÖÃµÄÊµÀı»¯ÊôĞÔ£¨Î»ÖÃÔÚÆ«ÒÆÎª0µÄµØ·½£©
+	// è®¾ç½®ä½ç½®çš„å®ä¾‹åŒ–å±æ€§ï¼ˆä½ç½®åœ¨åç§»ä¸º0çš„åœ°æ–¹ï¼‰
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
 	glEnableVertexAttribArray(1);
-	glVertexAttribDivisor(1, 1); // Ã¿¸öÊµÀıÊ¹ÓÃÒ»¸öÎ»ÖÃ
+	glVertexAttribDivisor(1, 1); // æ¯ä¸ªå®ä¾‹ä½¿ç”¨ä¸€ä¸ªä½ç½®
 
-	// ÉèÖÃ°ë¾¶µÄÊµÀı»¯ÊôĞÔ£¨°ë¾¶ÔÚÆ«ÒÆÎª2*sizeof(float)µÄµØ·½£©
+	// è®¾ç½®åŠå¾„çš„å®ä¾‹åŒ–å±æ€§ï¼ˆåŠå¾„åœ¨åç§»ä¸º2*sizeof(float)çš„åœ°æ–¹ï¼‰
 	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)(2 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(2);
-	glVertexAttribDivisor(2, 1); // Ã¿¸öÊµÀıÊ¹ÓÃÒ»¸ö°ë¾¶
+	glVertexAttribDivisor(2, 1); // æ¯ä¸ªå®ä¾‹ä½¿ç”¨ä¸€ä¸ªåŠå¾„
 
 	glm::vec3 circleColor(1.0f, 0.0f, 0.0f);
-	/* ÎÆÀíµ¥Ôª£ºÏÂÒ»½ÚÖØµãÊ¹ÓÃ */
+	/* çº¹ç†å•å…ƒï¼šä¸‹ä¸€èŠ‚é‡ç‚¹ä½¿ç”¨ */
 	ourShader.Use();	// don't forget to activate/use the shader before setting uniforms!
-	int fillColor = glGetUniformLocation(ourShader.Program, "fillColor");	// ÕÒµ½×ÅÉ«Æ÷ÖĞ uniform ÊôĞÔµÄÃûÎª"ourTexture"µÄÎÆÀíµÄË÷Òı
-	glUniformMatrix3fv(fillColor, 1, GL_FALSE, glm::value_ptr(circleColor));		// ¸æËß OpenGL µÄ×ÅÉ«Æ÷²ÉÑùÆ÷ÊôÓÚÄÄ¸öÎÆÀíµ¥Ôª	
+	int fillColor = glGetUniformLocation(ourShader.Program, "fillColor");	// æ‰¾åˆ°ç€è‰²å™¨ä¸­ uniform å±æ€§çš„åä¸º"ourTexture"çš„çº¹ç†çš„ç´¢å¼•
+	glUniformMatrix3fv(fillColor, 1, GL_FALSE, glm::value_ptr(circleColor));		// å‘Šè¯‰ OpenGL çš„ç€è‰²å™¨é‡‡æ ·å™¨å±äºå“ªä¸ªçº¹ç†å•å…ƒ	
 
-	/* draw loop »­Í¼Ñ­»· */
+	/* draw loop ç”»å›¾å¾ªç¯ */
 	while (!glfwWindowShouldClose(window))
 	{
-		/* ÊÓ¿Ú + Ê±¼ä */
+		/* è§†å£ + æ—¶é—´ */
 		glViewport(0, 0, screenWidth, screenHeight);
 		glfwPollEvents();
 
-		/* äÖÈ¾ + Çå³ıÑÕÉ«»º³å */
+		/* æ¸²æŸ“ + æ¸…é™¤é¢œè‰²ç¼“å†² */
 		glClearColor(1.0f, 0.8f, 0.5f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 
-		/* »æÖÆÍ¼ĞÎ */
+		/* ç»˜åˆ¶å›¾å½¢ */
 		ourShader.Use();
-		glBindVertexArray(VAO);										// ½â°ó¶¨ VAO
+		glBindVertexArray(VAO);										// è§£ç»‘å®š VAO
 		glDrawArraysInstanced(GL_LINE_LOOP, 0, numSegments + 1, instanceData.size() / 3);
-		glBindVertexArray(0);									// ½â°ó¶¨ VAO
-		glBindTexture(GL_TEXTURE_2D, 0);						// ½â°ó¶¨ ÎÆÀí
+		glBindVertexArray(0);									// è§£ç»‘å®š VAO
+		glBindTexture(GL_TEXTURE_2D, 0);						// è§£ç»‘å®š çº¹ç†
 
-		/* ½»»»»º³å */
+		/* äº¤æ¢ç¼“å†² */
 		glfwSwapBuffers(window);
 	}
 
-	/* ÊÍ·Å×ÊÔ´ */
+
+	/* é‡Šæ”¾èµ„æº */
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &instanceVBO);
-	glfwTerminate();	// ½áÊø
+	glfwTerminate();	// ç»“æŸ
 	return 0;
 }

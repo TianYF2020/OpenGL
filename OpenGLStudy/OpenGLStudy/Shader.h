@@ -1,56 +1,56 @@
-#pragma once
-#pragma once	// ÎªÁË±ÜÃâÍ¬Ò»¸öÍ·ÎÄ¼ş±»°üº¬£¨include£©¶à´Î
+ï»¿#pragma once
+#pragma once	// ä¸ºäº†é¿å…åŒä¸€ä¸ªå¤´æ–‡ä»¶è¢«åŒ…å«ï¼ˆincludeï¼‰å¤šæ¬¡
 #include<string>
 #include<fstream>
 #include<sstream>
 #include<iostream>
 using namespace std;
-#include"GL\glew.h"					// ×¢£ºÕâÒ»²¿·ÖÒª¸ù¾İ¸öÈËÇé¿ö½øĞĞÉè¶¨
+#include"GL\glew.h"					// æ³¨ï¼šè¿™ä¸€éƒ¨åˆ†è¦æ ¹æ®ä¸ªäººæƒ…å†µè¿›è¡Œè®¾å®š
 #include"GLFW\glfw3.h"
 
-// ÎÒÃÇ×Ô¼ºµÄ×ÅÉ«Æ÷
+// æˆ‘ä»¬è‡ªå·±çš„ç€è‰²å™¨
 class Shader
 {
 private:
-	GLuint vertex, fragment;	// ¶¥µã×ÅÉ«Æ÷ ºÍ Æ¬Ôª×ÅÉ«Æ÷ 
+	GLuint vertex, fragment;	// é¡¶ç‚¹ç€è‰²å™¨ å’Œ ç‰‡å…ƒç€è‰²å™¨ 
 public:
-	GLuint Program;				// ×ÅÉ«Æ÷³ÌĞòµÄID
+	GLuint Program;				// ç€è‰²å™¨ç¨‹åºçš„ID
 
-	// Constructor(×ÅÉ«Æ÷¹¹Ôìº¯Êı)
+	// Constructor(ç€è‰²å™¨æ„é€ å‡½æ•°)
 	Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
 	{
-		// ÎÄ¼ş¶ÁÈ¡ÏµÁĞµÄ±äÁ¿¶¨Òå
+		// æ–‡ä»¶è¯»å–ç³»åˆ—çš„å˜é‡å®šä¹‰
 		string vertexCode;
 		string fragmentCode;
 		ifstream vShaderFile;
 		ifstream fShaderFile;
 
-		// Òì³£»úÖÆ´¦Àí£º±£Ö¤ifstream¶ÔÏó¿ÉÒÔÅ×³öÒì³££º
+		// å¼‚å¸¸æœºåˆ¶å¤„ç†ï¼šä¿è¯ifstreamå¯¹è±¡å¯ä»¥æŠ›å‡ºå¼‚å¸¸ï¼š
 		vShaderFile.exceptions(ifstream::badbit);
 		fShaderFile.exceptions(ifstream::badbit);
 
 		try
 		{
-			// ´ò¿ªÎÄ¼ş
+			// æ‰“å¼€æ–‡ä»¶
 			vShaderFile.open(vertexPath);
 			fShaderFile.open(fragmentPath);
 			stringstream vShaderStream, fShaderStream;
 
-			// ¶ÁÈ¡ÎÄ¼şµÄ»º³åÄÚÈİµ½Êı¾İÁ÷ÖĞ
+			// è¯»å–æ–‡ä»¶çš„ç¼“å†²å†…å®¹åˆ°æ•°æ®æµä¸­
 			vShaderStream << vShaderFile.rdbuf();
 			fShaderStream << fShaderFile.rdbuf();
 
-			// ¹Ø±ÕÎÄ¼ş´¦ÀíÆ÷
+			// å…³é—­æ–‡ä»¶å¤„ç†å™¨
 			vShaderFile.close();
 			fShaderFile.close();
 
-			// ×ª»»Êı¾İÁ÷µ½string
+			// è½¬æ¢æ•°æ®æµåˆ°string
 			vertexCode = vShaderStream.str();
 			fragmentCode = fShaderStream.str();
 
 		}
 		catch (ifstream::failure e) 
-		{	// ·¢ÉúÒì³£Ê±Êä³ö
+		{	// å‘ç”Ÿå¼‚å¸¸æ—¶è¾“å‡º
 			cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ" << endl;
 		}
 
@@ -58,35 +58,35 @@ public:
 		{
 			throw 0;
 		}
-		/* ½« string ÀàĞÍµÄ×Ö·û´®×ª»¯Îª charÊı×é ÀàĞÍ */
+		/* å°† string ç±»å‹çš„å­—ç¬¦ä¸²è½¬åŒ–ä¸º charæ•°ç»„ ç±»å‹ */
 		const GLchar* vShaderCode = vertexCode.c_str();
 		const GLchar* fShaderCode = fragmentCode.c_str();
 
-		/* ¶¥µã×ÅÉ«Æ÷ */
-		vertex = glCreateShader(GL_VERTEX_SHADER);				// ´´½¨¶¥µã×ÅÉ«Æ÷¶ÔÏó
-		glShaderSource(vertex, 1, &vShaderCode, NULL);			// ½«¶¥µã×ÅÉ«Æ÷µÄÄÚÈİ´«½øÀ´
-		glCompileShader(vertex);								// ±àÒë¶¥µã×ÅÉ«Æ÷
-		GLint flag;												// ÓÃÓÚÅĞ¶Ï±àÒëÊÇ·ñ³É¹¦
+		/* é¡¶ç‚¹ç€è‰²å™¨ */
+		vertex = glCreateShader(GL_VERTEX_SHADER);				// åˆ›å»ºé¡¶ç‚¹ç€è‰²å™¨å¯¹è±¡
+		glShaderSource(vertex, 1, &vShaderCode, NULL);			// å°†é¡¶ç‚¹ç€è‰²å™¨çš„å†…å®¹ä¼ è¿›æ¥
+		glCompileShader(vertex);								// ç¼–è¯‘é¡¶ç‚¹ç€è‰²å™¨
+		GLint flag;												// ç”¨äºåˆ¤æ–­ç¼–è¯‘æ˜¯å¦æˆåŠŸ
 		GLchar infoLog[512];
-		glGetShaderiv(vertex, GL_COMPILE_STATUS, &flag); // »ñÈ¡±àÒë×´Ì¬
+		glGetShaderiv(vertex, GL_COMPILE_STATUS, &flag); // è·å–ç¼–è¯‘çŠ¶æ€
 		if (!flag)
 		{
 			glGetShaderInfoLog(vertex, 512, NULL, infoLog);
 			cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << endl;
 		}
 
-		/* Æ¬Ôª×ÅÉ«Æ÷ */
-		fragment = glCreateShader(GL_FRAGMENT_SHADER);			// ´´½¨Æ¬Ôª×ÅÉ«Æ÷¶ÔÏó
-		glShaderSource(fragment, 1, &fShaderCode, NULL);		// ½«Æ¬Ôª×ÅÉ«Æ÷µÄÄÚÈİ´«½øÀ´
-		glCompileShader(fragment);								// ±àÒë¶¥µã×ÅÉ«Æ÷
-		glGetShaderiv(fragment, GL_COMPILE_STATUS, &flag);		// »ñÈ¡±àÒë×´Ì¬
+		/* ç‰‡å…ƒç€è‰²å™¨ */
+		fragment = glCreateShader(GL_FRAGMENT_SHADER);			// åˆ›å»ºç‰‡å…ƒç€è‰²å™¨å¯¹è±¡
+		glShaderSource(fragment, 1, &fShaderCode, NULL);		// å°†ç‰‡å…ƒç€è‰²å™¨çš„å†…å®¹ä¼ è¿›æ¥
+		glCompileShader(fragment);								// ç¼–è¯‘é¡¶ç‚¹ç€è‰²å™¨
+		glGetShaderiv(fragment, GL_COMPILE_STATUS, &flag);		// è·å–ç¼–è¯‘çŠ¶æ€
 		if (!flag)
 		{
 			glGetShaderInfoLog(fragment, 512, NULL, infoLog);
 			cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << endl;
 		}
 
-		/* ×ÅÉ«Æ÷³ÌĞò */
+		/* ç€è‰²å™¨ç¨‹åº */
 		this->Program = glCreateProgram();
 		glAttachShader(this->Program, vertex);
 		glAttachShader(this->Program, fragment);
@@ -96,12 +96,12 @@ public:
 			glGetProgramInfoLog(this->Program, 512, NULL, infoLog);
 			cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << endl;
 		}
-		// É¾³ı×ÅÉ«Æ÷£¬ËüÃÇÒÑ¾­Á´½Óµ½ÎÒÃÇµÄ³ÌĞòÖĞÁË£¬ÒÑ¾­²»ÔÙĞèÒªÁË
+		// åˆ é™¤ç€è‰²å™¨ï¼Œå®ƒä»¬å·²ç»é“¾æ¥åˆ°æˆ‘ä»¬çš„ç¨‹åºä¸­äº†ï¼Œå·²ç»ä¸å†éœ€è¦äº†
 		glDeleteShader(vertex);
 		glDeleteShader(fragment);
 	}
 
-	// Deconstructor(Îö¹¹º¯Êı)
+	// Deconstructor(ææ„å‡½æ•°)
 	~Shader()
 	{
 		glDetachShader(this->Program, vertex);

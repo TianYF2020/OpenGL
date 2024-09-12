@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <QtWidgets/QMainWindow>
 #include "ui_OpenGLStudy.h"
@@ -19,6 +19,8 @@ public:
     C_DrawRectangle* m_DrawRect = nullptr;
 public slots:
     void TestOpenGL();
+    void TestThread();
+    void UpdataRunResult(const QString& result);
 private:
     Ui::OpenGLStudyClass ui;
 };

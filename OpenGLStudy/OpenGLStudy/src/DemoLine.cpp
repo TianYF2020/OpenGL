@@ -1,9 +1,9 @@
-///* ÒıÈëÏàÓ¦µÄ¿â */
+ï»¿///* å¼•å…¥ç›¸åº”çš„åº“ */
 //#define GLEW_STATIC	
 //
 //#include <iostream>
 //#include "Shader.h"
-//#include "GL\glew.h"					// ×¢£ºÕâÒ»²¿·ÖÒª¸ù¾İ¸öÈËÇé¿ö½øĞĞÉè¶¨
+//#include "GL\glew.h"					// æ³¨ï¼šè¿™ä¸€éƒ¨åˆ†è¦æ ¹æ®ä¸ªäººæƒ…å†µè¿›è¡Œè®¾å®š
 //#include "GLFW\glfw3.h"
 //#include "SOIL2\stb_image.h"
 //#include "SOIL2\SOIL2.h"
@@ -11,44 +11,44 @@
 //using namespace std;
 //int width, height;
 //
-////* (ÑùÀıÒ»£ºÄ¾°å) ±àĞ´¸÷¶¥µãÎ»ÖÃ  + ¶ÁÈ¡ÎÆÀí */
+////* (æ ·ä¾‹ä¸€ï¼šæœ¨æ¿) ç¼–å†™å„é¡¶ç‚¹ä½ç½®  + è¯»å–çº¹ç† */
 //
-////ÄæÊ±ÕëµÄÔÚÈıÎ¬ÊÇÕıÃæ£¬Ë³Ê±ÕëÎª±³Ãæ
+////é€†æ—¶é’ˆçš„åœ¨ä¸‰ç»´æ˜¯æ­£é¢ï¼Œé¡ºæ—¶é’ˆä¸ºèƒŒé¢
 ////GLfloat vertices_1[] =
 ////{
-////	//position				// color				// texture coords(ÎÆÀí×ø±ê)
-////	-1.0f, 1.0f, 0.0f,		1.0f, 0.0f, 0.0f,		0.0f, 1.0f		// ×óÉÏ¶¥µã		±àºÅ0
-////	-1.0f, -1.0f, 0.0f,		0.0f, 1.0f, 0.0f,		0.0f, 0.0f,		// ×óÏÂ¶¥µã		±àºÅ1
-////	1.0f, -1.0f, 0.0f,		0.0f, 0.0f, 1.0f,		1.0f, 0.0f,		// ÓÒÏÂ¶¥µã		±àºÅ2
-////	1.0f, 1.0f, 0.0f,		1.0f, 1.0f, 1.0f,		1.0f, 1.0f,		// ÓÒÉÏ¶¥µã		±àºÅ3
+////	//position				// color				// texture coords(çº¹ç†åæ ‡)
+////	-1.0f, 1.0f, 0.0f,		1.0f, 0.0f, 0.0f,		0.0f, 1.0f		// å·¦ä¸Šé¡¶ç‚¹		ç¼–å·0
+////	-1.0f, -1.0f, 0.0f,		0.0f, 1.0f, 0.0f,		0.0f, 0.0f,		// å·¦ä¸‹é¡¶ç‚¹		ç¼–å·1
+////	1.0f, -1.0f, 0.0f,		0.0f, 0.0f, 1.0f,		1.0f, 0.0f,		// å³ä¸‹é¡¶ç‚¹		ç¼–å·2
+////	1.0f, 1.0f, 0.0f,		1.0f, 1.0f, 1.0f,		1.0f, 1.0f,		// å³ä¸Šé¡¶ç‚¹		ç¼–å·3
 ////
 ////};
 ////
-/////* ËÄ¸ö¶¥µãµÄÁ¬½ÓĞÅÏ¢¸ø³öÀ´ */
+/////* å››ä¸ªé¡¶ç‚¹çš„è¿æ¥ä¿¡æ¯ç»™å‡ºæ¥ */
 ////GLuint indices_1[] =
 ////{
-////	//3, 0, 2,		// ĞòºÅÎª 1¡¢2¡¢3 µÄ¶¥µã×éºÏ³ÉÒ»¸öÈı½ÇĞÎ
-////	//1, 2, 0,		// ĞòºÅÎª 0¡¢1¡¢3 µÄ¶¥µã×éºÏ³ÉÒ»¸öÈı½ÇĞÎ
-////	0, 1, 3,		// ĞòºÅÎª 1¡¢2¡¢3 µÄ¶¥µã×éºÏ³ÉÒ»¸öÈı½ÇĞÎ
-////	2, 3, 1,		// ĞòºÅÎª 0¡¢1¡¢3 µÄ¶¥µã×éºÏ³ÉÒ»¸öÈı½ÇĞÎ
+////	//3, 0, 2,		// åºå·ä¸º 1ã€2ã€3 çš„é¡¶ç‚¹ç»„åˆæˆä¸€ä¸ªä¸‰è§’å½¢
+////	//1, 2, 0,		// åºå·ä¸º 0ã€1ã€3 çš„é¡¶ç‚¹ç»„åˆæˆä¸€ä¸ªä¸‰è§’å½¢
+////	0, 1, 3,		// åºå·ä¸º 1ã€2ã€3 çš„é¡¶ç‚¹ç»„åˆæˆä¸€ä¸ªä¸‰è§’å½¢
+////	2, 3, 1,		// åºå·ä¸º 0ã€1ã€3 çš„é¡¶ç‚¹ç»„åˆæˆä¸€ä¸ªä¸‰è§’å½¢
 ////};
 //
 //
-////ÄæÊ±ÕëµÄÔÚÈıÎ¬ÊÇÕıÃæ£¬Ë³Ê±ÕëÎª±³Ãæ
+////é€†æ—¶é’ˆçš„åœ¨ä¸‰ç»´æ˜¯æ­£é¢ï¼Œé¡ºæ—¶é’ˆä¸ºèƒŒé¢
 //GLfloat vertices_1[] =
 //{
-//	//position				// color				// texture coords(ÎÆÀí×ø±ê)
-//	-1.0f, -1.0f, 0.0f,		0.0f, 1.0f, 0.0f,		0.0f, 0.0f,		// ×óÏÂ¶¥µã		±àºÅ1
-//	1.0f, -1.0f, 0.0f,		0.0f, 0.0f, 1.0f,		1.0f, 0.0f,		// ÓÒÏÂ¶¥µã		±àºÅ2
-//	1.0f, 1.0f, 0.0f,		1.0f, 1.0f, 1.0f,		1.0f, 1.0f,		// ÓÒÉÏ¶¥µã		±àºÅ3
-//	-1.0f, 1.0f, 0.0f,		1.0f, 0.0f, 0.0f,		0.0f, 1.0f		// ×óÉÏ¶¥µã		±àºÅ0
+//	//position				// color				// texture coords(çº¹ç†åæ ‡)
+//	-1.0f, -1.0f, 0.0f,		0.0f, 1.0f, 0.0f,		0.0f, 0.0f,		// å·¦ä¸‹é¡¶ç‚¹		ç¼–å·1
+//	1.0f, -1.0f, 0.0f,		0.0f, 0.0f, 1.0f,		1.0f, 0.0f,		// å³ä¸‹é¡¶ç‚¹		ç¼–å·2
+//	1.0f, 1.0f, 0.0f,		1.0f, 1.0f, 1.0f,		1.0f, 1.0f,		// å³ä¸Šé¡¶ç‚¹		ç¼–å·3
+//	-1.0f, 1.0f, 0.0f,		1.0f, 0.0f, 0.0f,		0.0f, 1.0f		// å·¦ä¸Šé¡¶ç‚¹		ç¼–å·0
 //};
 //
-///* ËÄ¸ö¶¥µãµÄÁ¬½ÓĞÅÏ¢¸ø³öÀ´ */
+///* å››ä¸ªé¡¶ç‚¹çš„è¿æ¥ä¿¡æ¯ç»™å‡ºæ¥ */
 //GLuint indices_1[] =
 //{
-//	1, 2, 0,		// ĞòºÅÎª 0¡¢1¡¢3 µÄ¶¥µã×éºÏ³ÉÒ»¸öÈı½ÇĞÎ
-//	3, 0, 2			// ĞòºÅÎª 1¡¢2¡¢3 µÄ¶¥µã×éºÏ³ÉÒ»¸öÈı½ÇĞÎ
+//	1, 2, 0,		// åºå·ä¸º 0ã€1ã€3 çš„é¡¶ç‚¹ç»„åˆæˆä¸€ä¸ªä¸‰è§’å½¢
+//	3, 0, 2			// åºå·ä¸º 1ã€2ã€3 çš„é¡¶ç‚¹ç»„åˆæˆä¸€ä¸ªä¸‰è§’å½¢
 //};
 //
 //GLint WIDTH = 600, HEIGHT = 600;
@@ -56,10 +56,10 @@
 //int testmain()
 //{
 //	glfwInit();
-//	unsigned char* image = SOIL_load_image("./image/color.png", &width, &height, 0, SOIL_LOAD_RGBA);			// »ñÈ¡Í¼Æ¬
+//	unsigned char* image = SOIL_load_image("./image/color.png", &width, &height, 0, SOIL_LOAD_RGBA);			// è·å–å›¾ç‰‡
 //	int screenWidth = width, screenHeight = height;
 //	GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, "Learn OpenGL Texture test", nullptr, nullptr);
-//	glfwWindowHint(GLFW_DECORATED, GL_FALSE);   //Ã»ÓĞ±ß¿òºÍ±êÌâÀ¸
+//	glfwWindowHint(GLFW_DECORATED, GL_FALSE);   //æ²¡æœ‰è¾¹æ¡†å’Œæ ‡é¢˜æ 
 //	glfwGetFramebufferSize(window, &screenWidth, &screenHeight);
 //	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 //	glfwSetMouseButtonCallback(window, mouse_button_callback);
@@ -69,11 +69,11 @@
 //	glfwMakeContextCurrent(window);
 //	glewInit();
 //
-//	/* ½«ÎÒÃÇ×Ô¼ºÉèÖÃµÄ×ÅÉ«Æ÷ÎÄ±¾´«½øÀ´ */
+//	/* å°†æˆ‘ä»¬è‡ªå·±è®¾ç½®çš„ç€è‰²å™¨æ–‡æœ¬ä¼ è¿›æ¥ */
 //
-//	Shader ourShader = Shader("./shaders/Vexture/shader_v.glsl", "./shaders/Vexture/shader_f.glsl");		// Ïà¶ÔÂ·¾¶
+//	Shader ourShader = Shader("./shaders/Vexture/shader_v.glsl", "./shaders/Vexture/shader_f.glsl");		// ç›¸å¯¹è·¯å¾„
 //
-//	/* ÉèÖÃ¶¥µã»º³å¶ÔÏó(VBO) + ÉèÖÃ¶¥µãÊı×é¶ÔÏó(VAO) + Ë÷Òı»º³å¶ÔÏó(EBO)  */
+//	/* è®¾ç½®é¡¶ç‚¹ç¼“å†²å¯¹è±¡(VBO) + è®¾ç½®é¡¶ç‚¹æ•°ç»„å¯¹è±¡(VAO) + ç´¢å¼•ç¼“å†²å¯¹è±¡(EBO)  */
 //	GLuint VAO, VBO, EBO;
 //	glGenVertexArrays(1, &VAO);
 //	glGenBuffers(1, &VBO);
@@ -84,69 +84,69 @@
 //	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices_1), vertices_1, GL_STATIC_DRAW);
 //	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices_1), indices_1, GL_STATIC_DRAW);
 //
-//	/* ÉèÖÃÁ´½Ó¶¥µãÊôĞÔ */
+//	/* è®¾ç½®é“¾æ¥é¡¶ç‚¹å±æ€§ */
 //	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
-//	glEnableVertexAttribArray(0);	// Í¨µÀ 0 ´ò¿ª
+//	glEnableVertexAttribArray(0);	// é€šé“ 0 æ‰“å¼€
 //	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-//	glEnableVertexAttribArray(1);	// Í¨µÀ 1 ´ò¿ª
+//	glEnableVertexAttribArray(1);	// é€šé“ 1 æ‰“å¼€
 //	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
-//	glEnableVertexAttribArray(2);	// Í¨µÀ 2 ´ò¿ª
+//	glEnableVertexAttribArray(2);	// é€šé“ 2 æ‰“å¼€
 //
 //
-//	/* Éú³ÉÎÆÀí */
+//	/* ç”Ÿæˆçº¹ç† */
 //	GLuint texture;
 //	glGenTextures(1, &texture);
 //	glBindTexture(GL_TEXTURE_2D, texture);
-//	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);			// ¶ÁÈ¡Í¼Æ¬ĞÅÏ¢
-//	glGenerateMipmap(GL_TEXTURE_2D);	// ¶à²ã½¥½øÎÆÀí
+//	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);			// è¯»å–å›¾ç‰‡ä¿¡æ¯
+//	glGenerateMipmap(GL_TEXTURE_2D);	// å¤šå±‚æ¸è¿›çº¹ç†
 //	SOIL_free_image_data(image);
 //
-//	/* ÎÆÀí»·ÈÆ·½Ê½ */
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);	// S ×ø±ê
-//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);	// T ×ø±ê
+//	/* çº¹ç†ç¯ç»•æ–¹å¼ */
+//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);	// S åæ ‡
+//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);	// T åæ ‡
 //
-//	/* ÎÆÀí¹ıÂË */
+//	/* çº¹ç†è¿‡æ»¤ */
 //	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 //	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 //
-//	/* ÎÆÀíµ¥Ôª£ºÏÂÒ»½ÚÖØµãÊ¹ÓÃ */
+//	/* çº¹ç†å•å…ƒï¼šä¸‹ä¸€èŠ‚é‡ç‚¹ä½¿ç”¨ */
 //	ourShader.Use();	// don't forget to activate/use the shader before setting uniforms!
-//	int textureLocation = glGetUniformLocation(ourShader.Program, "mTexture");	// ÕÒµ½×ÅÉ«Æ÷ÖĞ uniform ÊôĞÔµÄÃûÎª"ourTexture"µÄÎÆÀíµÄË÷Òı
-//	glUniform1i(textureLocation, 0);		// ¸æËß OpenGL µÄ×ÅÉ«Æ÷²ÉÑùÆ÷ÊôÓÚÄÄ¸öÎÆÀíµ¥Ôª	
+//	int textureLocation = glGetUniformLocation(ourShader.Program, "mTexture");	// æ‰¾åˆ°ç€è‰²å™¨ä¸­ uniform å±æ€§çš„åä¸º"ourTexture"çš„çº¹ç†çš„ç´¢å¼•
+//	glUniform1i(textureLocation, 0);		// å‘Šè¯‰ OpenGL çš„ç€è‰²å™¨é‡‡æ ·å™¨å±äºå“ªä¸ªçº¹ç†å•å…ƒ	
 //
-//	/* draw loop »­Í¼Ñ­»· */
+//	/* draw loop ç”»å›¾å¾ªç¯ */
 //	while (!glfwWindowShouldClose(window))
 //	{
-//		/* ÊÓ¿Ú + Ê±¼ä */
+//		/* è§†å£ + æ—¶é—´ */
 //		glViewport(0, 0, screenWidth, screenHeight);
 //		glfwPollEvents();
 //
-//		/* äÖÈ¾ + Çå³ıÑÕÉ«»º³å */
+//		/* æ¸²æŸ“ + æ¸…é™¤é¢œè‰²ç¼“å†² */
 //		glClearColor(0.5f, 0.8f, 0.5f, 1.0f);
 //		glClear(GL_COLOR_BUFFER_BIT);
 //
-//		/* Éú³ÉÎÆÀí */
-//		glActiveTexture(GL_TEXTURE0);			// ¼¤»î 0 ºÅÎÆÀíµ¥Ôª¡£×î¶à 16 ¸öÍ¨µÀ
-//		glBindTexture(GL_TEXTURE_2D, texture);	// °ó¶¨Õâ¸öÎÆÀíµ½µ±Ç°¼¤»îµÄÎÆÀíÄ¿±ê			
+//		/* ç”Ÿæˆçº¹ç† */
+//		glActiveTexture(GL_TEXTURE0);			// æ¿€æ´» 0 å·çº¹ç†å•å…ƒã€‚æœ€å¤š 16 ä¸ªé€šé“
+//		glBindTexture(GL_TEXTURE_2D, texture);	// ç»‘å®šè¿™ä¸ªçº¹ç†åˆ°å½“å‰æ¿€æ´»çš„çº¹ç†ç›®æ ‡			
 //
-//		/* »æÖÆÍ¼ĞÎ */
+//		/* ç»˜åˆ¶å›¾å½¢ */
 //		ourShader.Use();
-//		glBindVertexArray(VAO);									// °ó¶¨ VAO
-//		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);				// °ó¶¨ EBO
-//		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);	// »­Á½¸öÈı½ÇĞÎ ´ÓµÚ0¸ö¶¥µã¿ªÊ¼ Ò»¹²»­6´Î
-//		glBindVertexArray(0);									// ½â°ó¶¨ VAO
-//		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);				// ½â°ó¶¨ EBO
-//		glBindTexture(GL_TEXTURE_2D, 0);						// ½â°ó¶¨ ÎÆÀí
+//		glBindVertexArray(VAO);									// ç»‘å®š VAO
+//		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);				// ç»‘å®š EBO
+//		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);	// ç”»ä¸¤ä¸ªä¸‰è§’å½¢ ä»ç¬¬0ä¸ªé¡¶ç‚¹å¼€å§‹ ä¸€å…±ç”»6æ¬¡
+//		glBindVertexArray(0);									// è§£ç»‘å®š VAO
+//		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);				// è§£ç»‘å®š EBO
+//		glBindTexture(GL_TEXTURE_2D, 0);						// è§£ç»‘å®š çº¹ç†
 //
-//		/* ½»»»»º³å */
+//		/* äº¤æ¢ç¼“å†² */
 //		glfwSwapBuffers(window);
 //	}
 //
-//	/* ÊÍ·Å×ÊÔ´ */
+//	/* é‡Šæ”¾èµ„æº */
 //	glDeleteVertexArrays(1, &VAO);
 //	glDeleteBuffers(1, &VBO);
 //	glDeleteBuffers(1, &EBO);
 //
-//	glfwTerminate();	// ½áÊø
+//	glfwTerminate();	// ç»“æŸ
 //	return 0;
 //}

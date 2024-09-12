@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="QtThreadInform.cpp" />
     <ClCompile Include="src\DemoCircle.cpp" />
     <ClCompile Include="src\DemoCircleBorder.cpp" />
     <ClCompile Include="src\DemoLine.cpp" />
@@ -128,6 +129,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="QtThreadInform.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="src\Common.h" />
     <ClInclude Include="src\DemoCircle.h" />
