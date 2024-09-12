@@ -214,6 +214,61 @@ Item
         myModel.removeAllRows();
     }
 
+          // 鼠标事件监听区域
+
+    MouseArea
+    {
+        anchors.fill: parent
+        acceptedButtons: Qt.RightButton
+
+        // 右键点击时显示菜单
+        onClicked: {
+            if (mouse.button === Qt.RightButton)
+            {
+                // 获取鼠标点击位置的行号
+                var rowIndex = myModel.rowAt(mouse.y);
+
+                if (rowIndex >= 0)
+                {
+                    // 记录点击的行号，供菜单使用
+                    contextMenu.currentRowIndex = rowIndex;
+                } else
+                {
+                    contextMenu.currentRowIndex = -1;
+                }
+
+                // 显示右键菜单
+                contextMenu.popup();
+            }
+        }
+    }
+    // 右键菜单定义
+    Menu {
+        id: contextMenu
+
+        property int currentRowIndex: -1
+
+        MenuItem {
+            text: "删除当前行"
+            enabled: contextMenu.currentRowIndex >= 0
+            onTriggered: {
+                if (currentRowIndex >= 0) {
+                    // 删除当前行
+                    myModel.removeRow(currentRowIndex);
+                }
+            }
+        }
+
+        MenuItem {
+            text: "删除所有行"
+            onTriggered: {
+                // 删除所有行
+                while (easyTableModel.rowCount() > 0) {
+                    myModel.removeRow(0);
+                }
+            }
+        }
+    }
 
 
 }
