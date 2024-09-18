@@ -1,0 +1,14 @@
+**/.vs/
+**/.vscode/
+**/x86/
+**/x64/
+**/[Dd]ebug/
+**/[Rr]elease/
+**/[Bb]uild/
+**/[Ll]ogs/
+**/*.user
+CMakeQml/*.json
+CMakeQml/out/
+**/*.exe
+**/*.ilk
+**/*.pdb

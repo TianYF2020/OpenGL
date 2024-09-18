@@ -5,6 +5,7 @@
 #include "DemoVexture.h"
 #include "DemoCircle.h"
 #include "DemoRectangle.h"
+#include "DemoText.h"
 #include "Common.h"
 
 class OpenGLStudy : public QMainWindow
@@ -17,6 +18,7 @@ public:
 
     C_DrawCircle* m_DrawCircle = nullptr;
     C_DrawRectangle* m_DrawRect = nullptr;
+    C_DrawText* m_DrawText = nullptr;
 public slots:
     void TestOpenGL();
     void TestThread();

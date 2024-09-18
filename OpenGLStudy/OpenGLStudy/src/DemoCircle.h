@@ -30,7 +30,7 @@ public:
 	Shader *ourShader = nullptr;
 private:
 	GLuint VAO, VBO,EBO, instanceVBO;
-	int screenWidth, screenHeight;
+	int screenWidth = 2560, screenHeight = 1440;
 	GLFWwindow* window = nullptr;
 	double xpos, ypos;   //鼠标位置
 };

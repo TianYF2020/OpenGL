@@ -1,9 +1,7 @@
 ﻿/* 引入相应的库 */
 #include "DemoRectangle.h"
-
 C_DrawRectangle::C_DrawRectangle()
 {
-	CreatGLWindow(2560, 1440);
 }
 
 C_DrawRectangle::~C_DrawRectangle()
@@ -14,11 +12,11 @@ C_DrawRectangle::~C_DrawRectangle()
 /* 编写各顶点信息 */
 vector<GLfloat> vertices_Rectangle =
 {
-	//position				// color				// texture coords(纹理坐标)
-	1.0f, 0.0f, 0.0f,		// 右上顶点		编号0
-	1.0f, -1.0f, 0.0f,		// 右下顶点		编号1
-	0.0f, -1.0f, 0.0f,		// 左下顶点		编号2
-	0.0f, 0.0f, 0.0f		// 左上顶点		编号3
+	//position			// color				// texture coords(纹理坐标)
+	1.0f, 0.0f,			// 右上顶点		编号0
+	1.0f, -1.0f,		// 右下顶点		编号1
+	0.0f, -1.0f,		// 左下顶点		编号2
+	0.0f, 0.0f			// 左上顶点		编号3
 
 };
 
@@ -38,8 +36,8 @@ void C_DrawRectangle::CreatGLWindow(int width, int height)
 		glfwSetWindowAttrib(window, GLFW_DECORATED, GLFW_FALSE);
 		cout << "screenWidth = " << screenWidth << ", screenHeight = " << screenHeight << endl;
 		glfwMakeContextCurrent(window);
-		glewInit();
 		//开辟GPU内存
+		glewInit();
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
 		glGenBuffers(1, &instanceVBO);
@@ -52,11 +50,11 @@ void C_DrawRectangle::DestroyGLWindow()
 	if (window != nullptr)
 	{
 		/* 释放资源 */
-		glfwTerminate();	// 结束
 		glDeleteVertexArrays(1, &VAO);
 		glDeleteBuffers(1, &VBO);
 		glDeleteBuffers(1, &EBO);
 		glDeleteBuffers(1, &instanceVBO);
+		glfwTerminate();	// 结束
 		window = nullptr;
 	}
 }
@@ -65,6 +63,7 @@ void C_DrawRectangle::DestroyGLWindow()
 
 int C_DrawRectangle::DrawRectangle_Vertices()   //使用描点的方案来进行绘图
 {
+	CreatGLWindow(screenWidth, screenHeight);
 	std::vector<GLfloat> instanceData =
 	{
 		//起始坐标x,y,width,height,color(R,G,B)
@@ -72,17 +71,15 @@ int C_DrawRectangle::DrawRectangle_Vertices()   //使用描点的方案来进行
 		0.5f, -0.5f,	0.2f, 0.1f,		0.0f, 1.0f, 0.0f,	// 第二个矩形
 		-0.5f, 0.5f,	0.2f, 0.2f,		0.0f, 0.0f, 1.0f, 	// 第三个矩形
 		0.5f,  0.5f,	0.1f, 0.2f,		1.0f, 1.0f, 0.0f, 	// 第四个矩形
-		-1.0f,  1.0f,	0.5f, 0.5f,		0.0f, 1.0f,	1.0f, 	// 第五个矩形
-	};
-			
+		-1.0f,  0.0f,	0.5f, 0.5f,		0.0f, 1.0f,	1.0f, 	// 第五个矩形
+	};	
 	ourShader = new Shader("./shaders/Rectangle/shader_v.glsl", "./shaders/Rectangle/shader_f.glsl");		// 相对路径
-
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ARRAY_BUFFER, vertices_Rectangle.size()*sizeof(GLfloat), &vertices_Rectangle[0], GL_STATIC_DRAW);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices_Screen.size() * sizeof(GLuint), &indices_Screen[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)(0 * sizeof(GLfloat)));
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (void*)(0 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(0);
 
 	// 绑定VBO并传递数据
@@ -97,12 +94,12 @@ int C_DrawRectangle::DrawRectangle_Vertices()   //使用描点的方案来进行
 	// 设置位置的实例化属性（位置在偏移为0的地方）
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (void*)(2 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(2);
-	glVertexAttribDivisor(2, 1); // 每个实例使用一个位置
+	glVertexAttribDivisor(2, 1); // 每个实例使用长宽
 
 	// 设置半径的实例化属性（半径在偏移为2*sizeof(float)的地方）
 	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (void*)(4 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(3);
-	glVertexAttribDivisor(3, 1); // 每个实例使用一个半径
+	glVertexAttribDivisor(3, 1); // 每个实例颜色
 
 	/* 纹理单元：下一节重点使用 */
 	ourShader->Use();	// don't forget to activate/use the shader before setting uniforms!
@@ -122,8 +119,8 @@ int C_DrawRectangle::DrawRectangle_Vertices()   //使用描点的方案来进行
 		glDrawElementsInstanced(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0, instanceData.size() / 7+1);
 		glBindVertexArray(0);									// 解绑定 VAO
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);				// 解绑定 EBO
-										
 
+								
 		/* 交换缓冲 */
 		glfwSwapBuffers(window);
 	}
@@ -136,12 +133,13 @@ int C_DrawRectangle::DrawRectangle_Vertices()   //使用描点的方案来进行
 
 int C_DrawRectangle::DrawRectangle_GLSL()   //使用glsl进行绘图
 {
+	CreatGLWindow(screenWidth, screenHeight);
 	/* 将我们自己设置的着色器文本传进来 */
 	if (ourShader != nullptr)
 	{
 		delete ourShader;
 	}
-	ourShader = new  Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/Circle_f.glsl");		// 相对路径  绘制普通的圆
+	ourShader = new  Shader("./shaders/Rectangle/Rectangle_v.glsl", "./shaders/Rectangle/Rectangle_f.glsl");		// 相对路径  绘制普通的圆
 	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGrid_f.glsl");		// 相对路径  多区域绘图
 	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleDemo1_f.glsl");		// 相对路径 绘制圆+鼠标画圆
 	/* 设置顶点缓冲对象(VBO) + 设置顶点数组对象(VAO) + 索引缓冲对象(EBO)  */
@@ -205,8 +203,8 @@ int C_DrawRectangle::DrawRectangle_GLSL()   //使用glsl进行绘图
 
 int C_DrawRectangle::DrawRectangleSingle_GLSL()   //使用glsl进行绘图
 {
-
-	ourShader = new Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/Circle_f.glsl");		// 相对路径  绘制普通的圆
+	CreatGLWindow(screenWidth, screenHeight);
+	ourShader = new Shader("./shaders/Rectangle/Rectangle_v.glsl", "./shaders/Rectangle/Rectangle_f.glsl");		// 相对路径  绘制普通的圆
 	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGrid_f.glsl");		// 相对路径  多区域绘图
 	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleDemo1_f.glsl");		// 相对路径 绘制圆+鼠标画圆
 	/* 设置顶点缓冲对象(VBO) + 设置顶点数组对象(VAO) + 索引缓冲对象(EBO)  */
@@ -256,3 +254,6 @@ int C_DrawRectangle::DrawRectangleSingle_GLSL()   //使用glsl进行绘图
 
 }
 	
+
+
+

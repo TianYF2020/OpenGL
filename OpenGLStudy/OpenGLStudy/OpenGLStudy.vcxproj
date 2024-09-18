@@ -69,21 +69,21 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
-      <AdditionalDependencies>OpenGL32.lib;glew32s.lib;glfw3.lib;soil2.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>.\lib\soil2\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OpenGL32.lib;glew32s.lib;glfw3.lib;soil2.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>.\lib\soil2\lib;.\lib\freestype\lib</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>.\src;.\shaders;.\lib\soil2\include;.\lib\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\src;.\shaders;.\lib\soil2\include;.\lib\glm;.\lib\freestype\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
-      <AdditionalDependencies>OpenGL32.lib;glew32s.lib;glfw3.lib;soil2.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>.\lib\soil2\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OpenGL32.lib;glew32s.lib;glfw3.lib;soil2.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>.\lib\soil2\lib;.\lib\freestype\lib</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>.\src;.\shaders;.\lib\soil2\include;.\lib\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\src;.\shaders;.\lib\soil2\include;.\lib\glm;.\lib\freestype\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DemoText.cpp" />
     <ClCompile Include="QtThreadInform.cpp" />
     <ClCompile Include="src\DemoCircle.cpp" />
     <ClCompile Include="src\DemoCircleBorder.cpp" />
@@ -130,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QtThreadInform.h" />
+    <ClInclude Include="DemoText.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="src\Common.h" />
     <ClInclude Include="src\DemoCircle.h" />
@@ -144,8 +146,12 @@
     <None Include="shaders\Circle\Circle_v.glsl" />
     <None Include="shaders\Circle\shader_f.glsl" />
     <None Include="shaders\Circle\shader_v.glsl" />
+    <None Include="shaders\Rectangle\Rectangle_f.glsl" />
+    <None Include="shaders\Rectangle\Rectangle_v.glsl" />
     <None Include="shaders\Rectangle\shader_f.glsl" />
     <None Include="shaders\Rectangle\shader_v.glsl" />
+    <None Include="shaders\Text\shader_f.glsl" />
+    <None Include="shaders\Text\shader_v.glsl" />
     <None Include="shaders\Vexture\shader_f.glsl" />
     <None Include="shaders\Vexture\shader_v.glsl" />
   </ItemGroup>

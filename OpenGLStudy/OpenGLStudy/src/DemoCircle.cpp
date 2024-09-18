@@ -3,7 +3,6 @@
 
 C_DrawCircle::C_DrawCircle()
 {
-	CreatGLWindow(2560,1440);
 }
 
 C_DrawCircle::~C_DrawCircle()
@@ -13,7 +12,8 @@ C_DrawCircle::~C_DrawCircle()
 
 void C_DrawCircle::CreatGLWindow(int width,int height)
 {
-	if (window == nullptr)
+	// 只初始化一次
+	if (window == nullptr) 
 	{
 		glfwInit();
 		screenWidth = width;
@@ -26,6 +26,7 @@ void C_DrawCircle::CreatGLWindow(int width,int height)
 		glfwSetCursorPosCallback(window, cursor_position_callback);
 		glfwSetWindowAttrib(window, GLFW_DECORATED, GLFW_FALSE);
 		cout << "screenWidth = " << screenWidth << ", screenHeight = " << screenHeight << endl;
+
 		glfwMakeContextCurrent(window);
 		glewInit();
 		//开辟GPU内存
@@ -41,11 +42,11 @@ void C_DrawCircle::DestroyGLWindow()
 	if (window != nullptr)
 	{
 		/* 释放资源 */
-		glfwTerminate();	// 结束
 		glDeleteVertexArrays(1, &VAO);
 		glDeleteBuffers(1, &VBO);
 		glDeleteBuffers(1, &EBO);
 		glDeleteBuffers(1, &instanceVBO);
+		glfwTerminate();	// 结束
 		window = nullptr;
 	}
 }
@@ -54,6 +55,7 @@ void C_DrawCircle::DestroyGLWindow()
 
 int C_DrawCircle::DrawCircle_Vertices()   //使用描点的方案来进行绘图
 {
+	CreatGLWindow(screenWidth, screenHeight);
 	std::vector<GLfloat> instanceData =
 	{
 	-0.0f, -0.f, 0.1f,  // 第一个圆的x, y位置和半径
@@ -119,6 +121,7 @@ int C_DrawCircle::DrawCircle_Vertices()   //使用描点的方案来进行绘图
 
 int C_DrawCircle::DrawCircle_GLSL()   //使用glsl进行绘图
 {
+	CreatGLWindow(screenWidth, screenHeight);
 	/* 将我们自己设置的着色器文本传进来 */
 	if (ourShader != nullptr)
 	{
@@ -182,13 +185,12 @@ int C_DrawCircle::DrawCircle_GLSL()   //使用glsl进行绘图
 	}
 	DestroyGLWindow();
 	return 0;
-
 }
 
 
 int C_DrawCircle::DrawCircleSingle_GLSL()   //使用glsl进行绘图
 {
-
+	CreatGLWindow(screenWidth, screenHeight);
 	ourShader = new Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/Circle_f.glsl");		// 相对路径  绘制普通的圆
 	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGrid_f.glsl");		// 相对路径  多区域绘图
 	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleDemo1_f.glsl");		// 相对路径 绘制圆+鼠标画圆
@@ -242,7 +244,7 @@ int C_DrawCircle::DrawCircleSingle_GLSL()   //使用glsl进行绘图
 
 int C_DrawCircle::DrawCircleGrid_GLSL()   //使用glsl进行绘图
 {
-
+	CreatGLWindow(screenWidth, screenHeight);
 	ourShader = new Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGrid_f.glsl");		// 相对路径  绘制普通的圆
 	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGrid_f.glsl");		// 相对路径  多区域绘图
 	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleDemo1_f.glsl");		// 相对路径 绘制圆+鼠标画圆
@@ -297,7 +299,7 @@ int C_DrawCircle::DrawCircleGrid_GLSL()   //使用glsl进行绘图
 
 int C_DrawCircle::DrawCircleGridPixel_GLSL()   //使用glsl进行绘图
 {
-
+	CreatGLWindow(screenWidth, screenHeight);
 	ourShader = new Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGridPixel_f.glsl");		// 相对路径  绘制普通的圆
 	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleGrid_f.glsl");		// 相对路径  多区域绘图
 	//Shader ourShader = Shader("./shaders/Circle/Circle_v.glsl", "./shaders/Circle/CircleDemo1_f.glsl");		// 相对路径 绘制圆+鼠标画圆
@@ -345,7 +347,6 @@ int C_DrawCircle::DrawCircleGridPixel_GLSL()   //使用glsl进行绘图
 	}
 	DestroyGLWindow();
 	return 0;
-
 }
 
 

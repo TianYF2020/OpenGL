@@ -149,6 +149,7 @@ void EasyTableModel::loadData(const QJsonArray &data)
     emit endResetModel();
 }
 
+
 void EasyTableModel::addRow(const QJsonObject& rowData)
 {
     int newRow = _modelData.size();
@@ -163,6 +164,15 @@ void EasyTableModel::addRow(const QJsonObject& rowData)
     _modelData.append(newRowData);
     endInsertRows();
 }
+
+void EasyTableModel::addRowVec(const QVector<QVariant>& newRowData)
+{
+    int newRow = _modelData.size();
+    beginInsertRows(QModelIndex(), newRow, newRow);
+    _modelData.append(newRowData);
+    endInsertRows();
+}
+
 
 void EasyTableModel::removeLastRow()
 {
@@ -183,31 +193,45 @@ void EasyTableModel::removeAllRows()
     }
 }
 
-/*
-bool EasyTableModel::insertRows(int row, int count, const QModelIndex &parent)
-{
-    beginInsertRows(parent, row, row + count - 1);
-    // FIXME: Implement me!
-    endInsertRows();
-}
 
-bool EasyTableModel::insertColumns(int column, int count, const QModelIndex &parent)
-{
-    beginInsertColumns(parent, column, column + count - 1);
-    // FIXME: Implement me!
-    endInsertColumns();
-}
+void EasyTableModel::removeRow(int row) {
+    if (row < 0 || row >= _modelData.size()) return;
 
-bool EasyTableModel::removeRows(int row, int count, const QModelIndex &parent)
-{
-    beginRemoveRows(parent, row, row + count - 1);
-    // FIXME: Implement me!
+    beginRemoveRows(QModelIndex(), row, row);
+    _modelData.removeAt(row);  // 删除指定行
     endRemoveRows();
 }
 
-bool EasyTableModel::removeColumns(int column, int count, const QModelIndex &parent)
-{
-    beginRemoveColumns(parent, column, column + count - 1);
-    // FIXME: Implement me!
-    endRemoveColumns();
-}*/
+
+
+// bool EasyTableModel::insertRows(int row, int count, const QModelIndex &parent)
+// {
+//     beginInsertRows(parent, row, row + count - 1);
+//     // FIXME: Implement me!
+//     endInsertRows();
+//     return true;
+// }
+
+// bool EasyTableModel::insertColumns(int column, int count, const QModelIndex &parent)
+// {
+//     beginInsertColumns(parent, column, column + count - 1);
+//     // FIXME: Implement me!
+//     endInsertColumns();
+//     return true;
+// }
+
+// bool EasyTableModel::removeRows(int row, int count, const QModelIndex &parent)
+// {
+//     beginRemoveRows(parent, row, row + count - 1);
+//     // FIXME: Implement me!
+//     endRemoveRows();
+//     return true;
+// }
+
+// bool EasyTableModel::removeColumns(int column, int count, const QModelIndex &parent)
+// {
+//     beginRemoveColumns(parent, column, column + count - 1);
+//     // FIXME: Implement me!
+//     endRemoveColumns();
+//     return true;
+// }

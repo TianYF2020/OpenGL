@@ -28,13 +28,6 @@ Window {
         horHeader: ["Id","Name","Age","Note"]
         initData: [
             {"id":1,"name":"gonge","age":20,"note":"test model view"},
-            {"id":2,"name":"gonge","age":21,"note":"test model view"},
-            {"id":3,"name":"gonge","age":22,"note":"test model view"},
-            {"id":4,"name":"gonge","age":23,"note":"test model view"},
-            {"id":5,"name":"gonge","age":24,"note":"test model view"},
-            {"id":6,"name":"gonge","age":25,"note":"test model view"},
-            {"id":7,"name":"gonge","age":26,"note":"test model view"},
-            {"id":8,"name":"gonge","age":27,"note":"test model view"}
         ]
     }
 
@@ -76,7 +69,7 @@ Window {
             {
                 console.log("test")
                 //testData.addRow({"id": 4, "name": "tyf", "age": 30, "note": "new data---"});
-                testData.addRow({"id": testData.rowCount() + 1, "name": "New", "age": 28, "note": "New note"})
+                testData.addRow({"id": testData.rowCount() + 1, "name": "tyf", "age": 28, "note": "测试"})
             }
         }
     

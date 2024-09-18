@@ -21,10 +21,10 @@ Item
     //列宽
     property variant columnWidthArr: [100,100,100,200]
     property var myModel: null;
-  
-
+    property var mousePositionIndex: 0
     //表格内容（不包含表头）
-    TableView{
+    TableView
+    {
         id: table_view
         anchors{
             fill: parent
@@ -89,12 +89,16 @@ Item
                 selectByMouse: true
                 selectedTextColor: "black"
                 selectionColor: "white"
-
+                readOnly: myModel.column !== (table_view.columns - 1)
                 //获取单元格对应的值
                 text: model.value
                 onEditingFinished: {
-                    model.edit=text;
-                    console.log("edit",model.value)
+                    if (!readOnly) 
+                    {
+                        model.edit=text;
+                        console.log("edit",model.value)
+                    }
+
                 }
             }
         }
@@ -214,61 +218,59 @@ Item
         myModel.removeAllRows();
     }
 
-          // 鼠标事件监听区域
+    function handleRightClick(mouseX, mouseY) 
+    {
+        // 获取行高
+        var rowHeight = control.verHeaderHeight;
+        // 计算点击位置所在的行号，并考虑滚动条的影响 (contentY)
+        var rowIndex = Math.floor((mouseY + table_view.contentY) / rowHeight) - 1;
+        console.log("Right-clicked row: " + rowIndex);
+        return rowIndex;
+    }
 
     MouseArea
     {
+        id: mouseArea
         anchors.fill: parent
         acceptedButtons: Qt.RightButton
+        onClicked: 
+        {
+            mousePositionIndex = handleRightClick(mouseArea.mouseX, mouseArea.mouseY);
+            myMenu.popup();
+        }
+    }
 
-        // 右键点击时显示菜单
-        onClicked: {
-            if (mouse.button === Qt.RightButton)
+    Menu
+    {
+        id:myMenu
+        MenuItem
+        {
+            text: qsTr("Delete")
+            onClicked:
             {
-                // 获取鼠标点击位置的行号
-                var rowIndex = myModel.rowAt(mouse.y);
-
-                if (rowIndex >= 0)
-                {
-                    // 记录点击的行号，供菜单使用
-                    contextMenu.currentRowIndex = rowIndex;
-                } else
-                {
-                    contextMenu.currentRowIndex = -1;
-                }
-
-                // 显示右键菜单
-                contextMenu.popup();
+                console.log("delete",mousePositionIndex)
+                myModel.removeRow(mousePositionIndex);
+            }
+        }
+        MenuItem
+        {
+            text: qsTr("Copy")
+            onClicked:
+            {
+                console.log("copy",index)
+            }
+        }
+        MenuItem
+        {
+            text: qsTr("Paste")
+            onClicked:
+            {
+                console.log("paste",index)
             }
         }
     }
-    // 右键菜单定义
-    Menu {
-        id: contextMenu
 
-        property int currentRowIndex: -1
-
-        MenuItem {
-            text: "删除当前行"
-            enabled: contextMenu.currentRowIndex >= 0
-            onTriggered: {
-                if (currentRowIndex >= 0) {
-                    // 删除当前行
-                    myModel.removeRow(currentRowIndex);
-                }
-            }
-        }
-
-        MenuItem {
-            text: "删除所有行"
-            onTriggered: {
-                // 删除所有行
-                while (easyTableModel.rowCount() > 0) {
-                    myModel.removeRow(0);
-                }
-            }
-        }
-    }
+   
 
 
 }

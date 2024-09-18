@@ -26,12 +26,17 @@ void OpenGLStudy::TestOpenGL()
     {
         m_DrawRect = new C_DrawRectangle();
     }
+    if (m_DrawText == nullptr)
+    {
+        m_DrawText = new C_DrawText();
+    }
     //m_DrawCircle->DrawCircle_Vertices();
 
     //m_DrawCircle->DrawCircleSingle_GLSL();   //使用glsl进行绘图
     //m_DrawCircle->DrawCircleGrid_GLSL();
     //m_DrawCircle->DrawCircleGridPixel_GLSL();
-    m_DrawRect->DrawRectangle_Vertices();
+    //m_DrawRect->DrawRectangle_Vertices();
+    m_DrawText->DrawText_Vertices();
 }
 
 void OpenGLStudy::TestThread()

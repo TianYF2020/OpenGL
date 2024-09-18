@@ -33,6 +33,9 @@
     <Filter Include="Shaders\Rectangle">
       <UniqueIdentifier>{0d9b2200-1504-4fd5-8bad-c054fb44002d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders\Text">
+      <UniqueIdentifier>{d664a613-3a18-4f37-8ae2-b4865487ac34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="OpenGLStudy.qrc">
@@ -73,6 +76,9 @@
     <ClCompile Include="QtThreadInform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DemoText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -87,8 +93,11 @@
     <ClInclude Include="src\DemoCircle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\DemoRectangle.h">
+    <ClInclude Include="DemoText.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DemoRectangle.h">
+      <Filter>Shaders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -119,11 +128,23 @@
     <None Include="shaders\Circle\CircleGridPixel_f.glsl">
       <Filter>Shaders\Circle</Filter>
     </None>
+    <None Include="shaders\Rectangle\Rectangle_f.glsl">
+      <Filter>Shaders\Rectangle</Filter>
+    </None>
+    <None Include="shaders\Rectangle\Rectangle_v.glsl">
+      <Filter>Shaders\Rectangle</Filter>
+    </None>
     <None Include="shaders\Rectangle\shader_f.glsl">
       <Filter>Shaders\Rectangle</Filter>
     </None>
     <None Include="shaders\Rectangle\shader_v.glsl">
       <Filter>Shaders\Rectangle</Filter>
+    </None>
+    <None Include="shaders\Text\shader_f.glsl">
+      <Filter>Shaders\Text</Filter>
+    </None>
+    <None Include="shaders\Text\shader_v.glsl">
+      <Filter>Shaders\Text</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

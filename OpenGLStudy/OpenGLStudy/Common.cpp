@@ -4,7 +4,6 @@ bool isDragging = false;
 GLint WIDTH = 600, HEIGHT = 600;
 // 声明一个记录鼠标位置的结构体
 
-
 /* 编写各顶点信息 */
 vector<GLfloat> vertices_Screen =
 {
@@ -44,7 +43,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     else if(button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
     {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
-        glfwTerminate();	// 结束
+        //glfwTerminate();	// 结束
     }
 }
 
@@ -58,3 +57,4 @@ void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
         glfwSetWindowPos(window, windowX + (int)(xpos - mousePos.x), windowY + (int)(ypos - mousePos.y));
     }
 }
+

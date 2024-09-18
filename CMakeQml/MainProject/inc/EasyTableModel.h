@@ -47,16 +47,19 @@ public:
                  int role = Qt::EditRole) override;
     Qt::ItemFlags flags(const QModelIndex& index) const override;
 
-    // Add data:
-    //bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
-    //bool insertColumns(int column, int count, const QModelIndex &parent = QModelIndex()) override;
+    // // Add data:
+    // bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
+    // bool insertColumns(int column, int count, const QModelIndex &parent = QModelIndex()) override;
 
-    // Remove data:
-    //bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
-    //bool removeColumns(int column, int count, const QModelIndex &parent = QModelIndex()) override;
+    // // Remove data:
+    // bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
+    // bool removeColumns(int column, int count, const QModelIndex &parent = QModelIndex()) override;
     Q_INVOKABLE void addRow(const QJsonObject& rowData);
+    Q_INVOKABLE void addRowVec(const QVector<QVariant>& newRowData);
     Q_INVOKABLE void removeLastRow();
     Q_INVOKABLE void removeAllRows();
+    Q_INVOKABLE void removeRow(int row);
+
 private:
     void loadData(const QJsonArray &data);
 

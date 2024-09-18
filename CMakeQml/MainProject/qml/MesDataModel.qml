@@ -82,6 +82,7 @@ Rectangle
                 font.pixelSize: fontSize
             }
         }
+
         onRowsChanged:
         {
             if(rows<table_view.height/horHeaderHeight)   //无奈规避，table_view.contentHeight好像有点bug，清空的row时候table_view.contentHeigh 值没变
