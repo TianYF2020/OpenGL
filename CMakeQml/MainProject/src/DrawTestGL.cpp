@@ -1,4 +1,6 @@
-﻿#include "DrawTestGL.h"
+﻿/*  
+*/
+#include "DrawTestGL.h"
 #include <QDebug>
 
 FBOItem::FBOItem(QQuickItem* parent)

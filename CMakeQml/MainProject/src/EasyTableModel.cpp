@@ -1,3 +1,4 @@
+
 #include "EasyTableModel.h"
 
 #include <QDebug>
@@ -23,7 +24,8 @@ QJsonArray EasyTableModel::getInitData() const
     return _initData;
 }
 
-void EasyTableModel::setInitData(const QJsonArray &jsonArr)
+
+void EasyTableModel::setInitData(const QJsonArray &jsonArr)     //TODO: 开发这东西
 {
     _initData=jsonArr;
     if(_completed){
@@ -59,7 +61,7 @@ QVariant EasyTableModel::headerData(int section, Qt::Orientation orientation, in
 {
     //返回表头数据，无效的返回None
     if(role==Qt::DisplayRole){
-        if(orientation==Qt::Horizontal){
+    if(orientation==Qt::Horizontal){
             return _horHeaderList.value(section,QString::number(section));
         }else if(orientation==Qt::Vertical){
             return QString::number(section);
@@ -67,6 +69,7 @@ QVariant EasyTableModel::headerData(int section, Qt::Orientation orientation, in
     }
     return QVariant();
 }
+
 
 bool EasyTableModel::setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role)
 {

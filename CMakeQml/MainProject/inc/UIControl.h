@@ -12,6 +12,8 @@ public:
 	~UIControl();
 
     Q_INVOKABLE QStringList scanPorts();
+public slots:
+    Q_INVOKABLE void handleSignal(const QString &message);
 
 signals:
     void portsScanned(const QStringList& portNames);

@@ -15,7 +15,15 @@ Q_INVOKABLE QStringList UIControl::scanPorts()
     //}
 
     portNames << "Com1" << "Com2" << "Com3";
+    
     qDebug() << portNames;
     //emit portsScanned(portNames);
     return portNames;
+}
+
+
+void UIControl::handleSignal(const QString &message)
+{
+
+    qDebug() << "Received from QML:" << message;
 }
