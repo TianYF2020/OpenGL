@@ -1,4 +1,7 @@
 {
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
@@ -6,26 +9,24 @@
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}/bin/Release/MainProject.exe",
-            // "program": "${command:cmake.launchTargetPath}",
-            // "args": [],
+            "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/bin/Release",
             "environment": [],
             "console": "externalTerminal",
-            "preLaunchTask": "CMake Release"
+            "visualizerFile": "c:\\Users\\TYF\\AppData\\Roaming\\Code\\User\\workspaceStorage\\4f42856441e507877d90afb789e83470\\tonka3000.qtvsctools\\qt.natvis.xml"
         },
         {
             "name": "(Windows) Debug",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${command:cmake.launchTargetPath}",
+            "program": "${workspaceFolder}/bin/Debug/MainProject.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/bin/Debug/",
             "environment": [],
             "console": "externalTerminal",
-            "preLaunchTask": "CMake Debug"
-        },
-
+            "visualizerFile": "c:\\Users\\TYF\\AppData\\Roaming\\Code\\User\\workspaceStorage\\4f42856441e507877d90afb789e83470\\tonka3000.qtvsctools\\qt.natvis.xml"
+        }
     ]
 }

@@ -22,23 +22,23 @@ Item {
     Material.theme: Material.Dark
     Material.accent: Material.LightGreen
     width: settings.settingsViewWidth
-    x: -(width + 30) * (1 - showAnimation) + 20
+    x: -width * (1 - showAnimation)
 
     Behavior on showAnimation {
         NumberAnimation {
             duration: 400
             easing.type: Easing.InOutQuad
         }
-    }
+    } 
 
     // Open/close button
     Item {
         width: 30 * dp
         height: 30 * dp
         anchors.left: parent.right
-        anchors.leftMargin: 20
+        anchors.leftMargin: 10
         anchors.top: parent.top
-        anchors.topMargin: -10
+        anchors.topMargin: 10
         Rectangle {
             anchors.fill: parent
             color: "#404040"
@@ -54,7 +54,7 @@ Item {
         }
         MouseArea {
             anchors.fill: parent
-            anchors.margins: -30 * dp
+            anchors.margins: -10 * dp
             onClicked: {
                 rootItem.show = !rootItem.show;
             }
@@ -66,7 +66,7 @@ Item {
         anchors.fill: scrollView
         opacity: showAnimation ? 0.6 : 0
         visible: opacity
-        anchors.margins: -10
+        // anchors.margins: -10
         color: "#202020"
         border.color: "#808080"
         border.width: 1

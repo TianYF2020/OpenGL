@@ -7,6 +7,9 @@ project(CMakeQml VERSION 0.1 LANGUAGES CXX)
 # 等同于INCLUDE_DIRECTORY(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+# set(CMAKE_CXX_FLAGS_DEBUG "-g")          # Debug 模式启用调试符号
+set(CMAKE_BUILD_TYPE Debug)
+
 # Qt6 对C++版本推荐至少17
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -18,7 +21,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 
-message(STATUS "*************当前构建类型: ${CAMKE_BUILD_TYPE}")
+message(STATUS "*************当前构建类型: ${CMAKE_BUILD_TYPE}")
 message(STATUS "*************当前构建类型: ${CMAKE_SOURCE_DIR}")
 message(STATUS "*************当前构建类型: ${${CMAKE_RUNTIME_OUTPUT_DIRECTORY}}")
 add_subdirectory(MainProject)

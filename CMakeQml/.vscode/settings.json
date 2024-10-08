@@ -1,15 +1,6 @@
 {
-    "files.associations": {
-        "vector": "cpp",
-        "array": "cpp",
-        "iterator": "cpp",
-        "list": "cpp",
-        "xhash": "cpp",
-        "xtree": "cpp",
-        "initializer_list": "cpp",
-        "span": "cpp",
-        "utility": "cpp",
-        "xstring": "cpp",
-        "xutility": "cpp"
-    }
+    "files.encoding": "utf8bom",
+    "git-graph.fileEncoding": "utf8",
+    "files.autoGuessEncoding": true,
+    "cmake.outputLogEncoding": "utf8"
 }

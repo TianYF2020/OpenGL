@@ -12,7 +12,6 @@ set(CMAKE_PREFIX_PATH "D:/qt/6.8.0/msvc2022_64")
 # 有些项目会动态生成头文件，项目中需要引入它，因此需要将output目录也include进来
 # 等同于INCLUDE_DIRECTORY(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
 # Qt6 对C++版本推荐至少17
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -25,6 +24,8 @@ set(CMAKE_AUTOUIC ON) # User Interface Compiler
 find_package(Qt6 REQUIRED COMPONENTS Quick Core Qml OpenGl)
 
 aux_source_directory(src SRC_LIST)
+
+link_directories(D:/qt/6.8.0/msvc2022_64/lib)
 
 # 集成源码以及资源并打包
 qt6_add_resources(QML_QRC qml.qrc)
@@ -45,11 +46,19 @@ qt_add_qml_module(${PROJECT_NAME}
         qml/Main.qml
 )
 
-target_link_libraries(${PROJECT_NAME}
-    PRIVATE Qt6::Quick
-    PRIVATE Qt6::Qml
-    PRIVATE Qt6::Core
-    PRIVATE Qt6::OpenGL
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    Qt6::Quick
+    Qt6::Qml
+    Qt6::Core
+    Qt6::OpenGL
+    # debug Qt6::Quick_d           # Debug 模式下使用 Qt5::Core_d
+    # optimized Qt6::Quick        # Release 模式下使用 Qt5::Core
+    # debug Qt6::Cored           # Debug 模式下使用 Qt5::Core_d
+    # optimized Qt6::Core         # Release 模式下使用 Qt5::Core
+    # debug Qt6::Qmld           # Debug 模式下使用 Qt5::Core_d
+    # optimized Qt6::Qml         # Release 模式下使用 Qt5::Core
+    # debug Qt6::OpenGLd           # Debug 模式下使用 Qt5::Core_d
+    # optimized Qt6::OpenGL        # Release 模式下使用 Qt5::Core
 )
 
 

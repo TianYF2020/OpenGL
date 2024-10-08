@@ -44,66 +44,77 @@ Window {
         id: settingsView
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        anchors.margins: 20
+        z:999
+        // anchors.left: parent.left
+        // anchors.margins: 20
         visible: settings.showSettingsView
         Component.onCompleted: {
             settings.reset();
         }
     }
 
-    Column
-    {
-        width: parent.width
-        height: parent.height
-        MyInputField
-        {
-            id: test
-            width: 100
-            height: 50
-            myText:"hello"
-            cppFunction: myUIControl.handleSignal
-            onMySignal: { // 连接信号
-                console.log(message) // 响应信号
-            }
-        }
-
-
-        Button
-        {
-            id: testBtn
-            width: 100
-            height: 50
-            onClicked:
-            {
-                console.log(test.myText)
-                // showText.text = test.myText
-                showText.text = test.textFieldText
-            }
-        }
-
-        TextField
-        {
-            id:showText
-            width: 100
-            height: 50
-        }
-
-
-
-        MyInputField
-        {
-            id: test2
-            width: 100
-            height: 50
-            myText:"222222"
-            cppFunction: myUIControl.handleSignal
-            onMySignal: { // 连接信号
-                console.log(message) // 响应信号
-            }
-        }
+    Rectangle
+     {
+        id: mainArea
+        anchors.left: settingsView.right
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        color: "black"
 
     }
+    // Column
+    // {
+    //     width: parent.width
+    //     height: parent.height
+    //     MyInputField
+    //     {
+    //         id: test
+    //         width: 100
+    //         height: 50
+    //         myText:"hello"
+    //         cppFunction: myUIControl.handleSignal
+    //         onMySignal: { // 连接信号
+    //             console.log(message) // 响应信号
+    //         }
+    //     }
+
+
+    //     Button
+    //     {
+    //         id: testBtn
+    //         width: 100
+    //         height: 50
+    //         onClicked:
+    //         {
+    //             console.log(test.myText)
+    //             // showText.text = test.myText
+    //             showText.text = test.textFieldText
+    //         }
+    //     }
+
+    //     TextField
+    //     {
+    //         id:showText
+    //         width: 100
+    //         height: 50
+    //     }
+
+
+
+    //     MyInputField
+    //     {
+    //         id: test2
+    //         width: 100
+    //         height: 50
+    //         myText:"222222"
+    //         cppFunction: myUIControl.handleSignal
+    //         onMySignal: { // 连接信号
+    //             console.log(message) // 响应信号
+    //         }
+    //     }
+
+    // }
 
 
 
