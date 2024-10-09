@@ -9,3 +9,8 @@
 **/*.user
 CMakeQml/*.json
 CMakeQml/out/
+**/*.ttf
+**/*.ttc
+**/*.TTF
+**/*.fon
+**/*.otf

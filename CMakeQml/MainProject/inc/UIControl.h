@@ -17,6 +17,14 @@ public:
 	~UIControl();
 
     Q_INVOKABLE QStringList scanPorts();
+    Q_INVOKABLE int setCommonParam(const QVariant &param1, const QVariant &param2);
+    
+    void myFunction(const QVariant &param1, const QVariant &param2) {
+        // 处理参数
+        qDebug() << "参数1:" << param1 << "类型:" << param1.typeName();
+        qDebug() << "参数2:" << param2 << "类型:" << param2.typeName();
+    }
+
 public slots:
     Q_INVOKABLE void handleSignal(const QString &message);
     void writeJsonFile(const QString &filePath); 

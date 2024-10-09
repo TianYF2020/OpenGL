@@ -2,5 +2,6 @@
     "files.encoding": "utf8bom",
     "git-graph.fileEncoding": "utf8",
     "files.autoGuessEncoding": true,
-    "cmake.outputLogEncoding": "utf8"
+    "cmake.outputLogEncoding": "utf8",
+    "editor.stickyScroll.enabled": true
 }

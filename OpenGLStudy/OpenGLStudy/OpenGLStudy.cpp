@@ -7,7 +7,6 @@ OpenGLStudy::OpenGLStudy(QWidget *parent)
     
     connect(ui.BtnCreateGL, SIGNAL(clicked()), this, SLOT(TestOpenGL()));
     connect(ui.BtnCreateThread, SIGNAL(clicked()), this, SLOT(TestThread()));
-    
 }
 
 OpenGLStudy::~OpenGLStudy()

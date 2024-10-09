@@ -12,10 +12,11 @@ UIControl::~UIControl()
 }
 
 
-Q_INVOKABLE QStringList UIControl::scanPorts() //你好
+QStringList UIControl::scanPorts() //你好
 {
     QStringList portNames;
     //foreach(const QSerialPortInfo & info, QSerialPortInfo::availablePorts()) {
+
     //    portNames << info.portName();
     //}
 
@@ -25,6 +26,15 @@ Q_INVOKABLE QStringList UIControl::scanPorts() //你好
     //emit portsScanned(portNames);
     return portNames;
 }
+
+int UIControl::setCommonParam(const QVariant &param1, const QVariant &param2)
+{
+    // 处理参数
+    qDebug() << "参数1:" << param1 << "类型:" << param1.typeName();
+    qDebug() << "参数2:" << param2 << "类型:" << param2.typeName();
+    return 0;
+}
+
 
 
 void UIControl::handleSignal(const QString &message)

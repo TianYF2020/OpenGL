@@ -35,8 +35,10 @@ Item {
     Item {
         width: 30 * dp
         height: 30 * dp
-        anchors.left: parent.right
-        anchors.leftMargin: 10
+        // anchors.left: parent.right
+        // anchors.leftMargin: 10
+        anchors.right: test.left
+        anchors.rightMargin: 10
         anchors.top: parent.top
         anchors.topMargin: 10
         Rectangle {
@@ -63,11 +65,12 @@ Item {
 
     // Background
     Rectangle {
+        id:test
         anchors.fill: scrollView
         opacity: showAnimation ? 0.6 : 0
         visible: opacity
         // anchors.margins: -10
-        color: "#202020"
+        color: "#200000"
         border.color: "#808080"
         border.width: 1
     }

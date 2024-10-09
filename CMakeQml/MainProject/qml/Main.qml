@@ -44,7 +44,9 @@ Window {
         id: settingsView
         anchors.top: parent.top
         anchors.bottom: parent.bottom
+
         z:999
+        anchors.right: parent.right
         // anchors.left: parent.left
         // anchors.margins: 20
         visible: settings.showSettingsView
@@ -56,13 +58,31 @@ Window {
     Rectangle
      {
         id: mainArea
-        anchors.left: settingsView.right
-        anchors.right: parent.right
+        // anchors.left: settingsView.right
+        // anchors.right: parent.right
+        anchors.left: parent.left
+        anchors.right: settingsView.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         color: "black"
 
+        Button
+        {
+            id: testBtn
+            width: 300
+            height: 50
+            text: "Test Button"
+            onClicked: 
+            {
+                var qtet = "ni hao"
+                myUIControl.setCommonParam("asdf",1);
+                myUIControl.setCommonParam(qtet,9.9);
+            }
+        }
+
     }
+
+
     // Column
     // {
     //     width: parent.width
