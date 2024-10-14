@@ -1,16 +1,15 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Timeline 1.0
-import QtQuick.Window 2.15
-import QtQuick.Layouts 2.15
-import LearnOpenGL 1.0
-import EasyModel 1.0
 import QtQuick
+import QtQuick.Controls
+import QtQuick.Timeline 
+import QtQuick.Window 
+import QtQuick.Layouts 
+import LearnOpenGL 
+import EasyModel 1.0
 import QtQuick.Window
 import QtQuick.Effects
 import "CustomMultiEffect"
 
-Window {
+ApplicationWindow  {
     width: 1280
     height: 720
     visible: true
@@ -25,8 +24,6 @@ Window {
         //     width: parent.width*0.5
         //     height: parent.height*0.5
         // }
-
-
 
 
     Settings {
@@ -64,7 +61,7 @@ Window {
         anchors.right: settingsView.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        color: "black"
+        // color: "black"
 
         Button
         {
@@ -80,7 +77,39 @@ Window {
             }
         }
 
-    }
+
+        ColumnLayout 
+        {
+            id: slidersColumn
+            spacing: 6
+            anchors.top: testBtn.bottom
+
+            LabeledSlider {
+                id: rotation1Slider
+                text: "R"
+                from: 0
+                to: 255
+                value: 255
+            }
+
+            LabeledSlider {
+                id: rotation2Slider
+                text: "G"
+                from: 0
+                to: 255
+                value: 255
+            }
+
+            LabeledSlider {
+                id: rotation3Slider
+                text: "B"
+                from: 0
+                to: 255
+                value: 255
+            }
+        }
+     }
+
 
 
     // Column

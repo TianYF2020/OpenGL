@@ -14,6 +14,7 @@
         <file>qml/SettingsView.qml</file>
         <file>qml/WarningsItem.qml</file>
         <file>qml/WarningsView.qml</file>
+        <file>qml/LabeledSlider.qml</file>
         <file>qml/CustomMultiEffect/BlurHelper.qml</file>
         <file>qml/CustomMultiEffect/bluritems.frag.qsb</file>
         <file>qml/CustomMultiEffect/bluritems.vert.qsb</file>
