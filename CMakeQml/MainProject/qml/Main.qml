@@ -16,6 +16,8 @@ ApplicationWindow  {
     title: qsTr("Hello World")
 
     readonly property real dp: 0.2 + Math.min(width, height) / 1200
+    property var stretchState: false 
+    property var showHideAnimationSpeed: 400
     // readonly property real dp: 0.2 + Math.min(width, height) / 1200
 
         // FBOItem
@@ -58,7 +60,7 @@ ApplicationWindow  {
         // anchors.left: settingsView.right
         // anchors.right: parent.right
         anchors.left: parent.left
-        anchors.right: settingsView.right
+        anchors.right: settingsView.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         // color: "black"
@@ -107,10 +109,124 @@ ApplicationWindow  {
                 to: 255
                 value: 255
             }
+
+            Button
+            {
+                width: 100
+                height: 50
+                text: "add"
+                onClicked:
+                {
+                    mlog.addLineText("This is a line log")
+                }
+            }
+            Button
+            {
+                width: 100
+                height: 50
+                text: "clear"
+                onClicked:
+                {
+                    mlog.clearListView()
+                }
+            }
+        }
+
+
+    
+
+        Rectangle
+        {
+            width: parent.width
+            height: 20
+            color: "#666666"
+            anchors.bottom: mlog.top
+            anchors.left: parent.left
+            RowLayout
+            {
+                anchors.fill: parent
+                ProgressBar
+                {
+                    Layout.preferredWidth: parent.width *0.9
+                    Layout.preferredHeight: parent.height
+                    height: 20
+                    value: 50  // 当前进度值
+                    from: 0   // 最小值
+                    to: 100   // 最大值
+                    // anchors.verticalCenter: parent.verticalCenter
+                }
+                Item 
+                {
+                    id: lightsSettings
+                    Layout.preferredWidth: parent.width *0.1
+                    Layout.preferredHeight: parent.height
+
+                    Rectangle 
+                    {
+                        anchors.fill: parent
+                        color: "#404040"
+                        border.width: 1
+                        border.color: "#808080"
+                        opacity: 0.4
+                        Image 
+                        {
+                            x: 8
+                            source: "images/arrow.png"
+                            anchors.verticalCenter: parent.verticalCenter
+                            rotation: stretchState? 270 : 90
+                            Behavior on rotation {
+                                NumberAnimation {
+                                    duration: 400
+                                    easing.type: Easing.InOutQuad
+                                }
+                            }
+                        }
+                        MouseArea 
+                        {
+                            anchors.fill: parent
+                            onClicked: {
+                                stretchState = !stretchState
+                                if (stretchState) {
+                                    mlog.height = 400
+                                //     hideAnimation.stop();
+                                //     showAnimation.start();
+                                } else {
+                                                                        mlog.height = 200
+                                //     showAnimation.stop();
+                                //     hideAnimation.start();
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        LogShow
+        {
+            id: mlog
+            width: parent.width
+            height: 200
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+
+                       // 动画效果
+            Behavior on height {
+                NumberAnimation {
+                    duration: 400
+                }
+            }
         }
      }
 
 
+    // LogShow
+    // {
+    //     width: parent.width
+    //     height: 200
+    //     anchors.left: parent.left
+    //     anchors.bottom: parent.bottom
+    // }
 
     // Column
     // {

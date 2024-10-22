@@ -1,0 +1,48 @@
+{
+    "adjust": {
+        "3683": {
+            "3DLut": true,
+            "Comm": "NT",
+            "Gamma": true,
+            "亮度": true,
+            "色域": true,
+            "色温": true
+        },
+        "NT68400": {
+            "3DLut": true,
+            "Comm": "NT",
+            "Gamma": true,
+            "亮度": true,
+            "色域": true,
+            "色温": true
+        },
+        "V53": {
+            "3DLut": true,
+            "Comm": "NT",
+            "Gamma": true,
+            "亮度": true,
+            "色域": true,
+            "色温": true
+        },
+        "V56": {
+            "3DLut": true,
+            "Comm": "NT",
+            "Gamma": true,
+            "亮度": true,
+            "色域": true,
+            "色温": true
+        },
+        "V68830": {
+            "3DLut": true,
+            "Comm": "NT",
+            "Gamma": true,
+            "亮度": true,
+            "色域": true,
+            "色温": true
+        }
+    },
+    "serial": {
+        "串口号": "COM1",
+        "波特率": 9600
+    }
+}

@@ -6,6 +6,7 @@
         <file>qml/EasyTableWidget.qml</file>
         <file>qml/MesDataModel.qml</file>
         <file>qml/MyInputField.qml</file>
+        <file>qml/LogShow.qml</file>
         <file>qml/Settings.qml</file>
         <file>qml/SettingsComponentCheckBox.qml</file>
         <file>qml/SettingsComponentColorSelector.qml</file>
