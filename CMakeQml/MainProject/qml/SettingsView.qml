@@ -18,7 +18,7 @@ Item {
                                       defaultSettings.shadowColor.g,
                                       defaultSettings.shadowColor.b);
     }
-
+    signal sendDevType(string txt)
     Material.theme: Material.Dark
     Material.accent: Material.LightGreen
     width: settings.settingsViewWidth
@@ -29,18 +29,16 @@ Item {
             duration: 400
             easing.type: Easing.InOutQuad
         }
-    } 
+    }
 
     // Open/close button
     Item {
         width: 30 * dp
         height: 30 * dp
-        // anchors.left: parent.right
-        // anchors.leftMargin: 10
-        anchors.right: test.left
-        anchors.rightMargin: 10
+        anchors.left: parent.right
+        // anchors.right: test.left
+        // anchors.rightMargin: 10
         anchors.top: parent.top
-        anchors.topMargin: 10
         Rectangle {
             anchors.fill: parent
             color: "#404040"
@@ -135,6 +133,17 @@ Item {
                         settings.showCustomMultiEffect = checked;
                     }
                 }
+
+                Button
+                {
+                    text: "发送信号"
+                    onClicked:
+                    {
+                        console.log("发送一次")
+                        sendDevType("sennd success");
+                    }
+                }
+
                 Item {
                     width: 1
                     height: 20 * dp

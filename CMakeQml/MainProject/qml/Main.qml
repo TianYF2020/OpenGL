@@ -27,6 +27,12 @@ ApplicationWindow  {
         //     height: parent.height*0.5
         // }
 
+    property var pageList: ["Page1.qml", "Page2.qml"]
+    function switchPage(index) {
+        if (index >= 0 && index < pageList.length) {
+            stackView.replace(pageList[index])  // 根据索引切换页面
+        }
+    }
 
     Settings {
         id: settings
@@ -43,100 +49,91 @@ ApplicationWindow  {
         id: settingsView
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-
         z:999
-        anchors.right: parent.right
         // anchors.left: parent.left
         // anchors.margins: 20
         visible: settings.showSettingsView
         Component.onCompleted: {
             settings.reset();
         }
+        // onSendDevType:function(value)
+        // {
+        //     pageone.item.revBtn.setButtonText(value)
+        // }
     }
+    TabBar
+    {
+        id: tabBar
+        anchors.left: settingsView.right
+        anchors.right: parent.right
+        anchors.top: parent.top
+        height: 20
+        TabButton
+        {
+            id: uiTest
+            text: "界面1"
+        }
+        TabButton
+        {
+            id: uiMes
+            text: "界面2"
+        }
+    }
+
+    StackLayout {
+         id: stackLayout
+         anchors.top:tabBar.bottom
+        anchors.left: settingsView.right
+        anchors.bottom: mainArea.top
+        anchors.right: parent.right
+         currentIndex: tabBar.currentIndex
+
+         // Page 1
+         Loader {
+             id: pageone
+             source: "qrc:/qml/Page1.qml"
+             onLoaded: {
+                 item.pageParentItem = settingsView;  // 传递值给加载的子组件
+             }
+         }
+
+         // Page 2
+         Loader {
+             source: "qrc:/qml/Page2.qml"
+         }
+
+     }
+
+    // StackView {
+    //     id:stackView
+    //     anchors {
+    //         left: settingsView.right
+    //         right: parent.right
+    //         bottom: mprogress.top
+    //         top: parent.top
+    //     }
+
+    //     initialItem: Page1 {}
+    //     // currentIndex: 1
+    // }
+
+
+
 
     Rectangle
      {
         id: mainArea
         // anchors.left: settingsView.right
         // anchors.right: parent.right
-        anchors.left: parent.left
-        anchors.right: settingsView.left
-        anchors.top: parent.top
+        anchors.left: settingsView.right
+        anchors.right: parent.right
+        // anchors.top: parent.top
         anchors.bottom: parent.bottom
         // color: "black"
 
-        Button
-        {
-            id: testBtn
-            width: 300
-            height: 50
-            text: "Test Button"
-            onClicked: 
-            {
-                var qtet = "ni hao"
-                myUIControl.setCommonParam("asdf",1);
-                myUIControl.setCommonParam(qtet,9.9);
-            }
-        }
-
-
-        ColumnLayout 
-        {
-            id: slidersColumn
-            spacing: 6
-            anchors.top: testBtn.bottom
-
-            LabeledSlider {
-                id: rotation1Slider
-                text: "R"
-                from: 0
-                to: 255
-                value: 255
-            }
-
-            LabeledSlider {
-                id: rotation2Slider
-                text: "G"
-                from: 0
-                to: 255
-                value: 255
-            }
-
-            LabeledSlider {
-                id: rotation3Slider
-                text: "B"
-                from: 0
-                to: 255
-                value: 255
-            }
-
-            Button
-            {
-                width: 100
-                height: 50
-                text: "add"
-                onClicked:
-                {
-                    mlog.addLineText("This is a line log")
-                }
-            }
-            Button
-            {
-                width: 100
-                height: 50
-                text: "clear"
-                onClicked:
-                {
-                    mlog.clearListView()
-                }
-            }
-        }
-
-
-    
-
         Rectangle
         {
+            id: mprogress
             width: parent.width
             height: 20
             color: "#666666"
