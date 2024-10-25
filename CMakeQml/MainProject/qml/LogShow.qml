@@ -9,6 +9,7 @@ Rectangle
     height: 300
     border.width: 2
     border.color: "red"
+    color: "transparent"
     function addLineText(text)
     {
         logListView.model.append({  log: new Date().toLocaleTimeString() + text});

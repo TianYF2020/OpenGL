@@ -68,6 +68,7 @@ ApplicationWindow  {
         anchors.right: parent.right
         anchors.top: parent.top
         height: 20
+        currentIndex: 1
         TabButton
         {
             id: uiTest
@@ -81,12 +82,12 @@ ApplicationWindow  {
     }
 
     StackLayout {
-         id: stackLayout
-         anchors.top:tabBar.bottom
+        id: stackLayout
+        anchors.top:tabBar.bottom
         anchors.left: settingsView.right
         anchors.bottom: mainArea.top
         anchors.right: parent.right
-         currentIndex: tabBar.currentIndex
+        currentIndex: tabBar.currentIndex
 
          // Page 1
          Loader {
@@ -130,7 +131,7 @@ ApplicationWindow  {
         // anchors.top: parent.top
         anchors.bottom: parent.bottom
         // color: "black"
-
+        height: mprogress.height + mlog.height
         Rectangle
         {
             id: mprogress
