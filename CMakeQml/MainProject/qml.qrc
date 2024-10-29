@@ -34,5 +34,6 @@
         <file>qml/Page1.qml</file>
         <file>qml/MyButton.qml</file>
         <file>qml/LineItem.qml</file>
+        <file>qml/Page3.qml</file>
     </qresource>
 </RCC>

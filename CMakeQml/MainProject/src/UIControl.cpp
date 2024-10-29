@@ -12,6 +12,10 @@ UIControl::~UIControl()
 }
 
 
+// qml 开发笔记
+// qml 中子空间能不断的访问，能够访问自己以上的所有 id ，但是 向下访问有限制，一般只能访问一层，想多层访问就要使用内部函数来一次曾一层访问
+// 比如设计的比较复杂后，可以在最上次设置一个配置文件，需要写的数据可以临时存在这里，其他地方可以从这里那
+
 QStringList UIControl::scanPorts() //你好
 {
     QStringList portNames;

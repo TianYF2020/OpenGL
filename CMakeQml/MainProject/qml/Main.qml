@@ -79,6 +79,11 @@ ApplicationWindow  {
             id: uiMes
             text: "界面2"
         }
+        TabButton
+        {
+            id: uiGrid
+            text: "界面3"
+        }
     }
 
     StackLayout {
@@ -101,6 +106,11 @@ ApplicationWindow  {
          // Page 2
          Loader {
              source: "qrc:/qml/Page2.qml"
+         }
+
+         // Page 2
+         Loader {
+             source: "qrc:/qml/Page3.qml"
          }
 
      }
