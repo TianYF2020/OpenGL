@@ -21,11 +21,11 @@ set(CMAKE_AUTOMOC ON) # Meta-Object Compiler
 set(CMAKE_AUTORCC ON) # Resource Compiler
 set(CMAKE_AUTOUIC ON) # User Interface Compiler
 
-find_package(Qt6 REQUIRED COMPONENTS Quick Core Qml OpenGl)
+find_package(Qt6 REQUIRED COMPONENTS Quick Core Qml OpenGl Charts Graphs)
 
 aux_source_directory(src SRC_LIST)
 
-link_directories(D:/qt/6.8.0/msvc2022_64/lib)
+# link_directories(D:/qt/6.7.3/msvc2022_64/lib)
 
 # 集成源码以及资源并打包
 qt6_add_resources(QML_QRC qml.qrc)
@@ -51,14 +51,10 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt6::Qml
     Qt6::Core
     Qt6::OpenGL
+    Qt6::Graphs
+    Qt6::Charts
     # debug Qt6::Quick_d           # Debug 模式下使用 Qt5::Core_d
     # optimized Qt6::Quick        # Release 模式下使用 Qt5::Core
-    # debug Qt6::Cored           # Debug 模式下使用 Qt5::Core_d
-    # optimized Qt6::Core         # Release 模式下使用 Qt5::Core
-    # debug Qt6::Qmld           # Debug 模式下使用 Qt5::Core_d
-    # optimized Qt6::Qml         # Release 模式下使用 Qt5::Core
-    # debug Qt6::OpenGLd           # Debug 模式下使用 Qt5::Core_d
-    # optimized Qt6::OpenGL        # Release 模式下使用 Qt5::Core
 )
 
 

@@ -35,5 +35,7 @@
         <file>qml/MyButton.qml</file>
         <file>qml/LineItem.qml</file>
         <file>qml/Page3.qml</file>
+        <file>qml/MyGridView.qml</file>
+        <file>qml/MyListView.qml</file>
     </qresource>
 </RCC>

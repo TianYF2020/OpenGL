@@ -8,6 +8,7 @@ import QtQuick.Controls.Material
 RowLayout {
     id: rootItem
     width: 250
+    height: 30
     property alias text: textItem.text
     property alias value: slider.value
     property alias from: slider.from
