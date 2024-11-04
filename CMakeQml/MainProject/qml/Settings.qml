@@ -8,7 +8,8 @@ QtObject {
 
     // Emitted when settings are reseted to default
     signal reseted
-
+    property var currentIndex: 0
+    property var tabBarText:["page1","page2"]
     // When adding settings here remember to add them also into reset()
 
     // *** General settings - No UI for these ***
@@ -53,40 +54,40 @@ QtObject {
     property real maskThresholdMax: 1.0
     property real maskSpreadAtMax: 0.0
 
-    function reset() {
-        autoPaddingEnabled = defaultSettings.autoPaddingEnabled;
-        paddingRect = defaultSettings.paddingRect;
+    // function reset() {
+    //     autoPaddingEnabled = defaultSettings.autoPaddingEnabled;
+    //     paddingRect = defaultSettings.paddingRect;
 
-        brightnessEnabled = defaultSettings.brightnessEnabled;
-        brightness = defaultSettings.brightness;
-        contrastEnabled = defaultSettings.contrastEnabled;
-        contrast = defaultSettings.contrast;
-        saturationEnabled = defaultSettings.saturationEnabled;
-        saturation = defaultSettings.saturation;
-        colorizationEnabled = defaultSettings.colorizationEnabled;
-        colorizationColor = defaultSettings.colorizationColor;
-        colorization = defaultSettings.colorization;
+    //     brightnessEnabled = defaultSettings.brightnessEnabled;
+    //     brightness = defaultSettings.brightness;
+    //     contrastEnabled = defaultSettings.contrastEnabled;
+    //     contrast = defaultSettings.contrast;
+    //     saturationEnabled = defaultSettings.saturationEnabled;
+    //     saturation = defaultSettings.saturation;
+    //     colorizationEnabled = defaultSettings.colorizationEnabled;
+    //     colorizationColor = defaultSettings.colorizationColor;
+    //     colorization = defaultSettings.colorization;
 
-        blurEnabled = defaultSettings.blurEnabled;
-        blur = defaultSettings.blur;
-        blurMax = defaultSettings.blurMax;
-        blurMultiplier = defaultSettings.blurMultiplier;
+    //     blurEnabled = defaultSettings.blurEnabled;
+    //     blur = defaultSettings.blur;
+    //     blurMax = defaultSettings.blurMax;
+    //     blurMultiplier = defaultSettings.blurMultiplier;
 
-        shadowEnabled = defaultSettings.shadowEnabled;
-        shadowOpacity = defaultSettings.shadowOpacity;
-        shadowBlur = defaultSettings.shadowBlur;
-        shadowHorizontalOffset = defaultSettings.shadowHorizontalOffset;
-        shadowVerticalOffset = defaultSettings.shadowVerticalOffset;
-        shadowColor = defaultSettings.shadowColor;
-        shadowScale = defaultSettings.shadowScale;
+    //     shadowEnabled = defaultSettings.shadowEnabled;
+    //     shadowOpacity = defaultSettings.shadowOpacity;
+    //     shadowBlur = defaultSettings.shadowBlur;
+    //     shadowHorizontalOffset = defaultSettings.shadowHorizontalOffset;
+    //     shadowVerticalOffset = defaultSettings.shadowVerticalOffset;
+    //     shadowColor = defaultSettings.shadowColor;
+    //     shadowScale = defaultSettings.shadowScale;
 
-        maskEnabled = defaultSettings.maskEnabled;
-        maskInverted = defaultSettings.maskInverted;
-        maskThresholdMin = defaultSettings.maskThresholdMin;
-        maskSpreadAtMin = defaultSettings.maskSpreadAtMin;
-        maskThresholdMax = defaultSettings.maskThresholdMax;
-        maskSpreadAtMax = defaultSettings.maskSpreadAtMax;
+    //     maskEnabled = defaultSettings.maskEnabled;
+    //     maskInverted = defaultSettings.maskInverted;
+    //     maskThresholdMin = defaultSettings.maskThresholdMin;
+    //     maskSpreadAtMin = defaultSettings.maskSpreadAtMin;
+    //     maskThresholdMax = defaultSettings.maskThresholdMax;
+    //     maskSpreadAtMax = defaultSettings.maskSpreadAtMax;
 
-        rootItem.reseted();
-    }
+    //     rootItem.reseted();
+    // }
 }

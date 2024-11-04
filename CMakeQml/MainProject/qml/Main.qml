@@ -3,30 +3,26 @@ import QtQuick.Controls
 import QtQuick.Timeline 
 import QtQuick.Window 
 import QtQuick.Layouts 
-import LearnOpenGL 
-import EasyModel 1.0
 import QtQuick.Window
 import QtQuick.Effects
+import QtQuick.Controls.Material
+import LearnOpenGL 
+import EasyModel 1.0
 import "CustomMultiEffect"
 
-ApplicationWindow  {
-    width: 1280
+ApplicationWindow    
+{
+    id:uiMainContol
+    width: 1080 + headLine.height
     height: 720
     visible: true
     title: qsTr("Hello World")
-
+    color:"#00000000"
+    flags: Qt.Window | Qt.FramelessWindowHint 
+    Material.theme: Material.Dark // 使用暗色主题
     readonly property real dp: 0.2 + Math.min(width, height) / 1200
     property var stretchState: false 
     property var showHideAnimationSpeed: 400
-    // readonly property real dp: 0.2 + Math.min(width, height) / 1200
-
-        // FBOItem
-        // {
-        //     id:myView
-        //     width: parent.width*0.5
-        //     height: parent.height*0.5
-        // }
-
     property var pageList: ["Page1.qml", "Page2.qml"]
     function switchPage(index) {
         if (index >= 0 && index < pageList.length) {
@@ -34,86 +30,143 @@ ApplicationWindow  {
         }
     }
 
-    Settings {
-        id: settings
-        onReseted: {
-            settingsView.resetSettings();
-        }
-    }
-
-    Settings {
-        id: defaultSettings
-    }
-
-    SettingsView {
-        id: settingsView
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        z:999
-        // anchors.left: parent.left
-        // anchors.margins: 20
-        visible: settings.showSettingsView
-        Component.onCompleted: {
-            settings.reset();
-        }
-        // onSendDevType:function(value)
-        // {
-        //     pageone.item.revBtn.setButtonText(value)
-        // }
-    }
-    TabBar
+    Rectangle 
     {
-        id: tabBar
-        anchors.left: settingsView.right
-        anchors.right: parent.right
-        anchors.top: parent.top
-        height: 20
-        currentIndex: 1
-        TabButton
+        id: inrec
+        anchors.fill: parent // 矩形填充父组件
+        clip: true
+        radius: 10 // 圆角半径设置为10
+        opacity:1
+        // layer.enabled: true
+        // layer.effect: OpacityMask
+        // {
+        //     maskSource: Rectangle
+        //     {
+        //         width: inrec.width
+        //         height: inrec.height
+        //         radius: inrec.radius
+        //     }
+        // }
+
+        WindowHead 
         {
-            id: uiTest
-            text: "界面1"
+            id: headLine
+            height: 40 
+            width: parent.width
+            z: 10
+            anchors.left: parent.left // 标题栏左部锚定在inrec的左部
+            anchors.top: parent.top // 标题栏顶部锚定在inrec的顶部
+            onMoveWindow: function(delta)
+            { // 当移动窗口时触发的事件
+                uiMainContol.setX(uiMainContol.x + delta.x) // 更新窗口的X坐标
+                uiMainContol.setY(uiMainContol.y + delta.y) // 更新窗口的Y坐标
+            }
+
+            onCloseWindow: { // 当关闭窗口时触发的事件
+                uiMainContol.close() // 关闭窗口
+            }
+            onMinimizeWindow: { // 当最小化窗口时触发的事件
+                uiMainContol.showMinimized() // 最小化窗口
+            }
+            onMaximizeWindow: { // 当最大化窗口时触发的事件
+                uiMainContol.showFullScreen()
+            }
         }
-        TabButton
+        Settings {
+            id: settings
+            onReseted: {
+                settingsView.resetSettings();
+            }
+        }
+
+        // Settings {
+        //     id: defaultSettings
+        // }
+
+        Rectangle
         {
-            id: uiMes
-            text: "界面2"
+            anchors.left: parent.left
+            anchors.top: headLine.bottom
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom  
+
+            SettingsView {
+            id: settingsView
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            z:999
+            // anchors.left: parent.left
+            // anchors.margins: 20
+            visible: settings.showSettingsView
+            // Component.onCompleted: {
+            //     settings.reset();
+            // }
+            // onSendDevType:function(value)
+            // {
+            //     pageone.item.revBtn.setButtonText(value)
+            // }
         }
-        TabButton
+        TabBar
         {
-            id: uiGrid
-            text: "界面3"
+            id: tabBar
+            anchors.left: settingsView.right
+            anchors.right: parent.right
+            // anchors.top: headLine.bottom
+            height: 40
+            currentIndex: 1
+            clip: true
+            TabButton
+            {
+                
+                id: uiTest
+                height: parent.height
+                text: "界面1"
+            }
+            TabButton
+            {
+                id: uiMes
+                height: parent.height
+                text: "界面2"
+            }
+            TabButton
+            {
+                id: uiGrid
+                height: parent.height
+                text: "界面3"
+            }
         }
-    }
 
-    StackLayout {
-        id: stackLayout
-        anchors.top:tabBar.bottom
-        anchors.left: settingsView.right
-        anchors.bottom: mainArea.top
-        anchors.right: parent.right
-        currentIndex: tabBar.currentIndex
+        StackLayout 
+        {
+            id: stackLayout
+            anchors.top:tabBar.bottom
+            anchors.left: settingsView.right
+            anchors.bottom: mainArea.top
+            anchors.right: parent.right
+            currentIndex: tabBar.currentIndex
 
-         // Page 1
-         Loader {
-             id: pageone
-             source: "qrc:/qml/Page1.qml"
-             onLoaded: {
-                 item.pageParentItem = settingsView;  // 传递值给加载的子组件
-             }
-         }
+            // Page 1
+            Loader {
+                id: pageone
+                source: "qrc:/qml/Page1.qml"
+                onLoaded: {
+                    item.pageParentItem = settingsView;  // 传递值给加载的子组件
+                }
+            }
 
-         // Page 2
-         Loader {
-             source: "qrc:/qml/Page2.qml"
-         }
+            // Page 2
+            Loader 
+            {
+                source: "qrc:/qml/Page2.qml"
+            }
 
-         // Page 2
-         Loader {
-             source: "qrc:/qml/Page3.qml"
-         }
+            // Page 2
+            Loader 
+            {
+                source: "qrc:/qml/Page3.qml"
+            }
+        }
 
-     }
 
     // StackView {
     //     id:stackView
@@ -128,113 +181,112 @@ ApplicationWindow  {
     //     // currentIndex: 1
     // }
 
+            // FBOItem
+        // {
+        //     id:myView
+        //     width: parent.width*0.5
+        //     height: parent.height*0.5
+        // }
 
 
-
-    Rectangle
-     {
-        id: mainArea
-        // anchors.left: settingsView.right
-        // anchors.right: parent.right
-        anchors.left: settingsView.right
-        anchors.right: parent.right
-        // anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        // color: "black"
-        height: mprogress.height + mlog.height
         Rectangle
         {
-            id: mprogress
-            width: parent.width
-            height: 20
-            color: "#666666"
-            anchors.bottom: mlog.top
-            anchors.left: parent.left
-            RowLayout
+            id: mainArea
+            // anchors.left: settingsView.right
+            // anchors.right: parent.right
+            anchors.left: settingsView.right
+            anchors.right: parent.right
+            // anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            // color: "black"
+            height: mprogress.height + mlog.height
+            Rectangle
             {
-                anchors.fill: parent
-                ProgressBar
+                id: mprogress
+                width: parent.width
+                height: 20
+                color: "#666666"
+                anchors.bottom: mlog.top
+                anchors.left: parent.left
+                RowLayout
                 {
-                    Layout.preferredWidth: parent.width *0.9
-                    Layout.preferredHeight: parent.height
-                    height: 20
-                    value: 50  // 当前进度值
-                    from: 0   // 最小值
-                    to: 100   // 最大值
-                    // anchors.verticalCenter: parent.verticalCenter
-                }
-                Item 
-                {
-                    id: lightsSettings
-                    Layout.preferredWidth: parent.width *0.1
-                    Layout.preferredHeight: parent.height
-
-                    Rectangle 
+                    anchors.fill: parent
+                    ProgressBar
                     {
-                        anchors.fill: parent
-                        color: "#404040"
-                        border.width: 1
-                        border.color: "#808080"
-                        opacity: 0.4
-                        Image 
-                        {
-                            x: 8
-                            source: "images/arrow.png"
-                            anchors.verticalCenter: parent.verticalCenter
-                            rotation: stretchState? 270 : 90
-                            Behavior on rotation {
-                                NumberAnimation {
-                                    duration: 400
-                                    easing.type: Easing.InOutQuad
-                                }
-                            }
-                        }
-                        MouseArea 
+                        Layout.preferredWidth: parent.width *0.9
+                        Layout.preferredHeight: parent.height
+                        height: 20
+                        value: 50  // 当前进度值
+                        from: 0   // 最小值
+                        to: 100   // 最大值
+                        // anchors.verticalCenter: parent.verticalCenter
+                    }
+                    Item 
+                    {
+                        id: lightsSettings
+                        Layout.preferredWidth: parent.width *0.1
+                        Layout.preferredHeight: parent.height
+
+                        Rectangle 
                         {
                             anchors.fill: parent
-                            onClicked: {
-                                stretchState = !stretchState
-                                if (stretchState) {
-                                    mlog.height = 400
-                                //     hideAnimation.stop();
-                                //     showAnimation.start();
-                                } else {
-                                                                        mlog.height = 200
-                                //     showAnimation.stop();
-                                //     hideAnimation.start();
+                            color: "#404040"
+                            border.width: 1
+                            border.color: "#808080"
+                            opacity: 0.4
+                            Image 
+                            {
+                                x: 8
+                                source: "images/arrow.png"
+                                anchors.verticalCenter: parent.verticalCenter
+                                rotation: stretchState? 270 : 90
+                                Behavior on rotation {
+                                    NumberAnimation {
+                                        duration: 400
+                                        easing.type: Easing.InOutQuad
+                                    }
                                 }
+                            }
+                            MouseArea 
+                            {
+                                anchors.fill: parent
+                                onClicked: {
+                                    stretchState = !stretchState
+                                    if (stretchState) {
+                                        mlog.height = 400
+                                    //     hideAnimation.stop();
+                                    //     showAnimation.start();
+                                    } else {
+                                                                            mlog.height = 200
+                                    //     showAnimation.stop();
+                                    //     hideAnimation.start();
+                                    }
 
+                                }
                             }
                         }
                     }
                 }
             }
-        }
-        LogShow
-        {
-            id: mlog
-            width: parent.width
-            height: 200
-            anchors.left: parent.left
-            anchors.bottom: parent.bottom
+            LogShow
+            {
+                id: mlog
+                width: parent.width
+                height: 200
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
 
-                       // 动画效果
-            Behavior on height {
-                NumberAnimation {
-                    duration: 400
+                        // 动画效果
+                Behavior on height {
+                    NumberAnimation {
+                        duration: 400
+                    }
                 }
             }
         }
-     }
 
-
-    // LogShow
-    // {
-    //     width: parent.width
-    //     height: 200
-    //     anchors.left: parent.left
-    //     anchors.bottom: parent.bottom
-    // }
+        }
+    }
 
     // Column
     // {

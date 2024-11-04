@@ -16,6 +16,7 @@
         <file>qml/WarningsItem.qml</file>
         <file>qml/WarningsView.qml</file>
         <file>qml/LabeledSlider.qml</file>
+        <file>qml/WindowHead.qml</file>
         <file>qml/CustomMultiEffect/BlurHelper.qml</file>
         <file>qml/CustomMultiEffect/bluritems.frag.qsb</file>
         <file>qml/CustomMultiEffect/bluritems.vert.qsb</file>
@@ -37,5 +38,15 @@
         <file>qml/Page3.qml</file>
         <file>qml/MyGridView.qml</file>
         <file>qml/MyListView.qml</file>
+        <file>icons/checkMark.png</file>
+        <file>icons/close.png</file>
+        <file>icons/delete.png</file>
+        <file>icons/max.png</file>
+        <file>icons/min.png</file>
+        <file>icons/packUp.png</file>
+        <file>icons/return.png</file>
+        <file>icons/select.png</file>
+        <file>icons/serach.png</file>
+        <file>icons/logo.png</file>
     </qresource>
 </RCC>
