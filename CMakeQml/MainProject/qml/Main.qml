@@ -23,7 +23,10 @@ ApplicationWindow
     readonly property real dp: 0.2 + Math.min(width, height) / 1200
     property var stretchState: false 
     property var showHideAnimationSpeed: 400
-    property var pageList: ["Page1.qml", "Page2.qml"]
+    property var tabBarTextList: ["界面1","界面2","界面3","界面4"]
+    property var pageQmlList: ["qrc:/qml/Page1.qml", "qrc:/qml/Page2.qml","qrc:/qml/Page3.qml","qrc:/qml/Page4.qml"]
+
+
     function switchPage(index) {
         if (index >= 0 && index < pageList.length) {
             stackView.replace(pageList[index])  // 根据索引切换页面
@@ -66,10 +69,34 @@ ApplicationWindow
                 uiMainContol.close() // 关闭窗口
             }
             onMinimizeWindow: { // 当最小化窗口时触发的事件
-                uiMainContol.showMinimized() // 最小化窗口
+                // uiMainContol.hide()
+                // uiMainContol.showMinimized() // 最小化窗口
+                if (uiMainContol.isFullScreen) 
+                {
+                    // 隐藏窗口并直接最小化，避免恢复正常大小
+                    uiMainContol.hide()   // 隐藏窗口
+                    uiMainContol.showMinimized()  // 然后最小化窗口
+                } 
+                else 
+                {
+                    uiMainContol.showMinimized()  // 非全屏时正常最小化
+                }
             }
-            onMaximizeWindow: { // 当最大化窗口时触发的事件
-                uiMainContol.showFullScreen()
+            onMaximizeWindow: 
+            { // 当最大化窗口时触发的事件
+                if(headLine.fullStates === false) 
+                {
+                    uiMainContol.showFullScreen()
+                }
+                else
+                {
+                    uiMainContol.showNormal()
+                }
+            }
+            onDefaultWindow: {
+                console.log("window resver size")
+                uiMainContol.showNormal()
+                // uiMainContol.resize(1080 + headLine.height,720)
             }
         }
         Settings {
@@ -113,27 +140,19 @@ ApplicationWindow
             anchors.right: parent.right
             // anchors.top: headLine.bottom
             height: 40
-            currentIndex: 1
+            currentIndex: 0
             clip: true
-            TabButton
+
+            Repeater
             {
-                
-                id: uiTest
-                height: parent.height
-                text: "界面1"
+                model: tabBarTextList
+                delegate: TabButton
+                {
+                    height: parent.height
+                    text: modelData
+                }
             }
-            TabButton
-            {
-                id: uiMes
-                height: parent.height
-                text: "界面2"
-            }
-            TabButton
-            {
-                id: uiGrid
-                height: parent.height
-                text: "界面3"
-            }
+  
         }
 
         StackLayout 
@@ -145,26 +164,35 @@ ApplicationWindow
             anchors.right: parent.right
             currentIndex: tabBar.currentIndex
 
-            // Page 1
-            Loader {
-                id: pageone
-                source: "qrc:/qml/Page1.qml"
-                onLoaded: {
-                    item.pageParentItem = settingsView;  // 传递值给加载的子组件
+            Repeater
+            {
+                model: pageQmlList
+                delegate: Loader
+                {
+                    source: modelData
                 }
             }
 
-            // Page 2
-            Loader 
-            {
-                source: "qrc:/qml/Page2.qml"
-            }
+            // // Page 1
+            // Loader {
+            //     id: pageone
+            //     source: "qrc:/qml/Page1.qml"
+            //     onLoaded: {
+            //         item.pageParentItem = settingsView;  // 传递值给加载的子组件
+            //     }
+            // }
 
-            // Page 2
-            Loader 
-            {
-                source: "qrc:/qml/Page3.qml"
-            }
+            // // Page 2
+            // Loader 
+            // {
+            //     source: "qrc:/qml/Page2.qml"
+            // }
+
+            // // Page 2
+            // Loader 
+            // {
+            //     source: "qrc:/qml/Page3.qml"
+            // }
         }
 
 

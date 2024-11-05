@@ -27,14 +27,14 @@ Item {
         property int timer: 0
         ValueAxis
         {
-                    id: myAxisX
-                    min: 0
-                    max: 10>mChartView.timer? 10:mChartView.timer+1
-                    tickCount: 11
-                    labelsColor: "#ffffff"
-                    labelsFont.pointSize: 13
-                    labelsFont.bold: true
-                    labelFormat: '%d'
+            id: myAxisX
+            min: 0
+            max: 10>mChartView.timer? 10:mChartView.timer+1
+            tickCount: 11
+            labelsColor: "#ffffff"
+            labelsFont.pointSize: 13
+            labelsFont.bold: true
+            labelFormat: '%d'
         }
         ValueAxis
         {
@@ -65,8 +65,16 @@ Item {
             repeat: true
             onTriggered: 
             {
-                lineSeries.append(mChartView.timer,Math.random()*50)
-                mChartView.timer = mChartView.timer+1
+                if(mChartView.timer <10)
+                {
+                    lineSeries.append(mChartView.timer,Math.random()*50)
+                    mChartView.timer = mChartView.timer+1
+                }
+                else
+                {
+                    running = false
+                }
+                // console.log("add a data")
             }
         }
     }

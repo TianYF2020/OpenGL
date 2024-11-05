@@ -31,11 +31,12 @@
         <file>qml/images/play.png</file>
         <file>qml/images/spinner.png</file>
         <file>qml/images/warning.png</file>
-        <file>qml/Page2.qml</file>
         <file>qml/Page1.qml</file>
+        <file>qml/Page2.qml</file>
+        <file>qml/Page3.qml</file>
+        <file>qml/Page4.qml</file>
         <file>qml/MyButton.qml</file>
         <file>qml/LineItem.qml</file>
-        <file>qml/Page3.qml</file>
         <file>qml/MyGridView.qml</file>
         <file>qml/MyListView.qml</file>
         <file>icons/checkMark.png</file>
@@ -43,6 +44,7 @@
         <file>icons/delete.png</file>
         <file>icons/max.png</file>
         <file>icons/min.png</file>
+        <file>icons/reserve.png</file>
         <file>icons/packUp.png</file>
         <file>icons/return.png</file>
         <file>icons/select.png</file>

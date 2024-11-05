@@ -5,7 +5,7 @@ Item {
     id: root
     width: 600
     height: 400
-    property var pageParentItem
+    // property var pageParentItem
     ColumnLayout
     {
         id: slidersColumn
@@ -79,13 +79,13 @@ Item {
             }
         }
 
-        Connections {
-            target: pageParentItem  // 监听 SettingView 的信号
-            function onSendDevType(txt)
-            {
-                revBtn.setButtonText(txt)  // 当 valueChanged 信号发出时调用 test 的 switch 方法
-            }
-        }
+        // Connections {
+        //     target: pageParentItem  // 监听 SettingView 的信号
+        //     function onSendDevType(txt)
+        //     {
+        //         revBtn.setButtonText(txt)  // 当 valueChanged 信号发出时调用 test 的 switch 方法
+        //     }
+        // }
     }
     MyListView
     {

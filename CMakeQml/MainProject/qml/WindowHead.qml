@@ -5,6 +5,7 @@ ToolBar {
     width: parent.width
     height: 40
     clip: true // 启用裁剪效果
+    property bool fullStates: false
     background: Rectangle 
     {
         anchors.fill: parent
@@ -16,6 +17,7 @@ ToolBar {
     signal moveWindow(var delta)
     signal minimizeWindow
     signal maximizeWindow
+    signal defaultWindow
     signal exitFullScreenWindow
 
     // function setHeadTabButton(index)
@@ -131,15 +133,15 @@ ToolBar {
         width: parent.height
         height: parent.height
         padding: 3
-        icon.source: "qrc:/icons/max.png" // 设置按钮图标的源路径
+        icon.source: (fullStates === true ? "qrc:/icons/reserve.png": "qrc:/icons/max.png")
         // icon.color: buttonColor // 设置按钮图标的颜色，使用buttonColor变量
         anchors.right: close.left // 将按钮定位到父组件的右侧
         anchors.verticalCenter: parent.verticalCenter // 将按钮垂直居中于父组件
-        
         z: 2 // 设置按钮的Z轴顺序，使其位于其他元素之上
         onClicked: 
         {
             maximizeWindow() // 当按钮被点击时，调用closeWindow函数
+            fullStates =!fullStates // 切换states的值
         }
         background: Rectangle 
         {
