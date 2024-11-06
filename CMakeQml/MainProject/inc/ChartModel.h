@@ -14,7 +14,7 @@ public:
     Q_INVOKABLE QVariant series(int index);
     Q_INVOKABLE void addSeries();
     Q_INVOKABLE void appendData();
- 
+    Q_INVOKABLE void LoadInitData();
 signals:
     void seriesAdded(int seriesIndex);
     void seriesUpdate(int seriesIndex);

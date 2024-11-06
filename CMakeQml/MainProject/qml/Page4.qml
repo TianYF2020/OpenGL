@@ -7,6 +7,10 @@ Item
     width: 600
     height: 400
     visible: true
+    Component.onCompleted: 
+    {
+        ChartModel.LoadInitData()
+    }
     ChartView 
     {
         id: chartView
@@ -17,7 +21,7 @@ Item
         ValueAxis {
             id: axisX
             min: 0
-            max: 100
+            max: 255
             labelFormat: "%d"
             tickCount:5
         }
@@ -25,7 +29,7 @@ Item
         ValueAxis {
             id: axisY
             min: 0
-            max: 1
+            max: 255
             labelFormat: "%.2f"
             tickCount:5
         }

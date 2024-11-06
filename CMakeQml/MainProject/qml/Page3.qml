@@ -145,65 +145,80 @@ Item {
             property var endRowIndex: 0
             property var startColumIndex: 0  
             property var endColumIndex: 0
-            property var isMove: true
+            property bool isMove: false
             acceptedButtons: Qt.LeftButton | Qt.RightButton 
             onPressed:function(mouse)
             {
                 if (mouse.button === Qt.RightButton) 
                 {
                     menu.popup() // 打开菜单
-                    isMove = false
                 }
                 else
                 {
                     startX = mouseX;
                     startY = mouseY;
                     selectionRect.visible = true; 
+                    isMove = false
+                }
+
+            }
+            onPositionChanged:function(mouse)
+            {
+
+                if (mouse.buttons & Qt.LeftButton) 
+                {
+                    selectionRect.width = Math.abs(mouseX - startX)
+                    selectionRect.height = Math.abs(mouseY - startY)
+                    if(mouseY > startY)
+                    {
+                        startRowIndex = Math.floor(startY /gridView.cellHeight)
+                        endRowIndex = Math.ceil(mouseY/gridView.cellHeight)                    
+                    }
+                    else
+                    {
+                        startRowIndex = Math.floor(mouseY /gridView.cellHeight)
+                        endRowIndex = Math.ceil(startY/gridView.cellHeight)
+                    }                    
+                    if(mouseX > startX)
+                    {
+                        startColumIndex = Math.floor(startX /gridView.cellWidth)
+                        endColumIndex = Math.ceil(mouseX /gridView.cellWidth)
+                    }                    
+                    else
+                    {
+                        startColumIndex = Math.floor(mouseX /gridView.cellWidth) 
+                        endColumIndex = Math.ceil(startX /gridView.cellWidth) 
+
+                    }
+                    startColumIndex = startColumIndex < 0 ? 0 : startColumIndex
+                    startRowIndex = startRowIndex < 0 ? 0 : startRowIndex
+                    endRowIndex = endRowIndex > rowsDiv ? rowsDiv : endRowIndex
+                    endColumIndex = endColumIndex > columnsDiv ? columnsDiv : endColumIndex
+                    for(let i = startRowIndex ; i < endRowIndex; i++)
+                    {
+                        for(let j = startColumIndex; j < endColumIndex;j++)
+                        {
+                            gridView.setColor(i,j, true);
+                        }
+                    }  
                     isMove = true
                 }
 
             }
-            onPositionChanged:
+            onReleased:function(mouse)
             {
-                selectionRect.width = Math.abs(mouseX - startX)
-                selectionRect.height = Math.abs(mouseY - startY)
-                if(mouseX > startX)
+                if (mouse.button === Qt.LeftButton) 
                 {
-                    startRowIndex = Math.floor(startY /gridView.cellHeight)
-                    endRowIndex = Math.ceil(mouseY/gridView.cellHeight)                    }
-                else
-                {
-                    startRowIndex = Math.floor(mouseY /gridView.cellHeight)
-                    endRowIndex = Math.ceil(startY/gridView.cellHeight)
-                }                    if(mouseY > startY)
-                {
-                    startColumIndex = Math.floor(startX /gridView.cellWidth)
-                    endColumIndex = Math.ceil(mouseX /gridView.cellWidth)
-                }                    else
-                {
-                    startColumIndex = Math.floor(mouseX /gridView.cellWidth)
-                    endColumIndex = Math.ceil(startX /gridView.cellWidth)
-                }
-                for(let i = startRowIndex ; i < endRowIndex; i++)
-                {
-                    for(let j = startColumIndex; j < endColumIndex;j++)
+                    selectionRect.width = 0
+                    selectionRect.height = 0
+                    if(!isMove)
                     {
-                        gridView.setColor(i,j, true);
+                        var index = Math.floor(mouseY /gridView.cellHeight)*columnsDiv + Math.floor(mouseX/gridView.cellWidth)
+                        gridModel.setProperty(index, "isSelected", !gridModel.get(index).isSelected)
                     }
-                }  
-                isMove = false
-            }
-            onReleased:
-            {
-                selectionRect.width = 0
-                selectionRect.height = 0
-                if(isMove)
-                {
-                    var index = Math.floor(mouseY /gridView.cellHeight)*columnsDiv + Math.floor(mouseX/gridView.cellWidth)
-                    console.log("Release click",index)
-                    gridModel.setProperty(index, "isSelected", !gridModel.get(index).isSelected)
+                    isMove = false
                 }
-                isMove = true
+
             }
         }
 

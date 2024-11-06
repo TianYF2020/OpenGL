@@ -112,17 +112,17 @@ void UIControl::readJson(const QString &filePath)
 
     // 读取 adjust 节点
     QJsonObject adjust = json["adjust"].toObject();
-    for (const QString &type : adjust.keys()) {
-        QJsonObject device = adjust[type].toObject();
-        qDebug() << "设备类型:" << type;
-        qDebug() << "色温:" << device["色温"].toBool();
-        qDebug() << "色域:" << device["色域"].toBool();
-        qDebug() << "亮度:" << device["亮度"].toBool();
-        qDebug() << "值:" << device["值"].toBool();
-    }
+    // for (const QString &type : adjust.keys()) {
+    //     QJsonObject device = adjust[type].toObject();
+    //     qDebug() << "设备类型:" << type;
+    //     qDebug() << "色温:" << device["色温"].toBool();
+    //     qDebug() << "色域:" << device["色域"].toBool();
+    //     qDebug() << "亮度:" << device["亮度"].toBool();
+    //     qDebug() << "值:" << device["值"].toBool();
+    // }
 
     // 读取 serial 节点
     QJsonObject serial = json["serial"].toObject();
-    qDebug() << "串口号:" << serial["串口号"].toString();
-    qDebug() << "波特率:" << serial["波特率"].toInt();
+    // qDebug() << "串口号:" << serial["串口号"].toString();
+    // qDebug() << "波特率:" << serial["波特率"].toInt();
 }
