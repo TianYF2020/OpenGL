@@ -7,10 +7,10 @@ Item
     width: 600
     height: 400
     visible: true
-    Component.onCompleted: 
-    {
-        ChartModel.LoadInitData()
-    }
+    // Component.onCompleted: 
+    // {
+    //     ChartModel.LoadInitData()
+    // }
     ChartView 
     {
         id: chartView
@@ -54,7 +54,7 @@ Item
                 {
                     chartSeries.clear();
                     for (var i = 0; i < series.length; i++) {
-                        console.log(series[i].x+":"+series[i].y)
+                        // console.log(series[i].x+":"+series[i].y)
                         chartSeries.append(series[i].x, series[i].y);
                     }
                 }

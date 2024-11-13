@@ -3,5 +3,9 @@
     "git-graph.fileEncoding": "utf8",
     "files.autoGuessEncoding": true,
     "cmake.outputLogEncoding": "utf8",
-    "editor.stickyScroll.enabled": true
+    "editor.stickyScroll.enabled": true,
+    "files.associations": {
+        "atomic": "cpp",
+        "memory": "cpp"
+    }
 }

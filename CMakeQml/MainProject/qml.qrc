@@ -35,6 +35,7 @@
         <file>qml/Page2.qml</file>
         <file>qml/Page3.qml</file>
         <file>qml/Page4.qml</file>
+        <file>qml/Page5.qml</file>
         <file>qml/MyButton.qml</file>
         <file>qml/LineItem.qml</file>
         <file>qml/MyGridView.qml</file>

@@ -23,8 +23,8 @@ ApplicationWindow
     readonly property real dp: 0.2 + Math.min(width, height) / 1200
     property var stretchState: false 
     property var showHideAnimationSpeed: 400
-    property var tabBarTextList: ["界面1","界面2","界面3","界面4"]
-    property var pageQmlList: ["qrc:/qml/Page1.qml", "qrc:/qml/Page2.qml","qrc:/qml/Page3.qml","qrc:/qml/Page4.qml"]
+    property var tabBarTextList: ["界面1","界面2","界面3","界面4","界面5"]
+    property var pageQmlList: ["qrc:/qml/Page1.qml", "qrc:/qml/Page2.qml","qrc:/qml/Page3.qml","qrc:/qml/Page4.qml","qrc:/qml/Page5.qml"]
 
 
     function switchPage(index) {
