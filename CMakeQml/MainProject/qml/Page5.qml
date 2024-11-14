@@ -8,103 +8,139 @@ Item
     height: 400
     visible: true
  
-       ChartView {
+    property var maxValue: 255
+    property var step: 8
+    property real pointSize: 0
+    property var num: 1;   
+    function resetData()
+    {
+        scatterSeries.clear()
+        splineSeries.clear()
+        for(let i=0;i<=maxValue;i++)
+        {
+            if( i%step == 0)
+            {
+                scatterSeries.append(i,i);
+            }
+            splineSeries.append(i,i);
+        }
+        if(maxValue % step != 0)
+        {
+            scatterSeries.append(maxValue,maxValue)
+        }
+    }
+    Component.onCompleted: 
+    {
+        resetData()
+        var tempPoint = chartView.mapToValue(Qt.point(scatterSeries.markerSize / 2.0, 0))
+        var tempPoint0 = chartView.mapToValue(Qt.point(0, 0))
+        pointSize = tempPoint.x - tempPoint0.x
+        console.log("pointSize: ==== ", scatterSeries.markerSize , " size ",pointSize)
+    }
+    ChartView 
+    {
         id: chartView
-        anchors.fill: parent
+        width: parent.width
+        height: parent.height - operateArea.height
         antialiasing: true
-        z: 10
-
         // 使用 ScatterSeries 来显示数据点
         ScatterSeries {
             id: scatterSeries
             name: "Scatter Series"
             color: "blue"
-
-            // 定义初始的散点数据
-            // 这里我们使用了一些假数据，实际使用时可以通过其他方式来动态添加数据点
-            XYPoint { x: 0; y: 0 }
-            XYPoint { x: 1; y: 1 }
-            XYPoint { x: 2; y: 2 }
+            axisX: xAxis
+            axisY: yAxis
         }
-
         // 使用 SplineSeries 来绘制平滑的曲线
         SplineSeries {
             id: splineSeries
             name: "Spline Series"
             color: "red"
-
-            // 这里我们只用了一些假数据来展示，实际使用时会与散点数据同步
-            XYPoint { x: 0; y: 0 }
-            XYPoint { x: 1; y: 1 }
-            XYPoint { x: 2; y: 2 }
+            axisX: xAxis
+            axisY: yAxis
         }
-
- 
-
-        // 定义鼠标事件处理
-        MouseArea {
+        MouseArea {// 定义鼠标事件处理
             id: dragArea
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
-
             property bool isDragging: false
-            property int draggedIndex: -1
-            property real originalY: 0
-
+            property int draggedIndex: -1   // 拖动的点图
+            property int draggedSpline: -1  //拖动的spline点图
+            onWheel: 
+            {
+                if(wheel.angleDelta.y > 0)
+                {
+                    chartView.zoom(1.1 )
+                }else
+                {
+                    chartView.zoom(0.9)
+                }
+            }
             onPressed: {
-                // 查找鼠标按下位置对应的点，开始拖动
-                console.log("onPressed  ")
                 var point = chartView.mapToValue(Qt.point(mouseX, mouseY))
                 draggedIndex = -1;
-
-                for (var i = 0; i < scatterSeries.count; ++i) {
+                draggedSpline = -1
+                console.log("coust ",point.x, point.y)
+                for (var i = 0; i < scatterSeries.count; ++i) 
+                {
                     var dataPoint = scatterSeries.at(i);
-                    if (Math.abs(dataPoint.x - point.x) < 1 && Math.abs(dataPoint.y - point.y) < 1) {
+                    if (Math.abs(dataPoint.x - point.x) < pointSize && Math.abs(dataPoint.y - point.y) < pointSize) 
+                    {
                         draggedIndex = i;
-                        originalY = dataPoint.y;
+                        draggedSpline = i * step > maxValue  ? maxValue : i * step 
+                        console.log(dataPoint.x, dataPoint.y, " - " , point.x,point.y)
                         break;
                     }
                 }
                 isDragging = draggedIndex !== -1;
             }
-
-            onReleased: {
-                isDragging = false;
+            onReleased: { 
+                isDragging = false
             }
-
-            onPositionChanged: {
-                if (isDragging && draggedIndex !== -1) {
+            onPositionChanged: 
+            {
+                if (isDragging && draggedIndex !== -1)
+                {
                     var point = chartView.mapToValue(Qt.point(mouseX, mouseY))
                     var yValue = point.y;
-
-                    // 在这里可以加入对Y值范围的限制（例如 min/max）
-                    if (yValue < 0) yValue = 0;
-                    if (yValue > 10) yValue = 10;
-
-                    // 更新散点和曲线的数据
-                    scatterSeries.replace(draggedIndex, point.x, yValue);
-                    splineSeries.replace(draggedIndex, point.x, yValue);
+                    if (yValue < 0)  yValue = 0;
+                    if (yValue > xAxis.max)  yValue = xAxis.max;
+                    // 更新散点和曲线的数据任意移动
+                    // scatterSeries.replace(draggedIndex, point.x, yValue);
+                    // splineSeries.replace(draggedSpline, point.x, yValue);
+                    // 上下移动
+                    scatterSeries.replace(draggedIndex, draggedSpline, yValue);
+                    splineSeries.replace(draggedSpline, draggedSpline, yValue);
+                    let startIndex = (draggedSpline - step) < 0 ? 0 : (draggedSpline - step )
+                    let endIndex = (draggedSpline + step) >maxValue ? maxValue : (draggedSpline + step)
+                    let diffIndex = (draggedSpline- startIndex) > 0 ? (draggedSpline- startIndex):0
+                    let diffValue = (splineSeries.at(draggedSpline).y - splineSeries.at(startIndex).y) /diffIndex
+                    num = 1;
+                    for(let i = startIndex +1 ;i<draggedSpline;i++)
+                    {
+                        splineSeries.replace(i, i, splineSeries.at(startIndex).y + (num++)*diffValue);
+                    }
+                    num = 1;
+                    diffIndex = (endIndex -draggedSpline) > 0 ? (endIndex - draggedSpline):0
+                    diffValue = (splineSeries.at(endIndex).y - splineSeries.at(draggedSpline).y) /diffIndex
+                    for(let i = draggedSpline +1 ;i<endIndex;i++)
+                    {
+                        splineSeries.replace(i, i, splineSeries.at(draggedSpline).y + (num++)*diffValue);
+                    }
                 }
             }
         }
-
-        // 设置 Y 轴的范围
         ValueAxis {
             id: yAxis
             min: 0
-            max: 10
+            max: maxValue
         }
-
         // 设置 X 轴的范围
         ValueAxis {
             id: xAxis
             min: 0
-            max: 10
+            max: maxValue
         }
-
-        // 设置坐标轴
-        axes: [xAxis, yAxis]
-
         // // 缩放功能
         // MouseArea {
         //     id: zoomArea
@@ -120,8 +156,43 @@ Item
         // 显示鼠标当前位置
         Text {
             anchors.top: parent.top
+            anchors.topMargin: 20
             anchors.left: parent.left
+            anchors.leftMargin: 20
             text: "Mouse Position: " + dragArea.mouseX + ", " +dragArea.mouseY
+        }
+    }
+    RowLayout
+    {
+        id:operateArea
+        anchors.top: chartView.bottom
+        width: parent.width
+        height: 30
+        Button
+        {
+            text: "test"
+            onClicked:
+            {
+                console.log("test")
+                for(let i = 0; i<splineSeries.count; i++)
+                {
+                    let point = splineSeries.at(i)
+                    console.log("pinghua: x:", point.x, "y:", point.y)
+                }
+                for(let i = 0; i<scatterSeries.count; i++)
+                {
+                    let point = scatterSeries.at(i)
+                    console.log("x:", point.x, "y:", point.y)
+                }
+            }
+        }
+        Button
+        {
+            text: "复位"
+            onClicked:
+            {
+                resetData()
+            }
         }
     }
 }
