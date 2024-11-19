@@ -7,6 +7,8 @@
 #include "TableDataModel.h"
 #include "EasyTableModel.h"
 #include "ChartModel.h"
+#include "MyTableModel.h"
+#include "MyProxyModel.h"
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
@@ -20,6 +22,13 @@ int main(int argc, char *argv[])
     // engine.rootContext()->setContextProperty("tableModel", &tableModel);
     UIControl m_UIControl;
     ChartModel chartModel;
+
+    MyTableModel myModel;
+    MyProxyModel myProxyModel;
+    myProxyModel.setSourceModel(&myModel);
+
+//    engine.rootContext()->setContextProperty("mymodel", &myModel);
+    engine.rootContext()->setContextProperty("myproxymodel", &myProxyModel);
     engine.rootContext()->setContextProperty("myUIControl", &m_UIControl);
     engine.rootContext()->setContextProperty("ChartModel", &chartModel);
     qmlRegisterType<EasyTableModel>("EasyModel", 1, 0, "EasyTableModel");

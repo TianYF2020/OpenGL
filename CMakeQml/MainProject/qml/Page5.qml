@@ -51,14 +51,47 @@ Item
             axisX: xAxis
             axisY: yAxis
         }
+        // // 使用 SplineSeries 来绘制平滑的曲线
+        // SplineSeries {
+        //     id: splineSeries
+        //     name: "Spline Series"
+        //     color: "red"
+        //     axisX: xAxis
+        //     axisY: yAxis
+        // }
+
         // 使用 SplineSeries 来绘制平滑的曲线
-        SplineSeries {
+        LineSeries {
             id: splineSeries
             name: "Spline Series"
             color: "red"
             axisX: xAxis
             axisY: yAxis
         }
+
+        WheelHandler {
+            id: wheelHandler
+            target: chartView
+            onWheel: {
+                const factor = (wheel.angleDelta.y > 0) ? 0.9 : 1.1; // 滚轮方向，缩放因子
+                const cursorX = chartView.mapToValue(wheel.x, xAxis, yAxis).x; // 鼠标所在点的X值
+                const cursorY = chartView.mapToValue(wheel.y, xAxis, yAxis).y; // 鼠标所在点的Y值
+
+                // 计算新的边界
+                const newXMin = cursorX - (cursorX - xAxis.min) * factor;
+                const newXMax = cursorX + (xAxis.max - cursorX) * factor;
+                const newYMin = cursorY - (cursorY - yAxis.min) * factor;
+                const newYMax = cursorY + (yAxis.max - cursorY) * factor;
+
+                // 设置新的范围
+                xAxis.min = newXMin;
+                xAxis.max = newXMax;
+                yAxis.min = newYMin;
+                yAxis.max = newYMax;
+            }
+        }
+
+
         MouseArea {// 定义鼠标事件处理
             id: dragArea
             anchors.fill: parent
@@ -66,16 +99,16 @@ Item
             property bool isDragging: false
             property int draggedIndex: -1   // 拖动的点图
             property int draggedSpline: -1  //拖动的spline点图
-            onWheel: 
-            {
-                if(wheel.angleDelta.y > 0)
-                {
-                    chartView.zoom(1.1 )
-                }else
-                {
-                    chartView.zoom(0.9)
-                }
-            }
+            // onWheel: 
+            // {
+            //     if(wheel.angleDelta.y > 0)
+            //     {
+            //         chartView.zoom(1.1 )
+            //     }else
+            //     {
+            //         chartView.zoom(0.9)
+            //     }
+            // }
             onPressed: {
                 var point = chartView.mapToValue(Qt.point(mouseX, mouseY))
                 draggedIndex = -1;

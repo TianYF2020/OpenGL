@@ -36,10 +36,15 @@
         <file>qml/Page3.qml</file>
         <file>qml/Page4.qml</file>
         <file>qml/Page5.qml</file>
+        <file>qml/Page6.qml</file>
+        <file>qml/Page7.qml</file>
+        <file>qml/Page8.qml</file>
+        <file>qml/Page9.qml</file>
         <file>qml/MyButton.qml</file>
         <file>qml/LineItem.qml</file>
         <file>qml/MyGridView.qml</file>
         <file>qml/MyListView.qml</file>
+        <file>qml/CustomRadius.qml</file>
         <file>icons/checkMark.png</file>
         <file>icons/close.png</file>
         <file>icons/delete.png</file>
@@ -51,5 +56,6 @@
         <file>icons/select.png</file>
         <file>icons/serach.png</file>
         <file>icons/logo.png</file>
+        <file>icons/sort.png</file>
     </qresource>
 </RCC>
