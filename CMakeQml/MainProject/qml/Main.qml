@@ -33,6 +33,16 @@ ApplicationWindow
         }
     }
 
+
+    // 处理窗口恢复显示的事件
+    Component.onCompleted: {
+        uiMainContol.activeChanged.connect(function() {
+            console.log("window is shown",uiMainContol.active ,"full screen",headLine.fullStates)
+            if (uiMainContol.active && headLine.fullStates) {
+                uiMainContol.showFullScreen()
+            }
+        })
+    }
     Rectangle 
     {
         id: inrec
@@ -68,10 +78,9 @@ ApplicationWindow
             onCloseWindow: { // 当关闭窗口时触发的事件
                 uiMainContol.close() // 关闭窗口
             }
-            onMinimizeWindow: { // 当最小化窗口时触发的事件
-                // uiMainContol.hide()
-                // uiMainContol.showMinimized() // 最小化窗口
-                if (uiMainContol.isFullScreen) 
+            onMinimizeWindow: 
+            { // 当最小化窗口时触发的事件
+                if (headLine.fullStates) 
                 {
                     // 隐藏窗口并直接最小化，避免恢复正常大小
                     uiMainContol.hide()   // 隐藏窗口
@@ -86,7 +95,7 @@ ApplicationWindow
             { // 当最大化窗口时触发的事件
                 if(headLine.fullStates === false) 
                 {
-                    uiMainContol.showFullScreen()
+                    uiMainContol.showMaximized()
                 }
                 else
                 {
@@ -94,7 +103,6 @@ ApplicationWindow
                 }
             }
             onDefaultWindow: {
-                console.log("window resver size")
                 uiMainContol.showNormal()
                 // uiMainContol.resize(1080 + headLine.height,720)
             }
